@@ -1,0 +1,26 @@
+----------user-----------
+Đăng nhâp < gmail, fb , sdt >
+Đăng xuất
+share bài viết
+cmt bài viết
+đánh dấu bài viết 
+like bài viết
+thay đổi theme <màu sắc, dảk or light>
+report , báo cáo lạm dụng 
+xem lại bài viết đã đánh dấu
+tìm kiếm báo
+đánh dấu thể loại yêu thích
+
+---------product--------
+
+sắp xếp theo thể loại (scroll) 
+filter bài viết theo kết quả đã search <mới nhất, theo số lượng yêu thích,...> // đánh dấu tag
+thông báo khi có bài viết với (trong thể loại đã thích)
+
+------------------------
+xoá cmt
+xoá bài viết
+thông báo mất kết nối
+
+
+
