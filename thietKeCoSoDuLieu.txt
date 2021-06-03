@@ -1,0 +1,35 @@
+User(
+	userID not nul primary key,
+	email not null ,
+	sdt,	
+)
+
+ĐÃ_ĐÁNh_Dấu(
+	userID,
+	baoID,
+)
+
+ĐÃlike(
+	userID,
+	baoID,
+)
+
+báo(
+	ID : string not null primary key,
+	title string,
+	body string,
+	ngày viết datetime,
+	nguồn string,
+	tag : list<string>
+	image : list<string> (link)
+	numOfLike : int
+	listCmt : list<string> (ID cmt)
+)
+
+
+comment(
+	cmtID,
+	Noidung,
+	userID,
+	thoi_gianCMt
+)
