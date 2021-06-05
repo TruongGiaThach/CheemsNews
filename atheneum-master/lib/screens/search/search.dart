@@ -1,8 +1,6 @@
 import 'package:atheneum/api/search.dart';
 import 'package:floating_search_bar/floating_search_bar.dart';
-import 'package:floating_search_bar/ui/sliver_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:html/parser.dart';
 
 import 'widgets/item.dart';
 
