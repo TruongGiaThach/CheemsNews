@@ -12,7 +12,7 @@ import 'package:atheneum/models/genre.dart';
 import 'package:atheneum/api/utils/genre.dart';
 
 Future<Document> getHomePage() async {
-    http.Response response = await http.get(baseUrl);
+    http.Response response = await http.get(Uri.parse(baseUrl));
     Document document = parse(response.body);
 
     return document;

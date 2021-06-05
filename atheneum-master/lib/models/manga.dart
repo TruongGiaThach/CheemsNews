@@ -6,7 +6,7 @@ import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
 Future<Document> getManga(String url) async {
-  http.Response response = await http.get(url);
+  http.Response response = await http.get(Uri.parse(url));
   Document document = parse(response.body);
   return document;
 }

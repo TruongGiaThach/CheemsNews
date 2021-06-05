@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:atheneum/models/genre.dart';
 
 Future<Document> getGenrePage(String url) async {
-  http.Response response = await http.get(url);
+  http.Response response = await http.get(Uri.parse(url));
   Document document = parse(response.body);
 
   return document;

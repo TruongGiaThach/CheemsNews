@@ -1,8 +1,8 @@
 import 'package:atheneum/constants/color.dart';
 import 'package:atheneum/models/popular.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
 import 'package:atheneum/screens/manga/mangascreen.dart';
+import 'package:flutter/material.dart';
 
 class MangaCard extends StatelessWidget {
   const MangaCard({Key key, @required this.manga, this.height})

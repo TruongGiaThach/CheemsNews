@@ -4,8 +4,6 @@ import 'package:http/http.dart' as http;
 
 
 
-import 'dart:convert';
-
 List<SearchResults> searchResultsFromJson(String str) =>
     List<SearchResults>.from(
         json.decode(str).map((x) => SearchResults.fromJson(x)));
@@ -56,7 +54,7 @@ class SearchResults {
 Future<List<SearchResults>> search(String keyword) async {
   Map<String, String> body = {"searchword": keyword};
   http.Response response =
-      await http.post('https://manganelo.com/getstorysearchjson', body: body);
+      await http.post(Uri.parse('https://manganelo.com/getstorysearchjson'), body: body);
 
   final searchResults = searchResultsFromJson(utf8.decode(response.bodyBytes));
   return searchResults;
