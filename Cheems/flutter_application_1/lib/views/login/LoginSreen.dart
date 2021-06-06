@@ -34,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                                 height: 40,
                                 width: 40,
                                 child:
-                                    Image.asset("assets/images/messenger.png")),
+                                    Image.asset("assets/images/tmpIcon.png")),
                           ),
                           SizedBox(height: 20),
                           Center(
@@ -48,14 +48,15 @@ class LoginScreen extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(30.0),
-                            child: Lottie.asset("assets/images/prm.json"),
+                            child: Lottie.asset("assets/images/factoryAnimation.json"),
                           ),
+                          SizedBox(height: 40),
                           buildSignIn(),
                         ],
                       ),
                     ),
                     
-                    SizedBox(height: 40)
+                    
                   ],
                 ),
               ),
@@ -77,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                               height: 40,
                               width: 40,
                               child:
-                                  Image.asset("assets/images/messenger.png")),
+                                  Image.asset("assets/images/tmpIcon.png")),
                         ),
                         SizedBox(height: 20),
                         Center(
@@ -91,7 +92,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(30.0),
-                          child: Lottie.asset("assets/images/prm.json"),
+                          child: Lottie.asset("assets/images/factoryAnimation.json"),
                         ),
                         CircularProgressIndicator(),
                         SizedBox(height: 20),
@@ -121,13 +122,6 @@ class LoginScreen extends StatelessWidget {
                     _authenticController.signInWithGoogle();
                   },
                 ),
-                SignInButton(
-                  Buttons.Facebook,
-                  text: "Continute with Facebook",
-                  onPressed: () {
-                    _authenticController.signInWithFacebook();
-                  },
-                )
               ],
             )
           : Column(

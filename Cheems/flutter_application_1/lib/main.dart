@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
     return GetMaterialApp(
-      title: 'Demo Chat App',
+      title: 'Demo Login',
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.rightToLeft,
       getPages: PageRouter.route,

@@ -26,14 +26,14 @@ class AuthenticController extends GetxController {
       } else {
         await FirestoreService.instance.addUser(user);
         Get.snackbar("Đăng nhập thành công",
-            "Chào mừng ${user.displayName} đến với Chat App.");
+            "Xin chao ${user.displayName}.");
       }
       Get.off(() => HomeScreen(
           ChatUser(user.uid, user.email!, user.displayName!, user.photoURL!), 1));
       isSigningIn.value = false;
       return true;
-    } else
-      Get.snackbar(
+    } 
+    Get.snackbar(
           "Đăng nhập thất bại", "Đã có lỗi xảy ra trong quá trình đăng nhập.");
     isSigningIn.value = false;
     return false;
@@ -43,7 +43,7 @@ class AuthenticController extends GetxController {
     await AuthenticService.instance.signOutGoogle();
     Get.offAllNamed('/loginView');
   }
-
+/*
   Future<bool> signInWithFacebook() async {
     isSigningIn.value = true;
     User user = await AuthenticService.instance.signInWithFacebook();
@@ -78,4 +78,5 @@ class AuthenticController extends GetxController {
     await AuthenticService.instance.signOutFacebook();
     Get.offAllNamed('/loginView');
   }
+  */
 }

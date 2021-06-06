@@ -1,6 +1,4 @@
-import 'package:flutter_application_1/models/ChatGroup.dart';
 import 'package:flutter_application_1/models/ChatUser.dart';
-import 'package:flutter_application_1/services/MessageService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -16,10 +14,6 @@ class FirestoreService {
   final String userTableMailField = "email";
   final String userTablePhotoUrlField = "photoUrl";
 
-  final String groupTable = "groups";
-  final String people = "people";
-  final String uid = "uid";
-
   Future<void> addUser(User _user, [String fbToken = ""]) async {
     await database.collection(userTable).doc(_user.uid.toString()).set({
       '$userTableMailField': _user.email,
@@ -34,19 +28,11 @@ class FirestoreService {
     return docs.exists;
   }
 
-  static ChatUser getChatUserFromRaw(String uid, Map<String, dynamic> result) {
-    return ChatUser(
-      uid,
-      result['email'],
-      result['displayName'],
-      result['photoUrl'],
-    );
-  }
 
-  Future<ChatUser> getUser(String userUID) async {
+  Future<ChatUser> getUserByEmail(String email) async {
     late ChatUser user;
-    await database.collection(userTable).doc(userUID).get().then((value) {
-      user = getChatUserFromRaw(value.id, value.data()!);
+    await database.collection(userTable).where('email',isEqualTo: email).get().then((value) {
+      user = ChatUser.fromJson(value.docs[0].data());
     });
     return user;
   }
@@ -55,57 +41,8 @@ class FirestoreService {
     List<ChatUser> weathers = [];
     await database.collection(userTable).get().then((value) {
       value.docs.forEach((element) =>
-          weathers.add(getChatUserFromRaw(element.id, element.data())));
+          weathers.add(ChatUser.fromJson(element.data())));
     });
     return weathers;
-  }
-
-  static ChatGroup getChatGroupFromRaw(String id, Map<String, dynamic> result) {
-    return ChatGroup(
-      id,
-      result['name'],
-      List.from(result['people']),
-    );
-  }
-
-  Future<ChatGroup> createChatGroup(List<String> people) async {
-    late ChatGroup chatGroup;
-    await database.collection('groups').add({
-      'name': "",
-      'people': people,
-    }).then((value) {
-      chatGroup = ChatGroup(value.id, "", people);
-    });
-    return chatGroup;
-  }
-
-  Future<List<ChatGroup>> getChatGroups(String userUID) async {
-    List<ChatGroup> chatGroups = [];
-    await database
-        .collection(groupTable)
-        .where(people, arrayContains: userUID)
-        .get()
-        .then((value) => value.docs.forEach((element) {
-              chatGroups.add(getChatGroupFromRaw(element.id, element.data()));
-            }));
-    for (var element in chatGroups) {
-      ChatUser user;
-      String user1 = element.peopleID[0], user2 = element.peopleID[1];
-      if (user1 == user2) {
-        user = await FirestoreService.instance.getUser(user1);
-        element.name = "You";
-      } else {
-        if (user1 != userUID) {
-          user = await FirestoreService.instance.getUser(user1);
-        } else {
-          user = await FirestoreService.instance.getUser(user2);
-        }
-      }
-      element.photoUrl = user.photoUrl;
-      if (element.name == "") element.name = user.displayName;
-      element.lastMessage =
-          await MessageService.instance.getLastMessage(element.id);
-    }
-    return chatGroups;
   }
 }
