@@ -89,52 +89,5 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
-
-    /*
-    return Scaffold(
-        appBar: appBarMain(context) ,
-        body: Column(
-         
-          children: [
-            (_signInType == 1)?Image.asset("assets/images/googleIcon.png")
-              :Image.asset("assets/images/facebookIcon.png"),
-            SizedBox(height: 30,),
-            Container(
-              padding:  EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-              alignment: Alignment.topCenter,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Image.network(
-                        _user.photoUrl,
-                        height: 40,
-                        width: 40,
-                      ), 
-                      
-                      Text(_user.displayName,style: textFieldTextStyle(),),
-                    ],               
-                  ),
-                  SizedBox(height: 30,),
-                  GestureDetector(
-                    onTap: ()=>{
-                      _authController.signOutGoogle()
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-                      decoration:BoxDecoration(
-                        color: Colors.blueGrey,
-                        borderRadius: BorderRadius.circular(30),
-                      ), 
-                      child: Text("Loggout",style: titleTextFieldTextStyle(),),
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
-    );*/
   }
 }
