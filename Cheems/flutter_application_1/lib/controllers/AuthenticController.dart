@@ -43,11 +43,10 @@ class AuthenticController extends GetxController {
     await AuthenticService.instance.signOutGoogle();
     Get.offAllNamed('/loginView');
   }
-/*
+
   Future<bool> signInWithFacebook() async {
     isSigningIn.value = true;
-    User user = await AuthenticService.instance.signInWithFacebook();
-    // ignore: unnecessary_null_comparison
+    User? user = await AuthenticService.instance.signInWithFacebook();
     if (user != null) {
       String token = AuthenticService.instance.fbAcessToken;
       bool isExisted = await FirestoreService.instance.isUserExisted(user);
@@ -78,5 +77,5 @@ class AuthenticController extends GetxController {
     await AuthenticService.instance.signOutFacebook();
     Get.offAllNamed('/loginView');
   }
-  */
+  
 }
