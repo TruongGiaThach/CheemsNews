@@ -48,15 +48,14 @@ class LoginScreen extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(30.0),
-                            child: Lottie.asset("assets/images/factoryAnimation.json"),
+                            child: Lottie.asset(
+                                "assets/images/factoryAnimation.json"),
                           ),
                           SizedBox(height: 40),
                           buildSignIn(),
                         ],
                       ),
                     ),
-                    
-                    
                   ],
                 ),
               ),
@@ -77,8 +76,7 @@ class LoginScreen extends StatelessWidget {
                           child: SizedBox(
                               height: 40,
                               width: 40,
-                              child:
-                                  Image.asset("assets/images/tmpIcon.png")),
+                              child: Image.asset("assets/images/tmpIcon.png")),
                         ),
                         SizedBox(height: 20),
                         Center(
@@ -92,7 +90,8 @@ class LoginScreen extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(30.0),
-                          child: Lottie.asset("assets/images/factoryAnimation.json"),
+                          child: Lottie.asset(
+                              "assets/images/factoryAnimation.json"),
                         ),
                         CircularProgressIndicator(),
                         SizedBox(height: 20),
@@ -100,7 +99,6 @@ class LoginScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  
                   SizedBox(height: 40)
                 ],
               ),
@@ -115,13 +113,18 @@ class LoginScreen extends StatelessWidget {
       () => (!_authenticController.isSigningIn.value)
           ? Column(
               children: [
-                SignInButton(
-                  Buttons.GoogleDark,
+                SignInButtonBuilder(
+                  image: Image.asset("assets/images/googleIcon.png",height: 30,width: 30,) ,
+                  backgroundColor: Colors.blue[300]!,
                   text: "Continute with Google",
                   onPressed: () {
                     _authenticController.signInWithGoogle();
                   },
                 ),
+                SignInButton(Buttons.FacebookNew,
+                    text: "Continute with Facebook",
+                    onPressed: () =>
+                        {_authenticController.signInWithFacebook()})
               ],
             )
           : Column(

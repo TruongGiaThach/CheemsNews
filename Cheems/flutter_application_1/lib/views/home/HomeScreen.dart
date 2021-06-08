@@ -82,7 +82,6 @@ class HomeScreen extends StatelessWidget {
                 _user.photoUrl,
                 height: 80,
                 width: 80,
-                fit: BoxFit.scaleDown,
               ),
             ),
           ),

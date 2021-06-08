@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 
 class AuthenticService {
   AuthenticService._privateConstructor();
@@ -9,6 +11,7 @@ class AuthenticService {
   late FirebaseAuth _firebaseAuth;
   late GoogleSignIn _googleSignIn;
   late String fbAcessToken;
+  late String handleError;
   Future<FirebaseApp> initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     _firebaseAuth = FirebaseAuth.instance;
@@ -18,7 +21,8 @@ class AuthenticService {
   }
 
   Future<User?> signInWithGoogle() async {
-    late User? user ;
+    handleError = "";
+    late User? user;
     final GoogleSignInAccount? googleSignInAccount =
         await _googleSignIn.signIn();
 
@@ -38,14 +42,15 @@ class AuthenticService {
         user = userCredential.user;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
-          // handle the error here
+          print("account exists");// handle the error here
         } else if (e.code == 'invalid-credential') {
           // handle the error here
         }
       } catch (e) {
         // handle the error here
       }
-    } else user = null;
+    } else
+      user = null;
     return user;
   }
 
@@ -53,25 +58,49 @@ class AuthenticService {
     await _googleSignIn.signOut();
     await _firebaseAuth.signOut();
   }
-/*
-  Future<User> signInWithFacebook() async {
-    late User user;
+
+  Future<User?> signInWithFacebook() async {
+    handleError = "";
+    User? user;
     final FacebookLogin _facebookLogin = FacebookLogin();
-    final result = await _facebookLogin.logInWithReadPermissions(['email']);
+    final res = await _facebookLogin.logIn(permissions: [
+      FacebookPermission.publicProfile,
+      FacebookPermission.email,
+    ]);
     try {
-      print(result.status.toString());
-      final OAuthCredential facebookAuthCredential =
-          FacebookAuthProvider.credential(result.accessToken.token);
-      fbAcessToken = result.accessToken.token;
-      print(fbAcessToken);
-      final UserCredential userCredential =
-          await _firebaseAuth.signInWithCredential(facebookAuthCredential);
-      user = userCredential.user!;
+      print(res.status.toString());
+      switch (res.status) {
+        case FacebookLoginStatus.success:
+          final OAuthCredential facebookAuthCredential =
+              FacebookAuthProvider.credential(res.accessToken!.token);
+          fbAcessToken = res.accessToken!.token;
+          print("token: " + fbAcessToken);
+
+          final UserCredential userCredential =
+              await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+          user = userCredential.user;
+          print((user != null) ? user.uid : "null user");
+          break;
+        case FacebookLoginStatus.cancel:
+          throw FirebaseAuthException(code: "fb-cancel-login");
+        case FacebookLoginStatus.error:
+          throw FirebaseAuthException(code: "fb-login-error");
+      }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'account-exists-with-different-credential') {
-        print("lỗi 1");
-      } else if (e.code == 'invalid-credential') {
-        print("lỗi 2");
+      switch (e.code) {
+        case 'account-exists-with-different-credential':
+          handleError = "Email này đã được sử dụng";
+          print("account-exists-with-different-credential");
+          break;
+        case 'invalid-credential':
+          print("invalid-credential");
+          break;
+        case 'fb-cancel-login':
+          print("fb-cancel-login");
+          break;
+        case 'fb-login-error':
+          print("fb-login-error");
+          break;
       }
     } catch (e) {
       print(e.toString());
@@ -84,5 +113,4 @@ class AuthenticService {
     await FacebookAuth.instance.logOut();
     await _firebaseAuth.signOut();
   }
-  */
 }

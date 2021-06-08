@@ -58,7 +58,7 @@ class AuthenticController extends GetxController {
       } else {
         await FirestoreService.instance.addUser(user, "?access_token=" + token);
         Get.snackbar("Đăng nhập thành công",
-            "Chào mừng ${user.displayName} đến với Chat App.");
+            "Chào mừng ${user.displayName} đến với CheemsNews.");
       }
       Get.off(() => HomeScreen(
           ChatUser(user.uid, user.email!, user.displayName!,
@@ -68,7 +68,7 @@ class AuthenticController extends GetxController {
       return true;
     } else
       Get.snackbar(
-          "Đăng nhập thất bại", "Đã có lỗi xảy ra trong quá trình đăng nhập.");
+          "Đăng nhập thất bại", "Đã có lỗi xảy ra trong quá trình đăng nhập." + AuthenticService.instance.handleError);
     isSigningIn.value = false;
     return false;
   }
