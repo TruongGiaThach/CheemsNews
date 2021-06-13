@@ -1,14 +1,19 @@
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
-import 'package:flutter_application_1/models/ChatUser.dart';
+import 'package:flutter_application_1/controllers/HomeController.dart';
+
+import 'package:flutter_application_1/models/User.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/views/home/Thumbnail.dart';
+
 import 'package:flutter_application_1/views/widgets.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
+  final _homeController = Get.put(HomeController());
   final _authController = Get.put(AuthenticController());
-  late final ChatUser _user;
+  late final myUser _user;
   late final int _signInType;
-  HomeScreen(ChatUser user, int signInType) {
+  HomeScreen(myUser user, int signInType) {
     _user = user;
     _signInType = signInType;
   } //1 - gg sign in  2- fb sign in
@@ -73,18 +78,38 @@ class HomeScreen extends StatelessWidget {
           onTap: () => {
             _showPicker(context),
           },
-          child: CircleAvatar(
-            backgroundColor: Colors.cyan[100],
-            radius: 45,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(45),
-              child: Image.network(
-                _user.photoUrl,
-                height: 80,
-                width: 80,
+          child: Column(children: [
+            CircleAvatar(
+              backgroundColor: Colors.cyan[100],
+              radius: 45,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(45),
+                child: Image.network(
+                  _user.photoUrl,
+                  height: 80,
+                  width: 80,
+                ),
               ),
             ),
-          ),
+            GestureDetector(
+              onTap: () => {_homeController.getListThumb()},
+              child: Image.asset("assets/images/userIcon.png"),
+            ),
+            Obx(
+              () => (_homeController.isDataChange.value)
+                  ? Container(
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: _homeController.listThumb.length,
+                          itemBuilder: (context, index) {
+                            return ThumbnailView(
+                                _homeController.listThumb[index]);
+                          }),
+                    )
+                  : Container(),
+            ),
+          ]),
         ),
       ),
     );
