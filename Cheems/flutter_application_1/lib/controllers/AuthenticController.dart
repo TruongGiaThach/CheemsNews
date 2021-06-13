@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/models/ChatUser.dart';
+import 'package:flutter_application_1/models/User.dart';
 import 'package:flutter_application_1/services/AuthenticService.dart';
 import 'package:flutter_application_1/services/FirestoreService.dart';
 import 'package:flutter_application_1/views/home/HomeScreen.dart';
@@ -29,7 +29,7 @@ class AuthenticController extends GetxController {
             "Xin chao ${user.displayName}.");
       }
       Get.off(() => HomeScreen(
-          ChatUser(user.uid, user.email!, user.displayName!, user.photoURL!), 1));
+          myUser(user.uid, user.email!, user.displayName!, user.photoURL!), 1));
       isSigningIn.value = false;
       return true;
     } 
@@ -61,7 +61,7 @@ class AuthenticController extends GetxController {
             "Chào mừng ${user.displayName} đến với CheemsNews.");
       }
       Get.off(() => HomeScreen(
-          ChatUser(user.uid, user.email!, user.displayName!,
+          myUser(user.uid, user.email!, user.displayName!,
               user.photoURL! + "?access_token=" + token),
           2));
       isSigningIn.value = false;
