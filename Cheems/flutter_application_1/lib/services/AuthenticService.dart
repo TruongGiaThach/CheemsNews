@@ -11,6 +11,7 @@ class AuthenticService {
   late FirebaseAuth _firebaseAuth;
   late GoogleSignIn _googleSignIn;
   late String fbAcessToken;
+  late String ggAccessToken;
   late String handleError;
   Future<FirebaseApp> initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
@@ -29,7 +30,7 @@ class AuthenticService {
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount.authentication;
-
+    ggAccessToken = googleSignInAuthentication.accessToken!;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,

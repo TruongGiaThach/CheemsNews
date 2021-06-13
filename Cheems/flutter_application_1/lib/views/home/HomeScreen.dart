@@ -73,31 +73,35 @@ class HomeScreen extends StatelessWidget {
       appBar: appBarMain(context),
       body: Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 18),
-        child: GestureDetector(
-          onTap: () => {
-            _showPicker(context),
-          },
-          child: Column(children: [
-            CircleAvatar(
-              backgroundColor: Colors.cyan[100],
-              radius: 45,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(45),
-                child: Image.network(
-                  _user.photoUrl,
-                  height: 80,
-                  width: 80,
+        padding: EdgeInsets.symmetric(horizontal: 8),
+        child: Column(children: [
+          GestureDetector(
+            onTap: () => {
+              _showPicker(context),
+            },
+            child: Column(children: [
+              CircleAvatar(
+                backgroundColor: Colors.cyan[100],
+                radius: 45,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(45),
+                  child: Image.network(
+                    _user.photoUrl,
+                    height: 80,
+                    width: 80,
+                  ),
                 ),
               ),
-            ),
-            GestureDetector(
-              onTap: () => {_homeController.getListThumb()},
-              child: Image.asset("assets/images/userIcon.png"),
-            ),
-            Obx(
-              () => (_homeController.isDataChange.value)
-                  ? Container(
+            ]),
+          ),
+          GestureDetector(
+            onTap: () => {_homeController.getListThumb()},
+            child: Image.asset("assets/images/userIcon.png"),
+          ),
+          Obx(
+            () => (_homeController.isDataChange.value)
+                ? Expanded(
+                  child: Container(
                       child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
@@ -106,11 +110,11 @@ class HomeScreen extends StatelessWidget {
                             return ThumbnailView(
                                 _homeController.listThumb[index]);
                           }),
-                    )
-                  : Container(),
-            ),
-          ]),
-        ),
+                    ),
+                )
+                : Container(),
+          ),
+        ]),
       ),
     );
   }

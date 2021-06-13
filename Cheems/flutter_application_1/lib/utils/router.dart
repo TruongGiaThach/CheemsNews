@@ -6,6 +6,6 @@ class PageRouter {
     GetPage(
       name: '/loginView',
       page: () => LoginScreen(),
-    ),
+    )
   ];
 }

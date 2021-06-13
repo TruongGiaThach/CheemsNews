@@ -57,5 +57,13 @@ class FirestoreService {
     });
     return thumb;
   }
+  Future<News> getNewsById(String id) async{
+    late News tmp;
+    await database.collection('new').doc(id).get().then((value) => {
+      if (value.exists)
+        tmp = News.fromJson(value.data()!)
+    });
+    return tmp;
+  }
 
 }
