@@ -1,21 +1,17 @@
+
 import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/services/FirestoreService.dart';
 import 'package:get/state_manager.dart';
 
 class ReadingController extends GetxController {
   News? news;
-  ReadingController();
+  ReadingController(){news = null;}
   var hasData = false.obs;
 
-  fletchNews(String id) async {
-    news = null;
-    /*await FirestoreService.instance.getNewsById(id).then((value) => {
-          if (value != null)
-            {
-              news = value,
-              hasData.value = true,
-            }
-        });*/
-    hasData.value = !hasData.value;
+  fletchNews(String id) async{
+    
+    news = await FirestoreService.instance.getNewsById(id);
+    if (news != null)
+      hasData.value = true;
   }
 }
