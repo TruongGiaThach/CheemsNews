@@ -21,7 +21,7 @@ TextStyle textFieldTextStyle() {
   return TextStyle(color: Colors.blue, fontSize: 16);
 }
 TextStyle titleTextFieldTextStyle() {
-  return TextStyle(color: Colors.white, fontSize: 18);
+  return TextStyle(color: Colors.black, fontSize: 18);
 }
 TextStyle minimzeTextStyle() {
   return TextStyle(color: Colors.blue, fontSize: 14);

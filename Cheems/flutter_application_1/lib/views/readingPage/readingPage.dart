@@ -30,6 +30,29 @@ class ReadingPage extends StatelessWidget {
     ));
   }
 
+  Widget tagView() { //need fixed
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Icon(Icons.category_outlined),
+        
+        Container(
+            padding: EdgeInsets.all(3),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5), color: Colors.grey),
+            child: Text(
+              _readingController.news!.tag[0],
+              style: minimzeTextStyle(),
+            ),
+          ),
+        
+        SizedBox(
+          width: 10,
+        ),
+      ],
+    );
+  }
+
   Widget newsView() {
     return ListView(
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
@@ -44,23 +67,7 @@ class ReadingPage extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Row(
-            //tag
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Icon(Icons.masks_rounded),
-              ListView.builder(
-                itemCount: _readingController.news!.tag.length,
-                itemBuilder: (context, index) => Text(
-                  _readingController.news!.tag[index],
-                  style: minimzeTextStyle(),
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-            ],
-          ),
+          tagView(),
           Row(
             //date
             mainAxisAlignment: MainAxisAlignment.end,
