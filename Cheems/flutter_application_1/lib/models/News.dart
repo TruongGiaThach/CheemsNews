@@ -15,7 +15,7 @@ class News {
   News(this.id,this.body,this.dateCreate,this.imageLink,this.numOfLike,this.source,this.tag,this.title,this.author);
   factory News.fromJson(Map<String,dynamic> result){
     return News(
-      result['id'],
+      result['ID'],
       List.castFrom(result['body'] as List<dynamic>),
       result['dateCreate'],
       List.castFrom(result['image'] as List<dynamic>),

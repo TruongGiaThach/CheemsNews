@@ -57,13 +57,22 @@ class FirestoreService {
     });
     return thumb;
   }
-  Future<News> getNewsById(String id) async{
-    late News tmp;
-    await database.collection('new').doc(id).get().then((value) => {
-      if (value.exists)
-        tmp = News.fromJson(value.data()!)
+  Future<News?> getNewsById(String id) async{
+    late News? tmp ;
+
+    FirebaseFirestore.instance
+    .collection('news')
+    .doc(id)
+    .get()
+    .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        tmp = News.fromJson(documentSnapshot.data()!);
+        print(tmp!.author);
+        return tmp;
+      } else {
+        print('Document does not exist on the database');
+      }
     });
-    return tmp;
   }
 
 }

@@ -1,6 +1,5 @@
 import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/services/FirestoreService.dart';
-import 'package:flutter_application_1/views/readingPage/readingPage.dart';
 import 'package:get/state_manager.dart';
 
 class HomeController extends GetxController{
