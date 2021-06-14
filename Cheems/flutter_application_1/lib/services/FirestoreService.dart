@@ -29,10 +29,13 @@ class FirestoreService {
     return docs.exists;
   }
 
-
   Future<myUser> getUserByEmail(String email) async {
     late myUser user;
-    await database.collection(userTable).where('email',isEqualTo: email).get().then((value) {
+    await database
+        .collection(userTable)
+        .where('email', isEqualTo: email)
+        .get()
+        .then((value) {
       user = myUser.fromJson(value.docs[0].data());
     });
     return user;
@@ -41,38 +44,37 @@ class FirestoreService {
   Future<List<myUser>> getAllUsers() async {
     List<myUser> weathers = [];
     await database.collection(userTable).get().then((value) {
-      value.docs.forEach((element) =>
-          weathers.add(myUser.fromJson(element.data())));
+      value.docs
+          .forEach((element) => weathers.add(myUser.fromJson(element.data())));
     });
     return weathers;
   }
 
-  Future<List<Thumbnail>> getAllNews() async{
+  Future<List<Thumbnail>> getAllNews() async {
     List<Thumbnail> thumb = [];
     await database.collection('news').get().then((value) => {
-      print(value.docs[0].data()),
-      value.docs.forEach((element) {
-        thumb.add(Thumbnail.fromJson(element.data()));
-       })
-    });
+          print(value.docs[0].data()),
+          value.docs.forEach((element) {
+            thumb.add(Thumbnail.fromJson(element.data()));
+          })
+        });
     return thumb;
   }
-  Future<News?> getNewsById(String id) async{
-    late News? tmp ;
 
-    FirebaseFirestore.instance
-    .collection('news')
-    .doc(id)
-    .get()
-    .then((DocumentSnapshot documentSnapshot) {
+  Future<News?> getNewsById(String id) async {
+    late News? tmp;
+
+    await database.collection('news').doc(id).get()
+        .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         tmp = News.fromJson(documentSnapshot.data()!);
         print(tmp!.author);
-        return tmp;
+        
       } else {
         print('Document does not exist on the database');
+        tmp =  null;
       }
     });
+    return tmp;
   }
-
 }

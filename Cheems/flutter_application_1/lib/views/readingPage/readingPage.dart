@@ -1,7 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/readingController.dart';
-
 import 'package:flutter_application_1/views/widgets.dart';
+
 import 'package:get/get.dart';
 
 class ReadingPage extends StatelessWidget {
@@ -13,35 +14,132 @@ class ReadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarMain(context),
-      body: RefreshIndicator(
-          onRefresh: () => _readingController.fletchNews(this.iD),
-          child: ListView(
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
+        body: RefreshIndicator(
+      onRefresh: () => _readingController.fletchNews(this.iD),
+      child: Obx(() => (_readingController.hasData.isFalse)
+          ? ListView(
+              physics: BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              children: [
+                Container(
+                    alignment: Alignment.center,
+                    child: Text("There is no data. Scroll to reload")),
+              ],
+            )
+          : newsView()),
+    ));
+  }
+
+  Widget newsView() {
+    return ListView(
+        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        shrinkWrap: true,
+        children: [
+          Container(
+            //title
+            child: Expanded(
+                child: Text(_readingController.news!.title,
+                    textAlign: TextAlign.center, style: newsTiltleTextStyle())),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            //tag
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                  alignment: Alignment.center,
-                  child: Obx(() => (_readingController.hasData.isFalse)
-                      ? Text("There is no data. Scroll to reload")
-                      : Text("Still no data"))),
+              Icon(Icons.masks_rounded),
+              ListView.builder(
+                itemCount: _readingController.news!.tag.length,
+                itemBuilder: (context, index) => Text(
+                  _readingController.news!.tag[index],
+                  style: minimzeTextStyle(),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
             ],
-          )),
-    );
+          ),
+          Row(
+            //date
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                _readingController.news!.dateCreate,
+                style: minimzeTextStyle(),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+          Container(
+            //body news
+
+            padding: EdgeInsets.all(8),
+            child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: _readingController.news!.body.length,
+              itemBuilder: (context, index) => Column(
+                children: [
+                  if (_readingController.news!.imageLink.length > index - 1)
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 150,
+                      child: CachedNetworkImage(
+                        imageUrl: _readingController.news!.imageLink[index],
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    )
+                  else
+                    Container(),
+                  Text(
+                    _readingController.news!.body[index],
+                    style: newsBodyTextStyle(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Row(
+            //author
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                _readingController.news!.author,
+                style: textFieldTextStyle(),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+          Row(
+            //source
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                _readingController.news!.source,
+                style: textFieldTextStyle(),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+        ]);
   }
 }
-//if (_readingController.news != null ){
-//      return Text(_readingController.news,style: textFieldTextStyle(),);
-//    }else return Text("No data",style: textFieldTextStyle(),);
-
-/*: ListView.builder(
-                physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: _readingController.news!.body.length,
-                itemBuilder: (context, index) => Text(
-                  _readingController.news!.body[index],
-                  style: TextStyle(fontSize: 20, height: 1.5),
-                ),
-              ),*/
