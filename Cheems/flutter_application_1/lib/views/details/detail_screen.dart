@@ -54,13 +54,13 @@ class DetailScreen extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          (_readingController.news!.imgaeSource == "")
+          (_readingController.news!.imageSource == "")
               ? Text(
                   _readingController.news!.source,
                   style: textFieldTextStyle(),
                 )
               : Image.network(
-                  _readingController.news!.imgaeSource,
+                  _readingController.news!.imageSource,
                   height: 25,
                   fit: BoxFit.fitWidth,
                 ),

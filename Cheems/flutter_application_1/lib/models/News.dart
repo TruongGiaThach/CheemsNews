@@ -7,13 +7,13 @@ class News {
   late List<String> imageLink;
   late String numOfLike;
   late String source;
-  late String imgaeSource;
+  late String imageSource;
   late List<String> tag;
   late String title;
   late List<Comments> cmts;
   late String author;
 
-  News(this.id,this.body,this.dateCreate,this.imageLink,this.numOfLike,this.source,this.tag,this.title,this.author,this.imgaeSource);
+  News(this.id,this.body,this.dateCreate,this.imageLink,this.numOfLike,this.source,this.tag,this.title,this.author,this.imageSource);
   factory News.fromJson(Map<String,dynamic> result){
     return News(
       result['ID'],
