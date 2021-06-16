@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/GetNewsController.dart';
 import 'package:flutter_application_1/models/News.dart';
-import 'package:flutter_application_1/services/FirestoreService.dart';
 import 'package:flutter_application_1/views/details/detail_screen.dart';
 import 'package:get/get.dart';
 
@@ -68,7 +67,7 @@ class ListPlantCard extends StatelessWidget {
                   topRight: Radius.circular(10),
                 ),
                 child: CachedNetworkImage(
-                        imageUrl: thumb.imageLink[0],
+                        imageUrl: thumb.imageLink.first,
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(
@@ -78,8 +77,8 @@ class ListPlantCard extends StatelessWidget {
                           ),
                         ),
                         placeholder: (context, url) => Container(
-                            height: 50,
-                            width: 50,
+                            height: 20,
+                            width: 20,
                             child: CircularProgressIndicator()),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
@@ -116,24 +115,7 @@ class ListPlantCard extends StatelessWidget {
                     Row(
                       children: [
                         
-                        CachedNetworkImage(
-                        imageUrl: thumb.imgaeSource,
-                        imageBuilder: (context, imageProvider) => Container(
-                          height: 20,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: imageProvider,
-                            
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                        ),
-                        placeholder: (context, url) => Container(
-                            height: 50,
-                            width: 50,
-                            child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
+                      Image.network(thumb.imageSource,height: 20,),
                         Spacer(),
                         Text(thumb.dateCreate)
                       ],
