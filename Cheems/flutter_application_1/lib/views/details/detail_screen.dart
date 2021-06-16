@@ -13,25 +13,16 @@ class DetailScreen extends StatelessWidget {
   final _readingController = Get.put(ReadingController());
   @override
   Widget build(BuildContext context) {
-    _readingController.fletchNews(news.id);
+    _readingController.news = this.news;
+    _readingController.hasData.value = true;
     return Obx(() => (_readingController.hasData.isTrue)
         ? Scaffold(
             appBar: buildAppBar(),
             body: RefreshIndicator(
               onRefresh: () => _readingController.fletchNews(news.id),
-              child: Obx(() => (_readingController.hasData.isFalse)
-                  ? ListView(
-                      physics: BouncingScrollPhysics(
-                          parent: AlwaysScrollableScrollPhysics()),
-                      children: [
-                        Container(
-                            alignment: Alignment.center,
-                            child: Text("There is no data. Scroll to reload")),
-                      ],
-                    )
-                  : newsView()),
-            ),
-          )
+              child:newsView()),
+            )
+          
         : Scaffold(
             body: Center(
               child: Text("Can't load data from server. Please try again."),
@@ -139,7 +130,7 @@ class DetailScreen extends StatelessWidget {
               itemCount: _readingController.news!.body.length,
               itemBuilder: (context, index) => Column(
                 children: [
-                  if (_readingController.news!.imageLink.length > index - 1)
+                  if (_readingController.news!.imageLink.length > index )
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: 150,

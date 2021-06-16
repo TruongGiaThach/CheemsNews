@@ -18,29 +18,29 @@ class ListPlantCard extends StatelessWidget {
     //Future<List<News>> productwithtopic =
     //    FirestoreService.instance.getLimitNewsWithTag(topic);
     return FutureBuilder(
-        future: controller.getListThumbWithTopic(topic,4),
+        future: controller.getListThumbWithTopic(topic, 4),
         builder: (context, AsyncSnapshot<List<News>> snapshot) {
           // Check for errors
           if (snapshot.hasError) {
             print("error when load " + topic);
           }
           // Once complete, show your application
-          if (snapshot.connectionState == ConnectionState.done) 
+          if (snapshot.connectionState == ConnectionState.done)
             return Padding(
                 padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
                 child: Container(
                     height: 300,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: (snapshot.data == null)? 0 : snapshot.data!.length,
+                      itemCount:
+                          (snapshot.data == null) ? 0 : snapshot.data!.length,
                       itemBuilder: (context, index) => buildCard(
                         context,
                         snapshot.data![index],
                       ),
                     )));
-            // Otherwise, show something whilst waiting for initialization to complete
+          // Otherwise, show something whilst waiting for initialization to complete
           return CircularProgressIndicator();
-          
         });
   }
 
@@ -67,22 +67,24 @@ class ListPlantCard extends StatelessWidget {
                   topRight: Radius.circular(10),
                 ),
                 child: CachedNetworkImage(
-                        imageUrl: thumb.imageLink.first,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                        ),
-                        placeholder: (context, url) => Container(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                  imageUrl: thumb.imageLink.first,
+                  imageBuilder: (context, imageProvider) => Container(
+                    height: size.height * 0.2,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.fitWidth,
                       ),
-                
+                    ),
+                  ),
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Container(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                              value: downloadProgress.progress)),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
               ),
               Container(
                 padding: EdgeInsets.all(kDefaultPadding / 2),
@@ -114,10 +116,14 @@ class ListPlantCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        
-                      Image.network(thumb.imageSource,height: 20,),
+                        Expanded(
+                          child: Image.network(
+                            thumb.imageSource,
+                            height: 20,
+                          ),
+                        ),
                         Spacer(),
-                        Text(thumb.dateCreate)
+                        Expanded(child: Text(thumb.dateCreate))
                       ],
                     )
                   ],
