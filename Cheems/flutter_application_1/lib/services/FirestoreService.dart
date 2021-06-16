@@ -50,29 +50,46 @@ class FirestoreService {
     return weathers;
   }
 
-  Future<List<Thumbnail>> getAllNews() async {
-    List<Thumbnail> thumb = [];
+  Future<List<News>> getAllNews() async {
+    List<News> thumb = [];
     await database.collection('news').get().then((value) => {
           print(value.docs[0].data()),
           value.docs.forEach((element) {
-            thumb.add(Thumbnail.fromJson(element.data()));
+            thumb.add(News.fromJson(element.data()));
           })
         });
+    return thumb;
+  }
+
+  Future<List<News>> getLimitNewsWithTag(String tag) async {
+    List<News> thumb = [];
+    await database
+        .collection('news')
+        //.where('tag', arrayContains: ['Du lịch'])
+        .get()
+        .then((value) => {
+              print(value.docs[0].data()),
+              value.docs.forEach((element) {
+                thumb.add(News.fromJson(element.data()));
+              })
+            });
     return thumb;
   }
 
   Future<News?> getNewsById(String id) async {
     late News? tmp;
 
-    await database.collection('news').doc(id).get()
+    await database
+        .collection('news')
+        .doc(id)
+        .get()
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         tmp = News.fromJson(documentSnapshot.data()!);
         print(tmp!.author);
-        
       } else {
         print('Document does not exist on the database');
-        tmp =  null;
+        tmp = null;
       }
     });
     return tmp;

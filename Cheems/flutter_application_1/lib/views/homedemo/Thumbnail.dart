@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+/*import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/services/AuthenticService.dart';
@@ -64,7 +64,7 @@ class ThumbnailView extends StatelessWidget {
         )
         : Container();
   }
-}
+}*/
 /*
 Container(
             margin: EdgeInsets.only(left: 3.0, bottom: 3),

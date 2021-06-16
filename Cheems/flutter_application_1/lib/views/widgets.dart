@@ -16,6 +16,27 @@ InputDecoration textFieldInputDecoration(String hintText) {
         UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
   );
 }
+class NavTitle extends StatelessWidget {
+  const NavTitle({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
+    return FlatButton(
+      onPressed: () {},
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+}
 
 TextStyle textFieldTextStyle() {
   return TextStyle(color: Colors.blue, fontSize: 16);

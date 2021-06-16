@@ -1,9 +1,9 @@
-import 'package:flutter_application_1/models/User.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/AuthenticService.dart';
 import 'package:flutter_application_1/services/FirestoreService.dart';
-import 'package:flutter_application_1/views/home/HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_application_1/views/home/home_link.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +12,7 @@ class AuthenticController extends GetxController {
   Future<FirebaseApp> initilizeFirebase() async {
     return await AuthenticService.instance.initializeFirebase();
   }
-
+  
   Future<bool> signInWithGoogle() async {
     isSigningIn.value = true;
     User? user = await AuthenticService.instance.signInWithGoogle();
@@ -28,10 +28,12 @@ class AuthenticController extends GetxController {
         Get.snackbar("Đăng nhập thành công",
             "Xin chao ${user.displayName}.");
       }
-      Get.off(() => HomeScreen(
+      Get.off(() => HomeLink());
+      
+      /* HomeScreen(
           myUser(user.uid, user.email!, user.displayName!, user.photoURL!), 1));
       isSigningIn.value = false;
-      return true;
+      return true;*/
     } 
     Get.snackbar(
           "Đăng nhập thất bại", "Đã có lỗi xảy ra trong quá trình đăng nhập.");
@@ -60,10 +62,12 @@ class AuthenticController extends GetxController {
         Get.snackbar("Đăng nhập thành công",
             "Chào mừng ${user.displayName} đến với CheemsNews.");
       }
-      Get.off(() => HomeScreen(
+      Get.off(() => HomeLink());
+      
+      /*HomeScreen(
           myUser(user.uid, user.email!, user.displayName!,
               user.photoURL! + "?access_token=" + token),
-          2));
+          2));*/
       isSigningIn.value = false;
       return true;
     } else

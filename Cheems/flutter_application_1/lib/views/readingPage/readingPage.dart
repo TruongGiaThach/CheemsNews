@@ -30,22 +30,21 @@ class ReadingPage extends StatelessWidget {
     ));
   }
 
-  Widget tagView() { //need fixed
+  Widget tagView() {
+    //need fixed
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Icon(Icons.category_outlined),
-        
         Container(
-            padding: EdgeInsets.all(3),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5), color: Colors.grey),
-            child: Text(
-              _readingController.news!.tag[0],
-              style: minimzeTextStyle(),
-            ),
+          padding: EdgeInsets.all(3),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5), color: Colors.grey),
+          child: Text(
+            _readingController.news!.tag[0],
+            style: minimzeTextStyle(),
           ),
-        
+        ),
         SizedBox(
           width: 10,
         ),
@@ -106,8 +105,10 @@ class ReadingPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
+                        placeholder: (context, url) => Container(
+                            height: 50,
+                            width: 50,
+                            child: CircularProgressIndicator()),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     )

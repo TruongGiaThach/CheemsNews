@@ -1,18 +1,18 @@
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
-import 'package:flutter_application_1/controllers/HomeController.dart';
+import 'package:flutter_application_1/controllers/GetNewsController.dart';
 
 import 'package:flutter_application_1/models/User.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/views/home/Thumbnail.dart';
+import 'package:flutter_application_1/views/homedemo/Thumbnail.dart';
 
 import 'package:flutter_application_1/views/widgets.dart';
 import 'package:get/get.dart';
-
+/*
 class HomeScreen extends StatelessWidget {
   final _homeController = Get.put(HomeController());
   final _authController = Get.put(AuthenticController());
-  late final myUser _user;
-  late final int _signInType;
+  late myUser _user;
+  late int _signInType;
   HomeScreen(myUser user, int signInType) {
     _user = user;
     _signInType = signInType;
@@ -52,7 +52,10 @@ class HomeScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: GestureDetector(
                       onTap: () {
-                        _authController.signOutGoogle();
+                        if (_signInType == 1)
+                          _authController.signOutGoogle();
+                        else if (_signInType == 2)
+                          _authController.signOutFacebook();
                       },
                       child: new Icon(
                         Icons.logout_outlined,
@@ -101,7 +104,7 @@ class HomeScreen extends StatelessWidget {
           Obx(
             () => (_homeController.isDataChange.value)
                 ? Expanded(
-                  child: Container(
+                    child: Container(
                       child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
@@ -111,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                                 _homeController.listThumb[index]);
                           }),
                     ),
-                )
+                  )
                 : Container(),
           ),
         ]),
@@ -119,3 +122,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+*/
