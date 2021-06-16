@@ -7,11 +7,13 @@ class ReadingController extends GetxController {
   News? news;
   ReadingController(){news = null;}
   var hasData = false.obs;
+  
 
   fletchNews(String id) async{
     
     news = await FirestoreService.instance.getNewsById(id);
     if (news != null)
       hasData.value = true;
+    else hasData.value = false;
   }
 }

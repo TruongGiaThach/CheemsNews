@@ -49,7 +49,7 @@ class MainScreen extends StatelessWidget {
                         SizedBox(height: 20),
                         Center(
                           child: Text(
-                            "Demo Login",
+                            "CheemsNews",
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,

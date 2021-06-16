@@ -61,14 +61,14 @@ class FirestoreService {
     return thumb;
   }
 
-  Future<List<News>> getLimitNewsWithTag(String tag) async {
+  Future<List<News>> getLimitNewsWithTag(String tag,int limit) async {
     List<News> thumb = [];
     await database
         .collection('news')
-        //.where('tag', arrayContains: ['Du lịch'])
+        .where('tag', arrayContainsAny: [tag]).limit(limit)
         .get()
         .then((value) => {
-              print(value.docs[0].data()),
+              
               value.docs.forEach((element) {
                 thumb.add(News.fromJson(element.data()));
               })

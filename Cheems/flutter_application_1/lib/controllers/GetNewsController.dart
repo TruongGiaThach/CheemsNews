@@ -8,10 +8,14 @@ class HomeController extends GetxController{
   HomeController();
 
   
-   Future<List<News>> getListThumbWithTopic(String topic) async{
+   Future<List<News>> getListThumbWithTopic(String topic,int num) async{
     List<News> tmp = [];
-    tmp= await FirestoreService.instance.getLimitNewsWithTag(topic);
-  
+    tmp = await FirestoreService.instance.getLimitNewsWithTag(topic,4);
+    if (tmp.length != 0)
+    while (tmp.length < num)
+      {
+        tmp.add(tmp[0]);
+      }
     return tmp;
   }
 

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/GetNewsController.dart';
 import 'package:flutter_application_1/models/News.dart';
@@ -15,15 +16,14 @@ class ListPlantCard extends StatelessWidget {
   final controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
-    Future<List<News>> productwithtopic =
-        FirestoreService.instance.getLimitNewsWithTag(topic);
+    //Future<List<News>> productwithtopic =
+    //    FirestoreService.instance.getLimitNewsWithTag(topic);
     return FutureBuilder(
-        // Initialize FlutterFire:
-        future: FirestoreService.instance.getLimitNewsWithTag(topic),
+        future: controller.getListThumbWithTopic(topic,4),
         builder: (context, AsyncSnapshot<List<News>> snapshot) {
           // Check for errors
           if (snapshot.hasError) {
-            print("errro");
+            print("error when load " + topic);
           }
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done) 
@@ -33,7 +33,7 @@ class ListPlantCard extends StatelessWidget {
                     height: 300,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.length,
+                      itemCount: (snapshot.data == null)? 0 : snapshot.data!.length,
                       itemBuilder: (context, index) => buildCard(
                         context,
                         snapshot.data![index],
@@ -67,11 +67,23 @@ class ListPlantCard extends StatelessWidget {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                child: Image.network(
-                  thumb.imageLink[0],
-                  width: size.width * 0.7,
-                  fit: BoxFit.fitWidth,
-                ),
+                child: CachedNetworkImage(
+                        imageUrl: thumb.imageLink[0],
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.fitWidth,
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) => Container(
+                            height: 50,
+                            width: 50,
+                            child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                
               ),
               Container(
                 padding: EdgeInsets.all(kDefaultPadding / 2),
@@ -103,11 +115,25 @@ class ListPlantCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Image.network(
-                          thumb.imageLink[0],
+                        
+                        CachedNetworkImage(
+                        imageUrl: thumb.imgaeSource,
+                        imageBuilder: (context, imageProvider) => Container(
                           height: 20,
-                          fit: BoxFit.fitWidth,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: imageProvider,
+                            
+                              fit: BoxFit.fitWidth,
+                            ),
+                          ),
                         ),
+                        placeholder: (context, url) => Container(
+                            height: 50,
+                            width: 50,
+                            child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
                         Spacer(),
                         Text(thumb.dateCreate)
                       ],
