@@ -1,5 +1,5 @@
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
-import 'package:flutter_application_1/controllers/GetNewsController.dart';
+import 'package:flutter_application_1/controllers/HomeController.dart';
 
 import 'package:flutter_application_1/models/User.dart';
 import 'package:flutter/material.dart';

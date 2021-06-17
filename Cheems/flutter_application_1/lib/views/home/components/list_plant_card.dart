@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controllers/GetNewsController.dart';
+import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/views/details/detail_screen.dart';
 import 'package:get/get.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter_application_1/models/News.dart';
+import 'package:flutter_application_1/models/Title.dart';
 import 'package:flutter_application_1/models/User.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -61,14 +62,28 @@ class FirestoreService {
     return thumb;
   }
 
-  Future<List<News>> getLimitNewsWithTag(String tag,int limit) async {
+  Future<List<News>> getLimitNewsWithTag(String tag, int limit) async {
     List<News> thumb = [];
     await database
         .collection('news')
-        .where('tag', arrayContainsAny: [tag]).limit(limit)
+        .where('tag', arrayContainsAny: [tag])
+        .limit(limit)
         .get()
         .then((value) => {
-              
+              value.docs.forEach((element) {
+                thumb.add(News.fromJson(element.data()));
+              })
+            });
+    return thumb;
+  }
+
+  Future<List<News>> getAllNewsWithTag(String tag) async {
+    List<News> thumb = [];
+    await database
+        .collection('news')
+        .where('tag', arrayContainsAny: [tag])
+        .get()
+        .then((value) => {
               value.docs.forEach((element) {
                 thumb.add(News.fromJson(element.data()));
               })
@@ -93,5 +108,16 @@ class FirestoreService {
       }
     });
     return tmp;
+  }
+
+  Future<List<TypeNews>> getAllTag() async {
+    List<TypeNews> thumb = [];
+    await database.collection('typeNews').get().then((value) => {
+          print(value.docs[0].data()),
+          value.docs.forEach((element) {
+            thumb.add(TypeNews.fromJson(element.data()));
+          })
+        });
+    return thumb;
   }
 }

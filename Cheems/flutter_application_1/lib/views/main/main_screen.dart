@@ -1,3 +1,4 @@
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
@@ -22,12 +23,13 @@ class MainScreen extends StatelessWidget {
         // Once complete, show your application
         else if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
+            extendBody: true,
             body: SafeArea(
               child: Obx(() => (_mainController.currentIndex == 0)
                   ? HomeLink()
                   : HomeLink()),
             ),
-            bottomNavigationBar: buildBottomNavigationBar(context),
+            bottomNavigationBar: Obx(()=>myBar(_mainController.currentIndex.value)) , //buildBottomNavigationBar(context),
           );
         } else
           return Scaffold(
@@ -71,36 +73,36 @@ class MainScreen extends StatelessWidget {
                 ],
               ),
             ),
-            
           );
       },
     );
   }
 
-  BottomNavigationBar buildBottomNavigationBar(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: _mainController.currentIndex.value,
-      selectedItemColor: kPrimaryColor,
-      backgroundColor: kPrimaryColor.withOpacity(.2),
-      selectedFontSize: 16,
-      iconSize: 22,
+  CustomNavigationBar myBar(int i) {
+    return CustomNavigationBar(
+      iconSize: 30.0,
+      selectedColor: kPrimaryColor,
+      strokeColor: Color(0x30040307),
+      unSelectedColor: Color(0xffacacac),
+      backgroundColor: Colors.white,
       items: [
-        BottomNavigationBarItem(
+        CustomNavigationBarItem(
           icon: Icon(Icons.home),
-          // ignore: deprecated_member_use
-          title: Text('Trang chủ'),
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
-          // ignore: deprecated_member_use
-          title: Text('Yêu thích'),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.shopping_cart),
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          // ignore: deprecated_member_use
-          title: Text('Cá nhân'),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.lightbulb_outline),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.search),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.account_circle),
         ),
       ],
+      currentIndex: i,
       onTap: (index) {
         _mainController.currentIndex.value = index;
       },

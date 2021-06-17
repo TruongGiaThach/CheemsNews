@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/Title.dart';
+import 'package:flutter_application_1/controllers/HomeController.dart';
+import 'package:get/get.dart';
 import 'header_with_search_box.dart';
 import 'list_plant_card.dart';
 import 'title_with_more_btn.dart';
@@ -8,27 +9,39 @@ class BodyHome extends StatelessWidget {
   BodyHome({
     Key? key,
   }) : super(key: key);
+  final controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          HeaderWithSearchBox(
+    return ListView(
+      physics: ScrollPhysics(),
+      shrinkWrap: true,
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.2 + 54,
+          child: HeaderWithSearchBox(
             name: 'Anh Tú',
           ),
-          CustomTitleList(text: titles[5]),
-          CustomTitleList(text: titles[0]),
-          CustomTitleList(text: titles[2]),
-          CustomTitleList(text: titles[3]),
-        ],
-      ),
+        ),
+        Container(
+          child: (controller.listType.isNotEmpty)
+              ? ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: controller.listType.length,
+                  itemBuilder: (context, index) =>
+                      CustomeTitleList(text: controller.listType[index].name))
+              : Container(
+                  height: 50,
+                  child:
+                      Center(child: Text("Can't load news. Please try later"))),
+        )
+      ],
     );
   }
 }
 
-class CustomTitleList extends StatelessWidget {
-  CustomTitleList({Key? key, required this.text}) : super(key: key);
+class CustomeTitleList extends StatelessWidget {
+  CustomeTitleList({Key? key, required this.text}) : super(key: key);
 
   final String text;
   @override

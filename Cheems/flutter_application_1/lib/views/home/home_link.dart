@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controllers/GetNewsController.dart';
+import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:flutter_application_1/models/Title.dart';
 import 'package:get/get.dart';
 
@@ -34,9 +34,9 @@ class HomeLink extends StatelessWidget {
             //color: Colors.black,
             // ignore: deprecated_member_use
             child: ListView.builder(
-              itemCount: titles.length,
+              itemCount: _homeController.listType.length,
               itemBuilder: (context, index) => NavTitle(
-                text: titles[index],
+                text: _homeController.listType[index].name,
               ),
               scrollDirection: Axis.horizontal,
             ),
