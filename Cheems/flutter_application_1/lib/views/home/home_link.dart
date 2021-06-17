@@ -1,17 +1,18 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/HomeController.dart';
-import 'package:flutter_application_1/models/Title.dart';
+import 'package:flutter_application_1/views/home/components/typeNewsViews/listTypeViews.dart';
+import 'package:flutter_application_1/views/home/components/typeNewsViews/typeNewsViews.dart';
 import 'package:get/get.dart';
 
 import '../../constants.dart';
-import '../widgets.dart';
 import 'components/home_body.dart';
 
 class HomeLink extends StatelessWidget {
   HomeLink({
     Key? key,
   }) : super(key: key);
-  final _homeController = Get.put(HomeController());
+  final _homeController = Get.put( HomeController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -24,26 +25,35 @@ class HomeLink extends StatelessWidget {
             Icons.home,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            _homeController.typeIndex.value = 0;
+          },
         ),
         backgroundColor: kPrimaryColor,
         actions: [
           Container(
             height: 20,
             width: size.width * .85,
-            //color: Colors.black,
-            // ignore: deprecated_member_use
             child: ListView.builder(
               itemCount: _homeController.listType.length,
               itemBuilder: (context, index) => NavTitle(
                 text: _homeController.listType[index].name,
+                press: changeIndex(index + 1),
               ),
               scrollDirection: Axis.horizontal,
             ),
           )
         ],
       ),
-      body: BodyHome(),
+      body: Obx(() => (_homeController.typeIndex.value == 0)
+          ? BodyHome()
+          : TypeNewsViews(
+              typeNews: _homeController
+                  .listType[_homeController.typeIndex.value - 1].name)),
     );
+  }
+
+  changeIndex(int i) {
+    _homeController.typeIndex.value = i;
   }
 }
