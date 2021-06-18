@@ -1,7 +1,6 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
-import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
 import 'package:flutter_application_1/views/home/home_link.dart';
 import 'package:get/get.dart';
@@ -10,8 +9,8 @@ import 'package:lottie/lottie.dart';
 import '../../constants.dart';
 
 class MainScreen extends StatelessWidget {
-  var _authenticController = Get.put(AuthenticController());
-  final _mainController = Get.put(MainController());
+  var _authenticController = Get.put(AuthenticController(),permanent: true);
+  final _mainController = Get.put(MainController(),permanent: true);
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

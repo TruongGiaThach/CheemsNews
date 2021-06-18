@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/User.dart';
 import 'package:flutter_application_1/services/AuthenticService.dart';
 import 'package:flutter_application_1/services/FirestoreService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,10 +9,12 @@ import 'package:get/get.dart';
 
 class AuthenticController extends GetxController {
   var isSigningIn = false.obs;
+  var isGuest = true.obs;
+  myUser? currentUser;
   Future<FirebaseApp> initilizeFirebase() async {
     return await AuthenticService.instance.initializeFirebase();
   }
-  
+
   Future<bool> signInWithGoogle() async {
     isSigningIn.value = true;
     User? user = await AuthenticService.instance.signInWithGoogle();
@@ -25,25 +27,29 @@ class AuthenticController extends GetxController {
             gravity: ToastGravity.CENTER);
       } else {
         await FirestoreService.instance.addUser(user);
-        Get.snackbar("Đăng nhập thành công",
-            "Xin chao ${user.displayName}.");
+        Get.snackbar("Đăng nhập thành công", "Xin chao ${user.displayName}.");
       }
-      Get.off(() => HomeLink());
-      
-      /* HomeScreen(
-          myUser(user.uid, user.email!, user.displayName!, user.photoURL!), 1));
+      currentUser =
+          new myUser(user.uid, user.email!, user.displayName!, user.photoURL!);
+      currentUser!.typeAccount = 1;
       isSigningIn.value = false;
-      return true;*/
-    } 
+      isGuest.value = false;
+
+      Get.off(() => HomeLink());
+
+      return true;
+    }
     Get.snackbar(
-          "Đăng nhập thất bại", "Đã có lỗi xảy ra trong quá trình đăng nhập.");
+        "Đăng nhập thất bại", "Đã có lỗi xảy ra trong quá trình đăng nhập.");
     isSigningIn.value = false;
     return false;
   }
 
   Future signOutGoogle() async {
     await AuthenticService.instance.signOutGoogle();
-    Get.offAllNamed('/loginView');
+    currentUser = null;
+    isGuest.value = true;
+    Get.offAllNamed('/mainView');
   }
 
   Future<bool> signInWithFacebook() async {
@@ -62,24 +68,27 @@ class AuthenticController extends GetxController {
         Get.snackbar("Đăng nhập thành công",
             "Chào mừng ${user.displayName} đến với CheemsNews.");
       }
-      Get.off(() => HomeLink());
-      
-      /*HomeScreen(
-          myUser(user.uid, user.email!, user.displayName!,
-              user.photoURL! + "?access_token=" + token),
-          2));*/
+      currentUser =
+          new myUser(user.uid, user.email!, user.displayName!, user.photoURL!);
+       currentUser!.typeAccount = 2;
+      isGuest.value = false;
       isSigningIn.value = false;
+      Get.off(() => HomeLink());
+
       return true;
     } else
       Get.snackbar(
-          "Đăng nhập thất bại", "Đã có lỗi xảy ra trong quá trình đăng nhập." + AuthenticService.instance.handleError);
+          "Đăng nhập thất bại",
+          "Đã có lỗi xảy ra trong quá trình đăng nhập." +
+              AuthenticService.instance.handleError);
     isSigningIn.value = false;
     return false;
   }
 
   Future signOutFacebook() async {
     await AuthenticService.instance.signOutFacebook();
-    Get.offAllNamed('/loginView');
+    currentUser = null;
+    isGuest.value = true;
+    Get.offAllNamed('/mainView');
   }
-  
 }
