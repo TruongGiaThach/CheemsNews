@@ -1,4 +1,5 @@
 import 'package:flutter_application_1/models/News.dart';
+import 'package:flutter_application_1/models/Title.dart';
 import 'package:flutter_application_1/models/User.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,10 +30,13 @@ class FirestoreService {
     return docs.exists;
   }
 
-
   Future<myUser> getUserByEmail(String email) async {
     late myUser user;
-    await database.collection(userTable).where('email',isEqualTo: email).get().then((value) {
+    await database
+        .collection(userTable)
+        .where('email', isEqualTo: email)
+        .get()
+        .then((value) {
       user = myUser.fromJson(value.docs[0].data());
     });
     return user;
@@ -41,29 +45,79 @@ class FirestoreService {
   Future<List<myUser>> getAllUsers() async {
     List<myUser> weathers = [];
     await database.collection(userTable).get().then((value) {
-      value.docs.forEach((element) =>
-          weathers.add(myUser.fromJson(element.data())));
+      value.docs
+          .forEach((element) => weathers.add(myUser.fromJson(element.data())));
     });
     return weathers;
   }
 
-  Future<List<Thumbnail>> getAllNews() async{
-    List<Thumbnail> thumb = [];
+  Future<List<News>> getAllNews() async {
+    List<News> thumb = [];
     await database.collection('news').get().then((value) => {
-      print(value.docs[0].data()),
-      value.docs.forEach((element) {
-        thumb.add(Thumbnail.fromJson(element.data()));
-       })
-    });
+          print(value.docs[0].data()),
+          value.docs.forEach((element) {
+            thumb.add(News.fromJson(element.data()));
+          })
+        });
     return thumb;
   }
-  Future<News> getNewsById(String id) async{
-    late News tmp;
-    await database.collection('new').doc(id).get().then((value) => {
-      if (value.exists)
-        tmp = News.fromJson(value.data()!)
+
+  Future<List<News>> getLimitNewsWithTag(String tag, int limit) async {
+    List<News> thumb = [];
+    await database
+        .collection('news')
+        .where('tag', arrayContainsAny: [tag])
+        .limit(limit)
+        .get()
+        .then((value) => {
+              value.docs.forEach((element) {
+                thumb.add(News.fromJson(element.data()));
+              })
+            });
+    return thumb;
+  }
+
+  Future<List<News>> getAllNewsWithTag(String tag) async {
+    List<News> thumb = [];
+    await database
+        .collection('news')
+        .where('tag', arrayContainsAny: [tag])
+        .get()
+        .then((value) => {
+              value.docs.forEach((element) {
+                thumb.add(News.fromJson(element.data()));
+              })
+            });
+    return thumb;
+  }
+
+  Future<News?> getNewsById(String id) async {
+    late News? tmp;
+
+    await database
+        .collection('news')
+        .doc(id)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        tmp = News.fromJson(documentSnapshot.data()!);
+        print(tmp!.author);
+      } else {
+        print('Document does not exist on the database');
+        tmp = null;
+      }
     });
     return tmp;
   }
 
+  Future<List<TypeNews>> getAllTag() async {
+    List<TypeNews> thumb = [];
+    await database.collection('typeNews').get().then((value) => {
+          print(value.docs[0].data()),
+          value.docs.forEach((element) {
+            thumb.add(TypeNews.fromJson(element.data()));
+          })
+        });
+    return thumb;
+  }
 }

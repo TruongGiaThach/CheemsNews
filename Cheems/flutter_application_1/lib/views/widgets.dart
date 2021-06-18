@@ -17,9 +17,19 @@ InputDecoration textFieldInputDecoration(String hintText) {
   );
 }
 
+
 TextStyle textFieldTextStyle() {
   return TextStyle(color: Colors.blue, fontSize: 16);
 }
 TextStyle titleTextFieldTextStyle() {
-  return TextStyle(color: Colors.white, fontSize: 18);
+  return TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 18);
+}
+TextStyle minimzeTextStyle() {
+  return TextStyle(color: Colors.blue, fontSize: 14);
+}
+TextStyle newsTiltleTextStyle() {
+  return TextStyle(color: Colors.black54, fontSize: 30);
+}
+TextStyle newsBodyTextStyle() {
+  return TextStyle(color: Colors.black87, fontSize: 18,height: 1.5);
 }

@@ -1,25 +1,34 @@
 import 'package:flutter_application_1/models/News.dart';
+import 'package:flutter_application_1/models/Title.dart';
 import 'package:flutter_application_1/services/FirestoreService.dart';
-import 'package:flutter_application_1/views/readingPage/readingPage.dart';
 import 'package:get/state_manager.dart';
 
 class HomeController extends GetxController{
-  var isDataChange = false.obs;
-  late List<Thumbnail> listThumb = [];
+  var typeIndex = 0.obs;
+  List<TypeNews> listType = [];
   HomeController();
-
-  getListThumb() async{
-    listThumb = [];
-    this.listThumb = await FirestoreService.instance.getAllNews();
-    isDataChange.value = true;
-    if (listThumb.length == 1){
-      var item = 0;
-      while (item <10) {
-        listThumb.add(listThumb[0]);
-        item++;
+  @override
+  void onInit() async{
+    super.onInit();
+    await getListTopic();
+    
+  }
+  Future<List<TypeNews>> getListTopic() async{
+    List<TypeNews> tmp = [];
+    tmp = await FirestoreService.instance.getAllTag();
+    listType = tmp;
+    return tmp;
+  }
+  
+  Future<List<News>> getListThumbWithTopic(String topic,int num) async{
+    List<News> tmp = [];
+    tmp = await FirestoreService.instance.getLimitNewsWithTag(topic,4);
+    if (tmp.length != 0)
+    while (tmp.length < num)
+      {
+        tmp.add(tmp[0]);
       }
-    }
-    print(listThumb.length);
+    return tmp;
   }
 
 }
