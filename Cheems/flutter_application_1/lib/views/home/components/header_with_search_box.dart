@@ -229,13 +229,7 @@ class HeaderWithSearchBox extends StatelessWidget {
           () => (!authController.isSigningIn.value)
               ? Wrap(
                   children: [
-                    Center(
-                      child: Text("Become cheemser with",
-                          style: TextStyle(
-                            color: Colors.deepPurple,
-                            fontSize: 20,
-                          )),
-                    ),
+                    
                     Center(
                       child: SignInButtonBuilder(
                         image: Image.asset(
@@ -263,7 +257,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                     SizedBox(height: 30),
                     Center(child: CircularProgressIndicator()),
                     SizedBox(height: 30),
-                    Center(child: Text("Hold up, we're signing you in..")),
+                    Center(child: Text("Hold up, we're signing you in...")),
                   ],
                 ),
         )));

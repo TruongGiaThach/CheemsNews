@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:get/get.dart';
 import 'header_with_search_box.dart';
