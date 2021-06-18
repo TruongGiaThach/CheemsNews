@@ -49,7 +49,7 @@ class ListPlantCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Get.to(DetailScreen(
+        Get.to(()=>DetailScreen(
           news: thumb,
         ));
       },

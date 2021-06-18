@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:get/get.dart';
 import 'header_with_search_box.dart';
@@ -19,7 +20,6 @@ class BodyHome extends StatelessWidget {
         Container(
           height: MediaQuery.of(context).size.height * 0.2 + 54,
           child: HeaderWithSearchBox(
-            name: 'Anh Tú',
           ),
         ),
         Container(

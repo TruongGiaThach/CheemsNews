@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../constants.dart';
 
 
 class HeaderWithSearchBox extends StatelessWidget {
-  const HeaderWithSearchBox({
+   HeaderWithSearchBox({
     Key? key,
-    required this.name,
+    
   }) : super(key: key);
-  final String name;
+
+  final authController = Get.put(AuthenticController());
+
+  get name => null;
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
+import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
 import 'package:flutter_application_1/views/home/home_link.dart';
 import 'package:get/get.dart';
@@ -22,12 +23,13 @@ class MainScreen extends StatelessWidget {
 
         // Once complete, show your application
         else if (snapshot.connectionState == ConnectionState.done) {
+          //Get.put(HomeController());
           return Scaffold(
             extendBody: true,
             body: SafeArea(
-              child: Obx(() => (_mainController.currentIndex == 0)
+              child: Obx(() => (_mainController.currentIndex.value == 0)
                   ? HomeLink()
-                  : HomeLink()),
+                  : Center(child: Text("Underdevelopment"),)),
             ),
             bottomNavigationBar: Obx(()=>myBar(_mainController.currentIndex.value)) , //buildBottomNavigationBar(context),
           );

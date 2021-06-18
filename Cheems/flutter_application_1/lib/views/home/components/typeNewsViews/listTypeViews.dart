@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controllers/HomeController.dart';
+import 'package:get/get.dart';
 
 class NavTitle extends StatelessWidget {
-  const NavTitle({
+  NavTitle({
     Key? key,
     required this.text,
-    required Function this.press,
+   
   }) : super(key: key);
-  final String text;
-  final Function press;
+  final int text;
+ 
+  final controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
-    // ignore: deprecated_member_use
-    return FlatButton(
-      onPressed: () => press,
+    return TextButton(
+      
+      onPressed: () => {controller.typeIndex.value = text  + 1},
       child: Text(
-        text,
+        controller.listType[text].name,
         style: TextStyle(
           color: Colors.white,
         ),

@@ -9,8 +9,9 @@ class HomeController extends GetxController{
   HomeController();
   @override
   void onInit() async{
-    await getListTopic();
     super.onInit();
+    await getListTopic();
+    
   }
   Future<List<TypeNews>> getListTopic() async{
     List<TypeNews> tmp = [];
