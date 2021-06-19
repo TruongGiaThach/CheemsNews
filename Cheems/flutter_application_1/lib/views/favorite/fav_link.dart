@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/FavoriteController.dart';
 import 'package:flutter_application_1/models/News.dart';
+import 'package:flutter_application_1/views/favorite/fav_item_view.dart';
 import 'package:get/get.dart';
 
 class FavoriteLink extends StatelessWidget {
@@ -26,14 +26,19 @@ class FavoriteLink extends StatelessWidget {
                       ),
                     );
                   }
-                  if (snapshot.connectionState ==
-                      ConnectionState.done) if (snapshot.hasData) {
-                        // show list news
-                  } else
-                    return Container(
-                        child: Center(
-                      child: Text("You don't have any news in list"),
-                    ));
+                  if (snapshot.connectionState == ConnectionState.done) 
+                      if (snapshot.hasData) 
+                        if (snapshot.data!.length != 0) {
+                          return ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              return FavItem(context, snapshot.data![index]);
+                            }); // show list news
+                        } else
+                            return Container(
+                                child: Center(
+                              child: Text("You don't have any news in list"),
+                            ));
                   return Center(
                     child: CircularProgressIndicator(),
                   );

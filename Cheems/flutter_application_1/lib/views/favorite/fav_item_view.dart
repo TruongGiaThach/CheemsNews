@@ -6,13 +6,14 @@ import 'package:get/get.dart';
 
 import '../widgets.dart';
 
-InkWell buildFavItem(BuildContext context, News thumb) {
+InkWell FavItem(BuildContext context, News thumb) {
   return InkWell(
       onTap: () {
         Get.to(() => DetailScreen(
               news: thumb,
             ));
       },
+     // onLongPress:  ,
       child: Padding(
         padding:
             const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8, right: 4),
