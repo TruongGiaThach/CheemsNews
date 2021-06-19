@@ -27,7 +27,7 @@ class MainScreen extends StatelessWidget {
           return Scaffold(
             extendBody: true,
             body: SafeArea(
-              child: Obx(() => (_mainController.currentIndex.value == 0)
+              child: Obx(() =>(_mainController.currentIndex.value == 0)
                   ? HomeLink()
                   : (_mainController.currentIndex.value == 1)
                       ? FavoriteLink()
