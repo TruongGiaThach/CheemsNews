@@ -120,4 +120,13 @@ class FirestoreService {
         });
     return thumb;
   }
+    Future<List<String>> getListFav(String uID) async {
+    List<String> listID = [];
+    await database.collection('users').doc(uID).get().then((value) => {
+          print(value.data()),
+          if (value.exists)
+            listID = List.castFrom(value.data()!['favNews']),
+        });
+    return listID;
+  }
 }

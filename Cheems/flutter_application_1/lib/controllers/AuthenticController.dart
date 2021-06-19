@@ -4,6 +4,7 @@ import 'package:flutter_application_1/services/FirestoreService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_application_1/views/home/home_link.dart';
+import 'package:flutter_application_1/views/main/main_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +36,7 @@ class AuthenticController extends GetxController {
       isSigningIn.value = false;
       isGuest.value = false;
 
-      Get.off(() => HomeLink());
+      Get.off(() => MainScreen());
 
       return true;
     }
@@ -73,7 +74,7 @@ class AuthenticController extends GetxController {
        currentUser!.typeAccount = 2;
       isGuest.value = false;
       isSigningIn.value = false;
-      Get.off(() => HomeLink());
+      Get.off(() => MainScreen());
 
       return true;
     } else
