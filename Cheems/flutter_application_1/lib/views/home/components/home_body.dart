@@ -10,7 +10,7 @@ class BodyHome extends StatelessWidget {
   BodyHome({
     Key? key,
   }) : super(key: key);
-  final controller = Get.put(HomeController());
+  final controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -19,8 +19,7 @@ class BodyHome extends StatelessWidget {
       children: [
         Container(
           height: MediaQuery.of(context).size.height * 0.2 + 54,
-          child: HeaderWithSearchBox(
-          ),
+          child: HeaderWithSearchBox(),
         ),
         Container(
           child: (controller.listType.isNotEmpty)

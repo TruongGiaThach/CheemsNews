@@ -6,16 +6,14 @@ class NavTitle extends StatelessWidget {
   NavTitle({
     Key? key,
     required this.text,
-   
   }) : super(key: key);
   final int text;
- 
-  final controller = Get.put(HomeController());
+
+  final controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      
-      onPressed: () => {controller.typeIndex.value = text  + 1},
+      onPressed: () => {controller.typeIndex.value = text + 1},
       child: Text(
         controller.listType[text].name,
         style: TextStyle(
