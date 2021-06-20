@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
+import 'package:flutter_application_1/views/favorite/fav_link.dart';
 import 'package:flutter_application_1/views/home/home_link.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -27,11 +28,13 @@ class MainScreen extends StatelessWidget {
           return Scaffold(
             extendBody: true,
             body: SafeArea(
-              child: Obx(() => (_mainController.currentIndex.value == 0)
+              child: Obx(() =>(_mainController.currentIndex.value == 0)
                   ? HomeLink()
-                  : Center(
-                      child: Text("Underdevelopment"),
-                    )),
+                  : (_mainController.currentIndex.value == 1)
+                      ? FavoriteLink()
+                      : Center(
+                          child: Text("Underdevelopment"),
+                        )),
             ),
             bottomNavigationBar: Obx(() => myBar(_mainController
                 .currentIndex.value)), //buildBottomNavigationBar(context),

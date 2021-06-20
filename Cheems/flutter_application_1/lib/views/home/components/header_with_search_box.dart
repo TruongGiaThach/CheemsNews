@@ -1,15 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:line_icons/line_icons.dart';
 
 import '../../../constants.dart';
-import '../../widgets.dart';
 
 class HeaderWithSearchBox extends StatelessWidget {
   HeaderWithSearchBox({
@@ -55,25 +50,64 @@ class HeaderWithSearchBox extends StatelessWidget {
                                   ),
                         ),
                         Spacer(),
-                        GestureDetector(
-                          onTap: () => _showUserSheet(context),
-                          child: Container(
-                            padding: EdgeInsets.all(4),
-                            height: 70,
-                            width: 70,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.white,
-                              ),
+                        Container(
+                          height: 70,
+                          width: 70,
+                          padding: EdgeInsets.all(0),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white,
                             ),
-                            child: ClipRRect(
+                          ),
+                          child: PopupMenuButton<int>(
+                            offset: Offset(0, 60),
+                            padding: EdgeInsets.all(4),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0))),
+                            icon: ClipRRect(
                               borderRadius: BorderRadius.circular(30),
                               child: Image.network(
                                   authController.currentUser!.photoUrl),
                             ),
+                            onSelected: (index) {
+                              switch (index) {
+                                case 1:
+                                  //push to fav page
+                                  break;
+                                case 2:
+                                  //push to setting page
+                                  break;
+                                case 3:
+                                  if (authController.currentUser!.typeAccount ==
+                                      1)
+                                    authController.signOutGoogle();
+                                  else if (authController
+                                          .currentUser!.typeAccount ==
+                                      2) authController.signOutFacebook();
+                                  break;
+                              }
+                            },
+                            itemBuilder: (context) => [
+                              PopupMenuItem(
+                                child: Text("Colection"),
+                                value: 1,
+                              ),
+                              PopupMenuItem(
+                                child: Text("Infor"),
+                                value: 2,
+                              ),
+                              PopupMenuDivider(
+                                height: 5,
+                              ),
+                              PopupMenuItem(
+                                value: 3,
+                                child: Text("Logout"),
+                              )
+                            ],
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -172,53 +206,6 @@ class HeaderWithSearchBox extends StatelessWidget {
     );
   }
 
-  void _showUserSheet(context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Container(
-              height: MediaQuery.of(context).size.height / 6,
-              child: new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Container(
-                      child: ClipRRect(
-                    borderRadius: BorderRadius.circular(35),
-                    child: Image.network(
-                      authController.currentUser!.photoUrl,
-                      height: 50,
-                      width: 50,
-                      fit: BoxFit.scaleDown,
-                    ),
-                  )),
-                  Container(
-                    child: GestureDetector(
-                        onTap: () {
-                          if (authController.currentUser!.typeAccount == 1)
-                            authController.signOutGoogle();
-                          else if (authController.currentUser!.typeAccount == 2)
-                            authController.signOutFacebook();
-                        },
-                        child: SvgPicture.asset(
-                          'assets/icons/logout.svg',
-                          height: 35,
-                          width: 35,
-                        )),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
   void _showGuestSheet(context) {
     showModalBottomSheet(
       context: context,
@@ -229,13 +216,6 @@ class HeaderWithSearchBox extends StatelessWidget {
           () => (!authController.isSigningIn.value)
               ? Wrap(
                   children: [
-                    Center(
-                      child: Text("Become cheemser with",
-                          style: TextStyle(
-                            color: Colors.deepPurple,
-                            fontSize: 20,
-                          )),
-                    ),
                     Center(
                       child: SignInButtonBuilder(
                         image: Image.asset(
@@ -263,7 +243,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                     SizedBox(height: 30),
                     Center(child: CircularProgressIndicator()),
                     SizedBox(height: 30),
-                    Center(child: Text("Hold up, we're signing you in..")),
+                    Center(child: Text("Hold up, we're signing you in...")),
                   ],
                 ),
         )));
