@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controllers/AuthenticController.dart';
+import 'package:flutter_application_1/controllers/FavoriteController.dart';
 import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:flutter_application_1/views/home/components/typeNewsViews/listTypeViews.dart';
 import 'package:flutter_application_1/views/home/components/typeNewsViews/typeNewsViews.dart';
@@ -11,13 +13,19 @@ class HomeLink extends StatelessWidget {
   HomeLink({
     Key? key,
   }) : super(key: key);
+  final _authenticController = Get.find<AuthenticController>();
   final _homeController = Get.find<HomeController>();
+  final _favoriteController = Get.find<FavoriteController>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return FutureBuilder(
-      future: _homeController.initialize(),
+      future: Future.wait([
+        _homeController.initialize(),
+        if (_authenticController.currentUser != null)
+          _favoriteController.initListFav(_authenticController.currentUser!.uid)
+      ]),
       builder: (context, snapshot) {
         return Scaffold(
           appBar: AppBar(

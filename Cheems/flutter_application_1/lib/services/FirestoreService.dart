@@ -21,7 +21,7 @@ class FirestoreService {
       '$userTableMailField': _user.email,
       '$userTableNameField': _user.displayName,
       '$userTablePhotoUrlField': _user.photoURL! + fbToken,
-      'favNews':[],
+      'favNews': [],
     }, SetOptions(merge: true));
   }
 
@@ -126,17 +126,17 @@ class FirestoreService {
     List<String> listID = [];
     await database.collection('users').doc(uID).get().then((value) => {
           print(value.data()),
-          if (value.data()!['favNews'] != null) listID = List.castFrom(value.data()!['favNews']),
+          if (value.data()!['favNews'] != null)
+            listID = List.castFrom(value.data()!['favNews']),
         });
     return listID;
   }
 
-  Future updateListFav(myUser _user, List<String> newsID) async {
+  Future updateListFav(myUser? _user, List<String> newsID) async {
     await database
-        .collection('user')
-        .doc(_user.uid)
-        .update(<String, dynamic>{'favNews': newsID})
-        .catchError(
+        .collection('users')
+        .doc(_user!.uid)
+        .update(<String, dynamic>{'favNews': newsID}).catchError(
             (error) => print('Update Faile : $error'));
   }
 }

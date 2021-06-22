@@ -1,7 +1,7 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
-import 'package:flutter_application_1/controllers/HomeController.dart';
+import 'package:flutter_application_1/controllers/FavoriteController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
 import 'package:flutter_application_1/views/favorite/fav_link.dart';
 import 'package:flutter_application_1/views/home/home_link.dart';
@@ -13,11 +13,12 @@ import '../../constants.dart';
 class MainScreen extends StatelessWidget {
   var _authenticController = Get.find<AuthenticController>();
   final _mainController = Get.find<MainController>();
-  final __homeController = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _authenticController.initilizeFirebase(),
+      future: Future.wait([
+        _authenticController.initilizeFirebase(),
+      ]),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Scaffold(body: Center(child: Text("Error!")));
@@ -28,7 +29,7 @@ class MainScreen extends StatelessWidget {
           return Scaffold(
             extendBody: true,
             body: SafeArea(
-              child: Obx(() =>(_mainController.currentIndex.value == 0)
+              child: Obx(() => (_mainController.currentIndex.value == 0)
                   ? HomeLink()
                   : (_mainController.currentIndex.value == 1)
                       ? FavoriteLink()
