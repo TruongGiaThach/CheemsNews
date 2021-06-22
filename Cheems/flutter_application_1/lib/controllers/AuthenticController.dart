@@ -3,7 +3,6 @@ import 'package:flutter_application_1/services/AuthenticService.dart';
 import 'package:flutter_application_1/services/FirestoreService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_application_1/views/home/home_link.dart';
 import 'package:flutter_application_1/views/main/main_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -11,7 +10,7 @@ import 'package:get/get.dart';
 class AuthenticController extends GetxController {
   var isSigningIn = false.obs;
   var isGuest = true.obs;
-  myUser? currentUser;
+  myUser? currentUser = null;
   Future<FirebaseApp> initilizeFirebase() async {
     return await AuthenticService.instance.initializeFirebase();
   }
@@ -71,7 +70,7 @@ class AuthenticController extends GetxController {
       }
       currentUser =
           new myUser(user.uid, user.email!, user.displayName!, user.photoURL!);
-       currentUser!.typeAccount = 2;
+      currentUser!.typeAccount = 2;
       isGuest.value = false;
       isSigningIn.value = false;
       Get.off(() => MainScreen());

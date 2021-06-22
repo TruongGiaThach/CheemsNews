@@ -5,16 +5,23 @@ import 'package:get/state_manager.dart';
 
 class FavoriteController extends GetxController {
   RxList listID = [].obs;
- 
+  Rx<bool> check = false.obs;
 
-  _initListFav(String uID) async {
+  bool checkNew(String newId) {
+    return listID.contains(newId);
+  }
+
+  Future<void> initListFav(String uID) async {
     List<String> tmp = [];
-    tmp = await FirestoreService.instance.getListFav(uID);
+    if (uID != "") {
+      tmp = await FirestoreService.instance.getListFav(uID);
+      check.value = true;
+    }
+    ;
     listID.value = tmp;
   }
 
   Future<List<News>> loadListFav(String uID) async {
-    await _initListFav(uID);
     List<News> tmp = [];
     if (listID.isNotEmpty)
       for (int i = 0; i < listID.value.length; i++) {
@@ -25,20 +32,17 @@ class FavoriteController extends GetxController {
     return tmp;
   }
 
-  Future addNewsToListFav(myUser currentUser, News news) async {
-    if (listID.value.contains(news.id)) 
-      return;
+  Future addNewsToListFav(myUser? currentUser, News news) async {
+    if (listID.value.contains(news.id)) return;
     listID.add(news.id);
     await FirestoreService.instance
         .updateListFav(currentUser, listID.value as List<String>);
   }
 
-  Future deleteNewsFromListFav(myUser currentUser, News news) async {
-    if (!listID.value.contains(news.id)) 
-      return;
+  Future deleteNewsFromListFav(myUser? currentUser, News news) async {
+    if (!listID.value.contains(news.id)) return;
     listID.remove(news.id);
     await FirestoreService.instance
         .updateListFav(currentUser, listID.value as List<String>);
-
   }
 }

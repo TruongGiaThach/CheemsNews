@@ -12,7 +12,7 @@ class ListPlantCard extends StatelessWidget {
 
   ListPlantCard({Key? key, required this.topic}) : super(key: key);
 
-  final controller = Get.put(HomeController());
+  final controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     //Future<List<News>> productwithtopic =
@@ -49,9 +49,9 @@ class ListPlantCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Get.to(()=>DetailScreen(
-          news: thumb,
-        ));
+        Get.to(() => DetailScreen(
+              news: thumb,
+            ));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(
