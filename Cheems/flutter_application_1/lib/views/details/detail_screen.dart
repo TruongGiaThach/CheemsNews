@@ -2,16 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/FavoriteController.dart';
+import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:flutter_application_1/controllers/readingController.dart';
 import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/views/widgets.dart';
 import 'package:get/get.dart';
 
-import '../../constants.dart';
-
 class DetailScreen extends StatelessWidget {
   late News news;
   DetailScreen({required this.news});
+  final _settingController = Get.find<SettingController>();
   final _authenticController = Get.find<AuthenticController>();
   final _readingController = Get.find<ReadingController>();
   final _favoriteController = Get.find<FavoriteController>();
@@ -43,7 +43,7 @@ class DetailScreen extends StatelessWidget {
     }*/ //get list favorite
     _favoriteController.check.value = _favoriteController.checkNew(news.id);
     return AppBar(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: _settingController.kPrimaryColor.value,
       centerTitle: true,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

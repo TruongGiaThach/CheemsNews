@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 class mainSrceenBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(SettingController());
     Get.put(AuthenticController());
     Get.put(HomeController());
     Get.put(MainController());

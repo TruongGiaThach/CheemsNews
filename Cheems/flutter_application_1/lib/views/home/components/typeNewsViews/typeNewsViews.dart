@@ -6,8 +6,6 @@ import 'package:flutter_application_1/views/details/detail_screen.dart';
 import 'package:flutter_application_1/views/widgets.dart';
 import 'package:get/get.dart';
 
-import '../../../../constants.dart';
-
 class TypeNewsViews extends StatelessWidget {
   TypeNewsViews({Key? key, required this.typeNews}) : super(key: key);
 

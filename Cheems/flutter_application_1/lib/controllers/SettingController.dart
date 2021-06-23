@@ -1,16 +1,24 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SettingController extends GetxController {
-  int idDetal = -1;
-  double textSize = 14;
-  int textFont = 0;
+  // Colors that we use in our app
+  Rx<Color> kPrimaryColor = Color(0xFF0C9869).obs;
+  Color kTextColor = Color(0xFF3C4046);
+  Color kBackgroundColor = Color(0xFFF9F8FD);
 
-  int idColor = 0;
+  double kDefaultPadding = 20.0;
 
-  List<int> kColor = [
+  Rx<int> idDetal = (-1).obs;
+  Rx<double> textSize = 14.0.obs;
+  Rx<int> textFont = 0.obs;
+
+  Rx<int> idColor = 0.obs;
+
+  RxList<int> kColor = [
     0xFF0C9869,
     0xFF365C95,
     0xFFF8C078,
     0xFFA29B9B,
-  ];
+  ].obs;
 }

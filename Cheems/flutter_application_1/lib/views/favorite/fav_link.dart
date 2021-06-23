@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/FavoriteController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
+import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/views/favorite/fav_item_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 
-import '../../constants.dart';
-
 class FavoriteLink extends StatelessWidget {
   FavoriteLink({Key? key}) : super(key: key);
 
+  final _settingController = Get.find<SettingController>();
   final controller = Get.find<FavoriteController>();
   final authController = Get.find<AuthenticController>();
   final mainController = Get.find<MainController>();
@@ -31,19 +31,20 @@ class FavoriteLink extends StatelessWidget {
                       ),
                     );
                   }
-                  if (snapshot.connectionState ==  ConnectionState.done) 
-                    if (snapshot.hasData) 
-                      if (snapshot.data!.length != 0) {
-                        return ListView.builder(
-                            itemCount: snapshot.data!.length,
-                            itemBuilder: (context, index) {
-                              return FavItem(context, snapshot.data![index]);
-                            }); // show list news
-                      } else
-                        return Container(
-                            child: Center(
-                          child: Text("You don't have any news in collection"),
-                        ));
+                  if (snapshot.connectionState ==
+                      ConnectionState.done) if (snapshot.hasData) if (snapshot
+                          .data!.length !=
+                      0) {
+                    return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return FavItem(context, snapshot.data![index]);
+                        }); // show list news
+                  } else
+                    return Container(
+                        child: Center(
+                      child: Text("You don't have any news in collection"),
+                    ));
                   return Center(
                     child: CircularProgressIndicator(),
                   );
@@ -52,10 +53,10 @@ class FavoriteLink extends StatelessWidget {
             : Container(
                 child: Center(
                     // ignore: deprecated_member_use
-                    child: FlatButton(
+                    child: Obx(() => FlatButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
-                        color: kPrimaryColor,
+                        color: _settingController.kPrimaryColor.value,
                         onPressed: () {
                           _showGuestSheet(context);
                           mainController.gotoHome();
@@ -63,7 +64,7 @@ class FavoriteLink extends StatelessWidget {
                         child: Text(
                           "Login to your collection",
                           style: TextStyle(color: Colors.white),
-                        ))))));
+                        )))))));
   }
 
   void _showGuestSheet(context) {

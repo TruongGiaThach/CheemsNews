@@ -2,13 +2,14 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
+import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:flutter_application_1/views/favorite/fav_link.dart';
 import 'package:flutter_application_1/views/home/home_link.dart';
 import 'package:flutter_application_1/views/person/person_link.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../constants.dart';
+final _settingController = Get.find<SettingController>();
 
 class MainScreen extends StatelessWidget {
   var _authenticController = Get.find<AuthenticController>();
@@ -39,8 +40,8 @@ class MainScreen extends StatelessWidget {
                               child: Text("Underdevelopment"),
                             )),
             ),
-            bottomNavigationBar: Obx(() => myBar(_mainController
-                .currentIndex.value)), 
+            bottomNavigationBar:
+                Obx(() => myBar(_mainController.currentIndex.value)),
           );
         } else
           return Scaffold(
@@ -92,7 +93,7 @@ class MainScreen extends StatelessWidget {
   CustomNavigationBar myBar(int i) {
     return CustomNavigationBar(
       iconSize: 30.0,
-      selectedColor: kPrimaryColor,
+      selectedColor: _settingController.kPrimaryColor.value,
       strokeColor: Color(0x30040307),
       unSelectedColor: Color(0xffacacac),
       backgroundColor: Colors.white,

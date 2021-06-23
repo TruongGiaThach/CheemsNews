@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:get/get.dart';
 
 final _settingController = Get.find<SettingController>();
+var _authenticController = Get.find<AuthenticController>();
 
 class PersonInfo extends StatefulWidget {
   const PersonInfo({
@@ -23,7 +25,8 @@ class _PersonInfoState extends State<PersonInfo> {
             Text(
               "Thông tin cá Nhân",
               style: TextStyle(
-                  color: Colors.black54, fontSize: _settingController.textSize),
+                  color: Colors.black54,
+                  fontSize: _settingController.textSize.value),
             ),
           ],
         ),
@@ -36,17 +39,20 @@ class _PersonInfoState extends State<PersonInfo> {
             ),
             Text(
               "Họ Tên",
-              style: TextStyle(fontSize: _settingController.textSize),
+              style: TextStyle(fontSize: _settingController.textSize.value),
             ),
             Spacer(),
             Text(
-              "Trần Anh Tú",
+              _authenticController.currentUser != null
+                  ? _authenticController.currentUser!.displayName
+                  : "no name",
               style: TextStyle(
-                  color: Colors.black, fontSize: _settingController.textSize),
+                  color: Colors.black,
+                  fontSize: _settingController.textSize.value),
             ),
           ],
         ),
-        Row(
+        /*Row(
           children: <Widget>[
             IconButton(
               onPressed: () {},
@@ -54,17 +60,18 @@ class _PersonInfoState extends State<PersonInfo> {
             ),
             Text(
               "Ngày Sinh",
-              style: TextStyle(fontSize: _settingController.textSize),
+              style: TextStyle(fontSize: _settingController.textSize.value),
             ),
             Spacer(),
             Text(
               "19 02 2001",
               style: TextStyle(
-                  color: Colors.black, fontSize: _settingController.textSize),
+                  color: Colors.black,
+                  fontSize: _settingController.textSize.value),
             ),
           ],
-        ),
-        Row(
+        ),*/
+        /*Row(
           children: <Widget>[
             IconButton(
               onPressed: () {},
@@ -72,16 +79,17 @@ class _PersonInfoState extends State<PersonInfo> {
             ),
             Text(
               "Số Điện Thoại",
-              style: TextStyle(fontSize: _settingController.textSize),
+              style: TextStyle(fontSize: _settingController.textSize.value),
             ),
             Spacer(),
             Text(
               "+84 986 653 409",
               style: TextStyle(
-                  color: Colors.black, fontSize: _settingController.textSize),
+                  color: Colors.black,
+                  fontSize: _settingController.textSize.value),
             ),
           ],
-        ),
+        ),*/
         Row(
           children: <Widget>[
             IconButton(
@@ -90,13 +98,16 @@ class _PersonInfoState extends State<PersonInfo> {
             ),
             Text(
               "Địa chỉ email",
-              style: TextStyle(fontSize: _settingController.textSize),
+              style: TextStyle(fontSize: _settingController.textSize.value),
             ),
             Spacer(),
             Text(
-              "19522456@gm.uit.edu.vn",
+              _authenticController.currentUser != null
+                  ? _authenticController.currentUser!.email
+                  : "no email",
               style: TextStyle(
-                  color: Colors.black, fontSize: _settingController.textSize),
+                  color: Colors.black,
+                  fontSize: _settingController.textSize.value),
             ),
           ],
         ),

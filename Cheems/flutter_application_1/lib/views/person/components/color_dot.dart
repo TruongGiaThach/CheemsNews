@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/SettingController.dart';
-import 'package:flutter_application_1/constants.dart';
 import 'package:get/get.dart';
 
 final _settingController = Get.find<SettingController>();
@@ -21,11 +20,10 @@ class _ColorDotState extends State<ColorDot> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        setState(() {
-          kPrimaryColor = Color(_settingController.kColor[widget.id]);
-          _settingController.idColor = widget.id;
-          Get.offNamed("/mainView");
-        });
+        _settingController.kPrimaryColor.value =
+            Color(_settingController.kColor[widget.id]);
+        _settingController.idColor.value = widget.id;
+        //Get.offNamed("/mainView");
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 2),
