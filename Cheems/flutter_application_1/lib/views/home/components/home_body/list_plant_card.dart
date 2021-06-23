@@ -5,7 +5,7 @@ import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/views/details/detail_screen.dart';
 import 'package:get/get.dart';
 
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 class ListPlantCard extends StatelessWidget {
   final String topic;
@@ -15,8 +15,6 @@ class ListPlantCard extends StatelessWidget {
   final controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
-    //Future<List<News>> productwithtopic =
-    //    FirestoreService.instance.getLimitNewsWithTag(topic);
     return FutureBuilder(
         future: controller.getListThumbWithTopic(topic, 4),
         builder: (context, AsyncSnapshot<List<News>> snapshot) {
@@ -29,7 +27,7 @@ class ListPlantCard extends StatelessWidget {
             return Padding(
                 padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
                 child: Container(
-                    height: 300,
+                    height: 275,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount:
@@ -58,7 +56,7 @@ class ListPlantCard extends StatelessWidget {
           horizontal: kDefaultPadding,
         ),
         child: Container(
-          width: size.width * 0.7,
+          width: 250,
           child: Column(
             children: [
               ClipRRect(
@@ -69,7 +67,7 @@ class ListPlantCard extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: thumb.imageLink.first,
                   imageBuilder: (context, imageProvider) => Container(
-                    height: size.height * 0.2,
+                    height:  150,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: imageProvider,
@@ -78,11 +76,10 @@ class ListPlantCard extends StatelessWidget {
                     ),
                   ),
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Container(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(
-                              value: downloadProgress.progress)),
+                      Center(
+                        child: CircularProgressIndicator(
+                            value: downloadProgress.progress),
+                      ),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),

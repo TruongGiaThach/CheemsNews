@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
+import 'package:flutter_application_1/controllers/MainController.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 class HeaderWithSearchBox extends StatelessWidget {
   HeaderWithSearchBox({
@@ -12,6 +13,7 @@ class HeaderWithSearchBox extends StatelessWidget {
   }) : super(key: key);
 
   final authController = Get.find<AuthenticController>();
+  final mainController = Get.find<MainController>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                         Spacer(),
                         Container(
                           height: size.height * 0.1,
-                          width: size.height*0.1,
+                          width: size.height * 0.1,
                           padding: EdgeInsets.all(0),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
@@ -74,7 +76,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                             onSelected: (index) {
                               switch (index) {
                                 case 1:
-                                  //push to fav page
+                                  mainController.gotoCollection();
                                   break;
                                 case 2:
                                   //push to setting page
@@ -141,8 +143,8 @@ class HeaderWithSearchBox extends StatelessWidget {
                           onTap: () => _showGuestSheet(context),
                           child: Container(
                             padding: EdgeInsets.all(4),
-                            height: 70,
-                            width: 70,
+                            height: size.height * 0.1,
+                            width: size.height * 0.1,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(

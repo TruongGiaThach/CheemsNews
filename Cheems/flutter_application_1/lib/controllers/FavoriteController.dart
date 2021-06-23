@@ -17,7 +17,6 @@ class FavoriteController extends GetxController {
       tmp = await FirestoreService.instance.getListFav(uID);
       check.value = true;
     }
-    ;
     listID.value = tmp;
   }
 
