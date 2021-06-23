@@ -40,7 +40,7 @@ class MainScreen extends StatelessWidget {
                             )),
             ),
             bottomNavigationBar: Obx(() => myBar(_mainController
-                .currentIndex.value)), //buildBottomNavigationBar(context),
+                .currentIndex.value)), 
           );
         } else
           return Scaffold(

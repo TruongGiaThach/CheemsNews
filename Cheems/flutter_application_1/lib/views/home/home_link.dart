@@ -7,7 +7,7 @@ import 'package:flutter_application_1/views/home/components/typeNewsViews/typeNe
 import 'package:get/get.dart';
 
 import '../../constants.dart';
-import 'components/home_body.dart';
+import 'components/home_body/home_body.dart';
 
 class HomeLink extends StatelessWidget {
   HomeLink({
