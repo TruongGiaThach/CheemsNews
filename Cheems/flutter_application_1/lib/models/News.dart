@@ -12,8 +12,10 @@ class News {
   late String title;
   late List<Comments> cmts;
   late String author;
+  late String decription;
 
-  News(this.id,this.body,this.dateCreate,this.imageLink,this.numOfLike,this.source,this.tag,this.title,this.author,this.imageSource);
+  News(this.id,this.body,this.dateCreate,this.imageLink,this.numOfLike,
+    this.source,this.tag,this.title,this.author,this.imageSource,this.decription);
   factory News.fromJson(Map<String,dynamic> result){
     return News(
       result['ID'],
@@ -25,7 +27,8 @@ class News {
       List.castFrom(result['tag'] as List<dynamic>),
       result['title'],
       result['author'],
-      result['imageSource']
+      result['imageSource'],
+      result['decription']
     );
   }
 

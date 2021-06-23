@@ -35,12 +35,7 @@ class DetailScreen extends StatelessWidget {
   }
 
   AppBar buildAppBar(BuildContext context, News news) {
-    /*for (int i = 0; i < favorites.length; i++) {
-      if (favorites[i].link == products[idDetal].source) {
-        indexFavorite = i;
-        break;
-      }
-    }*/ //get list favorite
+ 
     _favoriteController.check.value = _favoriteController.checkNew(news.id);
     return AppBar(
       backgroundColor: kPrimaryColor,
@@ -122,10 +117,11 @@ class DetailScreen extends StatelessWidget {
 
   Widget newsView() {
     return ListView(
-        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        physics: BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics()),
         shrinkWrap: true,
         children: [
-          Container(
+          Container(                          //need fixed tommorrow
             //title
             child: Expanded(
                 child: Text(_readingController.news!.title,
@@ -147,6 +143,18 @@ class DetailScreen extends StatelessWidget {
                 width: 10,
               ),
             ],
+          ),
+          Container(
+             padding: EdgeInsets.all(8),
+             child: Text(_readingController.news!.decription,
+                  textAlign: TextAlign.left, style: TextStyle(
+                fontSize: 12 + 8,
+                fontWeight: FontWeight.bold,
+              ),),
+           ),
+          
+          SizedBox(
+            height: 10,
           ),
           Container(
             //body news
