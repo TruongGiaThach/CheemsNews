@@ -1,6 +1,7 @@
 import 'package:flutter_application_1/utils/router.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_application_1/constants.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 
 import 'Binding/MainScreenBinding.dart';
@@ -17,6 +18,12 @@ class MyApp extends StatelessWidget {
     WidgetsFlutterBinding.ensureInitialized();
     return GetMaterialApp(
       title: 'Demo Login',
+      theme: ThemeData(
+        scaffoldBackgroundColor: kBackgroundColor,
+        primaryColor: kPrimaryColor,
+        textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
+        primarySwatch: Colors.blue,
+      ),
       initialBinding: mainSrceenBinding(),
       smartManagement: SmartManagement.keepFactory,
       debugShowCheckedModeBanner: false,
