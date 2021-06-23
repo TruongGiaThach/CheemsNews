@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 class FavoriteLink extends StatelessWidget {
   FavoriteLink({Key? key}) : super(key: key);
 
-  final controller = Get.put(FavoriteController());
-  final authController = Get.put(AuthenticController());
+  final controller = Get.find<FavoriteController>();
+  final authController = Get.find<AuthenticController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,7 +1,6 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
-import 'package:flutter_application_1/controllers/FavoriteController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
 import 'package:flutter_application_1/views/favorite/fav_link.dart';
 import 'package:flutter_application_1/views/home/home_link.dart';

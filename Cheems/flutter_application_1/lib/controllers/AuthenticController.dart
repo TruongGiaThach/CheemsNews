@@ -35,7 +35,7 @@ class AuthenticController extends GetxController {
       isSigningIn.value = false;
       isGuest.value = false;
 
-      Get.off(() => MainScreen());
+      Get.offAll(() => MainScreen());
 
       return true;
     }
@@ -49,7 +49,7 @@ class AuthenticController extends GetxController {
     await AuthenticService.instance.signOutGoogle();
     currentUser = null;
     isGuest.value = true;
-    Get.off(() => MainScreen());
+    Get.offAll(() => MainScreen());
   }
 
   Future<bool> signInWithFacebook() async {
@@ -73,7 +73,7 @@ class AuthenticController extends GetxController {
       currentUser!.typeAccount = 2;
       isGuest.value = false;
       isSigningIn.value = false;
-      Get.off(() => MainScreen());
+      Get.offAll(() => MainScreen());
 
       return true;
     } else
@@ -89,6 +89,6 @@ class AuthenticController extends GetxController {
     await AuthenticService.instance.signOutFacebook();
     currentUser = null;
     isGuest.value = true;
-    Get.off(() => MainScreen());
+    Get.offAll(() => MainScreen());
   }
 }

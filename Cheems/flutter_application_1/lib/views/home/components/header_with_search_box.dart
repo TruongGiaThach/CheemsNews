@@ -51,8 +51,8 @@ class HeaderWithSearchBox extends StatelessWidget {
                         ),
                         Spacer(),
                         Container(
-                          height: 70,
-                          width: 70,
+                          height: size.height * 0.1,
+                          width: size.height*0.1,
                           padding: EdgeInsets.all(0),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
@@ -61,7 +61,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                             ),
                           ),
                           child: PopupMenuButton<int>(
-                            offset: Offset(0, 60),
+                            offset: Offset(0, size.height * 0.1),
                             padding: EdgeInsets.all(4),
                             shape: RoundedRectangleBorder(
                                 borderRadius:

@@ -17,7 +17,7 @@ class BodyHome extends StatelessWidget {
       shrinkWrap: true,
       children: [
         Container(
-          height: MediaQuery.of(context).size.height * 0.2 + 54,
+          height: MediaQuery.of(context).size.height * 0.2 + 54 ,
           child: HeaderWithSearchBox(),
         ),
         Container(
@@ -26,7 +26,9 @@ class BodyHome extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: controller.listType.length,
-                  itemBuilder: (context, index) =>
+                  itemBuilder: (context, index) => 
+
+                  
                       CustomeTitleList(text: controller.listType[index].name))
               : Container(
                   height: 50,
