@@ -11,7 +11,7 @@ class HeaderWithSearchBox extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final authController = Get.put(AuthenticController());
+  final authController = Get.find<AuthenticController>();
 
   @override
   Widget build(BuildContext context) {

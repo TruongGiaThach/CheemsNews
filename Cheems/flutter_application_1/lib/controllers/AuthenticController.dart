@@ -49,7 +49,7 @@ class AuthenticController extends GetxController {
     await AuthenticService.instance.signOutGoogle();
     currentUser = null;
     isGuest.value = true;
-    Get.offAllNamed('/mainView');
+    Get.off(() => MainScreen());
   }
 
   Future<bool> signInWithFacebook() async {
@@ -89,6 +89,6 @@ class AuthenticController extends GetxController {
     await AuthenticService.instance.signOutFacebook();
     currentUser = null;
     isGuest.value = true;
-    Get.offAllNamed('/mainView');
+    Get.off(() => MainScreen());
   }
 }

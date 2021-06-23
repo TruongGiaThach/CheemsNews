@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 
+import 'Binding/MainScreenBinding.dart';
+
 void main() {
   timeDilation = 2.0;
   runApp(MyApp());
@@ -15,6 +17,8 @@ class MyApp extends StatelessWidget {
     WidgetsFlutterBinding.ensureInitialized();
     return GetMaterialApp(
       title: 'Demo Login',
+      initialBinding: mainSrceenBinding(),
+      smartManagement: SmartManagement.keepFactory,
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.rightToLeft,
       getPages: PageRouter.route,

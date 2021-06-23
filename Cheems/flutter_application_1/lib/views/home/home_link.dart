@@ -23,8 +23,10 @@ class HomeLink extends StatelessWidget {
     return FutureBuilder(
       future: Future.wait([
         _homeController.initialize(),
-        if (_authenticController.currentUser != null)
-          _favoriteController.initListFav(_authenticController.currentUser!.uid)
+        (_authenticController.currentUser != null
+            ? _favoriteController
+                .initListFav(_authenticController.currentUser!.uid)
+            : _favoriteController.initListFav(""))
       ]),
       builder: (context, snapshot) {
         return Scaffold(
