@@ -24,21 +24,96 @@ class TypeNewsViews extends StatelessWidget {
             );
           }
           if (snapshot.connectionState == ConnectionState.done) {
-            return (snapshot.hasData)
-                ? ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      return buildItem(context, snapshot.data![index]);
-                    })
-                : Center(
-                    child: Text("Can't find news matching with this topic"));
+            if (snapshot.hasData) {
+              return ListView(
+                physics: ScrollPhysics(),
+                shrinkWrap: true,
+                children: [
+                  buildFirstItem(context, snapshot.data![0]),
+                  ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        return buildItem(context, snapshot.data![index]);
+                      })
+                ],
+              );
+            } else
+              Center(child: Text("Can't find news matching with this topic"));
           }
-          
+
           return Center(
             child: CircularProgressIndicator(),
           );
         });
+  }
+
+  Widget buildFirstItem(BuildContext context, News thumb) {
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => DetailScreen(
+              news: thumb,
+            ));
+      },
+      child: Stack(
+        children: [
+          Container(
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            child: CachedNetworkImage(
+              imageUrl: thumb.imageLink.first,
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  Container(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress)),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+          ),
+          Positioned(
+              left: 0,
+              bottom: 0,
+              child: Container(
+                  padding: EdgeInsets.all(10),
+                  color: Colors.black.withOpacity(.5),
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          thumb.title,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            thumb.dateCreate,
+                            style: TextStyle(color: Colors.white, fontSize: 10),
+                          ))
+                    ],
+                  ))),
+        ],
+      ),
+    );
   }
 
   InkWell buildItem(BuildContext context, News thumb) {
@@ -50,11 +125,11 @@ class TypeNewsViews extends StatelessWidget {
         },
         child: Padding(
           padding:
-              const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8, right: 4),
+              const EdgeInsets.only(left: 4.0, top: 8.0, bottom: 8, right: 4),
           child: Row(children: [
             Container(
-              height: MediaQuery.of(context).size.height / 7,
-              width: MediaQuery.of(context).size.height / 7,
+              height: 100,
+              width: 125,
               child: ClipRRect(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
@@ -62,6 +137,7 @@ class TypeNewsViews extends StatelessWidget {
                 ),
                 child: CachedNetworkImage(
                   imageUrl: thumb.imageLink.first,
+                  filterQuality: FilterQuality.none,
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -81,7 +157,7 @@ class TypeNewsViews extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 20,
+              width: 10,
             ),
             Expanded(
               child: Column(
@@ -97,10 +173,13 @@ class TypeNewsViews extends StatelessWidget {
                         child: Image.network(
                           thumb.imageSource,
                           height: 15,
+                          alignment: Alignment.centerLeft,
                         ),
                       ),
-                      Spacer(),
-                      Expanded(child: Text(thumb.dateCreate))
+                      Expanded(
+                          child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(thumb.dateCreate)))
                     ],
                   )
                 ],

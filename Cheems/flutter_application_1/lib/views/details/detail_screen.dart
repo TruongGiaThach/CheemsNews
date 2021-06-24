@@ -96,23 +96,26 @@ class DetailScreen extends StatelessWidget {
 
   Widget tagView() {
     //need fixed
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(Icons.category_outlined),
-        Container(
-          padding: EdgeInsets.all(3),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5), color: Colors.grey),
-          child: Text(
-            _readingController.news!.tag[0],
-            style: minimzeTextStyle(),
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(Icons.category_outlined),
+          Container(
+            padding: EdgeInsets.all(3),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5), color: Colors.grey[300]),
+            child: Text(
+              _readingController.news!.tag[0],
+              style: minimzeTextStyle(),
+            ),
           ),
-        ),
-        SizedBox(
-          width: 10,
-        ),
-      ],
+          SizedBox(
+            width: 10,
+          ),
+        ],
+      ),
     );
   }
 
@@ -122,12 +125,8 @@ class DetailScreen extends StatelessWidget {
           parent: AlwaysScrollableScrollPhysics()),
         shrinkWrap: true,
         children: [
-          Container(                          //need fixed tommorrow
-            //title
-            child: Expanded(
-                child: Text(_readingController.news!.title,
-                    textAlign: TextAlign.center, style: newsTiltleTextStyle())),
-          ),
+          Text(_readingController.news!.title,
+              textAlign: TextAlign.center, style: newsTiltleTextStyle()),
           SizedBox(
             height: 10,
           ),
@@ -145,7 +144,8 @@ class DetailScreen extends StatelessWidget {
               ),
             ],
           ),
-          Container(
+          Container( 
+            //decription
              padding: EdgeInsets.all(8),
              child: Text(_readingController.news!.decription,
                   textAlign: TextAlign.left, style: TextStyle(
@@ -167,6 +167,7 @@ class DetailScreen extends StatelessWidget {
               shrinkWrap: true,
               itemCount: _readingController.news!.body.length,
               itemBuilder: (context, index) => Column(
+               
                 children: [
                   if (_readingController.news!.imageLink.length > index)
                     Container(
@@ -191,10 +192,12 @@ class DetailScreen extends StatelessWidget {
                     )
                   else
                     Container(),
+                  SizedBox(height: 10,),
                   Text(
                     _readingController.news!.body[index],
                     style: newsBodyTextStyle(),
                   ),
+                  SizedBox(height: 10,)
                 ],
               ),
             ),
@@ -212,19 +215,7 @@ class DetailScreen extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            //source
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                _readingController.news!.source,
-                style: textFieldTextStyle(),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-            ],
-          ),
+          
         ]);
   }
 }
