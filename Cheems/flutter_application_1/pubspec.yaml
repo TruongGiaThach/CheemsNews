@@ -48,6 +48,8 @@ dependencies:
   flutter_svg: ^0.22.0 
   custom_navigation_bar: ^0.8.2
   line_icons: ^2.0.1
+  http: ^0.13.3
+  table_calendar: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +70,7 @@ flutter:
   assets:
      - assets/images/
      - assets/icons/
+     - assets/json/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

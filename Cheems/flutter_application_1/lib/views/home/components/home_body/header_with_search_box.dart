@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
 import 'package:flutter_application_1/controllers/SettingController.dart';
+import 'package:flutter_application_1/views/calender/Calendar.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -138,6 +139,17 @@ class HeaderWithSearchBox extends StatelessWidget {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                   ),
+                        ),
+                        Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            Get.toNamed('/calender');
+                          },
+                          icon: Icon(
+                            Icons.calendar_today_outlined,
+                            color: Colors.white,
+                            size: 28,
+                          ),
                         ),
                         Spacer(),
                         GestureDetector(

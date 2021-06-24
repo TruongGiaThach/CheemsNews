@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
 import 'package:flutter_application_1/controllers/SettingController.dart';
+import 'package:flutter_application_1/views/StockChart/chartBuilder.dart';
 import 'package:flutter_application_1/views/favorite/fav_link.dart';
 import 'package:flutter_application_1/views/home/home_link.dart';
 import 'package:flutter_application_1/views/person/person_link.dart';
+import 'package:flutter_application_1/views/weather/weather_view.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -35,11 +37,15 @@ class MainScreen extends StatelessWidget {
                   ? HomeLink()
                   : (_mainController.currentIndex.value == 1)
                       ? FavoriteLink()
-                      : (_mainController.currentIndex.value == 4)
-                          ? PersonLink()
-                          : Center(
-                              child: Text("Underdevelopment"),
-                            )),
+                      : (_mainController.currentIndex.value == 2)
+                          ? WeatherView()
+                          : (_mainController.currentIndex.value == 3)
+                              ? Chart()
+                              : (_mainController.currentIndex.value == 4)
+                                  ? PersonLink()
+                                  : Center(
+                                      child: Text("Underdevelopment"),
+                                    )),
             ),
             bottomNavigationBar:
                 Obx(() => myBar(_mainController.currentIndex.value)),
@@ -103,13 +109,13 @@ class MainScreen extends StatelessWidget {
           icon: Icon(Icons.home),
         ),
         CustomNavigationBarItem(
+          icon: Icon(Icons.favorite),
+        ),
+        CustomNavigationBarItem(
+          icon: Icon(Icons.cloud),
+        ),
+        CustomNavigationBarItem(
           icon: Icon(Icons.shopping_cart),
-        ),
-        CustomNavigationBarItem(
-          icon: Icon(Icons.lightbulb_outline),
-        ),
-        CustomNavigationBarItem(
-          icon: Icon(Icons.search),
         ),
         CustomNavigationBarItem(
           icon: Icon(Icons.account_circle),
