@@ -80,7 +80,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                                   mainController.gotoCollection();
                                   break;
                                 case 2:
-                                  //push to setting page
+                                  mainController.gotoSetting();
                                   break;
                                 case 3:
                                   if (authController.currentUser!.typeAccount ==
@@ -246,10 +246,9 @@ class HeaderWithSearchBox extends StatelessWidget {
                   ],
                 )
               : Wrap(
+                  spacing: 20,
                   children: [
-                    SizedBox(height: 30),
                     Center(child: CircularProgressIndicator()),
-                    SizedBox(height: 30),
                     Center(child: Text("Hold up, we're signing you in...")),
                   ],
                 ),

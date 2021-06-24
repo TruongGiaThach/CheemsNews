@@ -17,54 +17,61 @@ class FavoriteLink extends StatelessWidget {
   final mainController = Get.find<MainController>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(),
-        body: Obx(() => (!authController.isGuest.value)
-            ? FutureBuilder(
-                future: controller.loadListFav(authController.currentUser!.uid),
-                builder: (context, AsyncSnapshot<List<News>> snapshot) {
-                  if (snapshot.hasError) {
-                    return Container(
-                      child: Center(
-                        child: Text(
-                            "There are some error when load your collection"),
-                      ),
-                    );
-                  }
-                  if (snapshot.connectionState ==
-                      ConnectionState.done) if (snapshot.hasData) if (snapshot
-                          .data!.length !=
-                      0) {
-                    return ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (context, index) {
-                          return FavItem(context, snapshot.data![index]);
-                        }); // show list news
-                  } else
-                    return Container(
-                        child: Center(
-                      child: Text("You don't have any news in collection"),
-                    ));
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              )
-            : Container(
-                child: Center(
-                    // ignore: deprecated_member_use
-                    child: Obx(() => FlatButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        color: _settingController.kPrimaryColor.value,
-                        onPressed: () {
-                          _showGuestSheet(context);
-                          mainController.gotoHome();
-                        },
-                        child: Text(
-                          "Login to your collection",
-                          style: TextStyle(color: Colors.white),
-                        )))))));
+    return Obx(() => (_settingController.kPrimaryColor.value != null)
+        ? Scaffold(
+            appBar: AppBar(
+              backgroundColor: _settingController.kPrimaryColor.value,
+            ),
+            body: Obx(() => (!authController.isGuest.value)
+                ? FutureBuilder(
+                    future:
+                        controller.loadListFav(authController.currentUser!.uid),
+                    builder: (context, AsyncSnapshot<List<News>> snapshot) {
+                      if (snapshot.hasError) {
+                        return Container(
+                          child: Center(
+                            child: Text(
+                                "There are some error when load your collection"),
+                          ),
+                        );
+                      }
+                      if (snapshot.connectionState ==
+                          ConnectionState
+                              .done) if (snapshot
+                          .hasData) if (snapshot.data!.length != 0) {
+                        return ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              return FavItem(context, snapshot.data![index]);
+                            }); // show list news
+                      } else
+                        return Container(
+                            child: Center(
+                          child: Text("You don't have any news in collection"),
+                        ));
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  )
+                : Container(
+                    child: Center(
+                        // ignore: deprecated_member_use
+                        child: FlatButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            color: _settingController.kPrimaryColor.value,
+                            onPressed: () {
+                              _showGuestSheet(context);
+                              mainController.gotoHome();
+                            },
+                            child: Text(
+                              "Login to your collection",
+                              style: TextStyle(color: Colors.white),
+                            ))))))
+        : Center(
+            child: Text("Error when load primary color"),
+          ));
   }
 
   void _showGuestSheet(context) {
@@ -100,10 +107,9 @@ class FavoriteLink extends StatelessWidget {
                   ],
                 )
               : Wrap(
+                  spacing: 20,
                   children: [
-                    SizedBox(height: 30),
                     Center(child: CircularProgressIndicator()),
-                    SizedBox(height: 30),
                     Center(child: Text("Hold up, we're signing you in...")),
                   ],
                 ),

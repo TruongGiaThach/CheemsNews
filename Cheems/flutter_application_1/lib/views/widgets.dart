@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 AppBar appBarMain(BuildContext context) {
   return AppBar(
-    //title: Image.asset(      'assets/images/tmpIcon.png',      height: 55,    ),
+    
   );
 }
 

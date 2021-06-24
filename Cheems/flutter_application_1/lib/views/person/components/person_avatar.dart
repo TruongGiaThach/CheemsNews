@@ -29,7 +29,10 @@ class PersonAvatar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(1000),
                   child: _authenticController.currentUser != null
                       ? Image.network(
-                          (_authenticController.currentUser!.photoUrl))
+                          _authenticController.currentUser!.photoUrl,
+                          width: size.width * .4,
+                          fit: BoxFit.fitWidth,
+                        )
                       : Image.asset(
                           "assets/images/guestImage.jpg",
                           width: size.width * .4,
@@ -119,10 +122,9 @@ class PersonAvatar extends StatelessWidget {
                   ],
                 )
               : Wrap(
+                  spacing: 20,
                   children: [
-                    SizedBox(height: 30),
                     Center(child: CircularProgressIndicator()),
-                    SizedBox(height: 30),
                     Center(child: Text("Hold up, we're signing you in...")),
                   ],
                 ),

@@ -22,6 +22,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Obx(() => Container(
           width: double.infinity,
+          height: MediaQuery.of(context).size.height,
           color: _settingController.kPrimaryColor.value.withOpacity(.1),
           child: SingleChildScrollView(
             child: Column(

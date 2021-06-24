@@ -11,6 +11,7 @@ class PersonLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
+          extendBody: true,
           appBar: AppBar(
             title: Text('Tôi'),
             backgroundColor: _settingController.kPrimaryColor.value,

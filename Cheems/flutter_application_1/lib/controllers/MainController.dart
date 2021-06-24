@@ -11,6 +11,6 @@ class MainController extends GetxController{
     currentIndex.value = 1;
   }
    gotoSetting(){
-    currentIndex.value = 5;
+    currentIndex.value = 4;
   }
 }
