@@ -8,6 +8,7 @@ import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/views/widgets.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class DetailScreen extends StatelessWidget {
   late News news;
   DetailScreen({required this.news});

@@ -17,6 +17,7 @@ class FavoriteLink extends StatelessWidget {
   final mainController = Get.find<MainController>();
   @override
   Widget build(BuildContext context) {
+    // ignore: unnecessary_null_comparison
     return Obx(() => (_settingController.kPrimaryColor.value != null)
         ? Scaffold(
             appBar: AppBar(

@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 class AuthenticController extends GetxController {
   var isSigningIn = false.obs;
   var isGuest = true.obs;
+  // ignore: avoid_init_to_null
   MyUser? currentUser = null;
   Future<FirebaseApp> initilizeFirebase() async {
     return await AuthenticService.instance.initializeFirebase();

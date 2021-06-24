@@ -11,6 +11,7 @@ import 'package:lottie/lottie.dart';
 
 final _settingController = Get.find<SettingController>();
 
+// ignore: must_be_immutable
 class MainScreen extends StatelessWidget {
   var _authenticController = Get.find<AuthenticController>();
   final _mainController = Get.find<MainController>();

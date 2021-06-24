@@ -33,6 +33,7 @@ class _ColorDotState extends State<ColorDot> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
+            // ignore: unrelated_type_equality_checks
             color: widget.id == _settingController.idColor
                 ? Color(_settingController.kColor[widget.id])
                 : Colors.white,

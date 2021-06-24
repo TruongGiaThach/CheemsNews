@@ -45,7 +45,6 @@ class ListPlantCard extends StatelessWidget {
   }
 
   InkWell buildCard(BuildContext context, News thumb) {
-    Size size = MediaQuery.of(context).size;
 
     return InkWell(
       onTap: () {

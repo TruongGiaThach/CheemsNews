@@ -23,6 +23,7 @@ class FavoriteController extends GetxController {
   Future<List<News>> loadListFav(String uID) async {
     List<News> tmp = [];
     if (listID.isNotEmpty)
+      // ignore: invalid_use_of_protected_member
       for (int i = 0; i < listID.value.length; i++) {
         News? news = await FirestoreService.instance.getNewsById(listID[i]);
         if (news != null) tmp.add(news);
@@ -32,16 +33,20 @@ class FavoriteController extends GetxController {
   }
 
   Future addNewsToListFav(MyUser? currentUser, News news) async {
+    // ignore: invalid_use_of_protected_member
     if (listID.value.contains(news.id)) return;
     listID.add(news.id);
     await FirestoreService.instance
+        // ignore: invalid_use_of_protected_member
         .updateListFav(currentUser, listID.value as List<String>);
   }
 
   Future deleteNewsFromListFav(MyUser? currentUser, News news) async {
+    // ignore: invalid_use_of_protected_member
     if (!listID.value.contains(news.id)) return;
     listID.remove(news.id);
     await FirestoreService.instance
+        // ignore: invalid_use_of_protected_member
         .updateListFav(currentUser, listID.value as List<String>);
   }
 }

@@ -173,7 +173,8 @@ class _BodyState extends State<Body> {
                         "Rubik",
                         style: TextStyle(
                           fontSize: _settingController.textSize.value,
-                          color: _settingController.textFont == 0
+                          // ignore: unrelated_type_equality_checks
+                          color: (_settingController.textFont == 0)
                               ? Colors.white
                               : Colors.black,
                         ),
@@ -198,6 +199,7 @@ class _BodyState extends State<Body> {
                         "Bookerly",
                         style: TextStyle(
                           fontSize: _settingController.textSize.value,
+                          // ignore: unrelated_type_equality_checks
                           color: _settingController.textFont == 1
                               ? Colors.white
                               : Colors.black,

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../widgets.dart';
 
+// ignore: non_constant_identifier_names
 InkWell FavItem(BuildContext context, News thumb) {
   return InkWell(
       onTap: () {

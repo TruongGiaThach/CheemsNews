@@ -6,6 +6,7 @@ import 'package:flutter_application_1/views/details/detail_screen.dart';
 import 'package:flutter_application_1/views/widgets.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class TypeNewsViews extends StatelessWidget {
   TypeNewsViews({Key? key, required this.typeNews}) : super(key: key);
 
@@ -33,7 +34,7 @@ class TypeNewsViews extends StatelessWidget {
                 : Center(
                     child: Text("Can't find news matching with this topic"));
           }
-          ;
+          
           return Center(
             child: CircularProgressIndicator(),
           );
