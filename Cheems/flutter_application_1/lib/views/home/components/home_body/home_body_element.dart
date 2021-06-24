@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/HomeController.dart';
+import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:flutter_application_1/views/home/components/home_body/list_plant_card.dart';
 import 'package:get/get.dart';
 
-import '../../../../constants.dart';
+final _settingController = Get.find<SettingController>();
 
 class HomeBodyElement extends StatelessWidget {
-  HomeBodyElement({
-    Key? key,
-   required this.index}
-  ) : super(key: key);
+  HomeBodyElement({Key? key, required this.index}) : super(key: key);
 
   final controller = Get.find<HomeController>();
   final int index;
@@ -19,31 +17,31 @@ class HomeBodyElement extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding/2),
+          padding: EdgeInsets.symmetric(
+              horizontal: _settingController.kDefaultPadding / 2),
           child: Row(
             children: <Widget>[
               TitleWithCustomUnderline(
-                text:  controller.listType[index].name,
+                text: controller.listType[index].name,
               ),
               Spacer(),
               // ignore: deprecated_member_use
-              FlatButton(
+              Obx(() => FlatButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  color: kPrimaryColor,
+                  color: _settingController.kPrimaryColor.value,
                   onPressed: () {
-                      controller.typeIndex.value = index + 1;
-                    },
+                    controller.typeIndex.value = index + 1;
+                  },
                   child: Text(
                     "Xem thêm",
                     style: TextStyle(color: Colors.white),
-                  ))
+                  )))
             ],
           ),
         ),
         ListPlantCard(topic: controller.listType[index].name),
       ],
-      
     );
   }
 }
@@ -63,7 +61,8 @@ class TitleWithCustomUnderline extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(left: kDefaultPadding / 4),
+            padding:
+                EdgeInsets.only(left: _settingController.kDefaultPadding / 4),
             child: Text(
               "${this.text}",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -73,11 +72,13 @@ class TitleWithCustomUnderline extends StatelessWidget {
             bottom: 0,
             left: 0,
             right: 0,
-            child: Container(
-              margin: EdgeInsets.only(right: kDefaultPadding / 4),
-              height: 7,
-              color: kPrimaryColor.withOpacity(0.2),
-            ),
+            child: Obx(() => Container(
+                  margin: EdgeInsets.only(
+                      right: (_settingController.kDefaultPadding) / 4),
+                  height: 7,
+                  color:
+                      _settingController.kPrimaryColor.value.withOpacity(0.2),
+                )),
           )
         ],
       ),

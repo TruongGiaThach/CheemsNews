@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controllers/SettingController.dart';
+import 'package:get/get.dart';
 
-import '../../../../constants.dart';
-
+final _settingController = Get.find<SettingController>();
 
 class TitleWithCustomUnderline extends StatelessWidget {
   const TitleWithCustomUnderline({
@@ -16,8 +17,8 @@ class TitleWithCustomUnderline extends StatelessWidget {
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-              left: kDefaultPadding / 4,
+            padding: EdgeInsets.only(
+              left: _settingController.kDefaultPadding / 4,
             ),
             child: Text(
               "${this.text}",
@@ -28,11 +29,12 @@ class TitleWithCustomUnderline extends StatelessWidget {
             left: 0,
             right: 0,
             bottom: -3,
-            child: Container(
-              margin: EdgeInsets.only(right: kDefaultPadding / 4),
-              height: 7,
-              color: kPrimaryColor.withOpacity(.4),
-            ),
+            child: Obx(() => Container(
+                  margin: EdgeInsets.only(
+                      right: _settingController.kDefaultPadding / 4),
+                  height: 7,
+                  color: _settingController.kPrimaryColor.value.withOpacity(.4),
+                )),
           )
         ],
       ),

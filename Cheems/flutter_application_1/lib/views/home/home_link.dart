@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/FavoriteController.dart';
 import 'package:flutter_application_1/controllers/HomeController.dart';
+import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:flutter_application_1/views/home/components/typeNewsViews/listTypeViews.dart';
 import 'package:flutter_application_1/views/home/components/typeNewsViews/typeNewsViews.dart';
 import 'package:get/get.dart';
-
-import '../../constants.dart';
 import 'components/home_body/home_body.dart';
 
 class HomeLink extends StatelessWidget {
   HomeLink({
     Key? key,
   }) : super(key: key);
+  final _settingController = Get.find<SettingController>();
+
   final _authenticController = Get.find<AuthenticController>();
   final _homeController = Get.find<HomeController>();
   final _favoriteController = Get.find<FavoriteController>();
@@ -42,7 +43,7 @@ class HomeLink extends StatelessWidget {
                 _homeController.typeIndex.value = 0;
               },
             ),
-            backgroundColor: kPrimaryColor,
+            backgroundColor: _settingController.kPrimaryColor.value,
 
             actions: [
               Container(
