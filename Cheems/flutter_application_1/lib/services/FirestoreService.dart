@@ -31,23 +31,23 @@ class FirestoreService {
     return docs.exists;
   }
 
-  Future<myUser> getUserByEmail(String email) async {
-    late myUser user;
+  Future<MyUser> getUserByEmail(String email) async {
+    late MyUser user;
     await database
         .collection(userTable)
         .where('email', isEqualTo: email)
         .get()
         .then((value) {
-      user = myUser.fromJson(value.docs[0].data());
+      user = MyUser.fromJson(value.docs[0].data());
     });
     return user;
   }
 
-  Future<List<myUser>> getAllUsers() async {
-    List<myUser> weathers = [];
+  Future<List<MyUser>> getAllUsers() async {
+    List<MyUser> weathers = [];
     await database.collection(userTable).get().then((value) {
       value.docs
-          .forEach((element) => weathers.add(myUser.fromJson(element.data())));
+          .forEach((element) => weathers.add(MyUser.fromJson(element.data())));
     });
     return weathers;
   }
@@ -132,7 +132,7 @@ class FirestoreService {
     return listID;
   }
 
-  Future updateListFav(myUser? _user, List<String> newsID) async {
+  Future updateListFav(MyUser? _user, List<String> newsID) async {
     await database
         .collection('users')
         .doc(_user!.uid)

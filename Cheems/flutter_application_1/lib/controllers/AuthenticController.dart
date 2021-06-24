@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 class AuthenticController extends GetxController {
   var isSigningIn = false.obs;
   var isGuest = true.obs;
-  myUser? currentUser = null;
+  MyUser? currentUser = null;
   Future<FirebaseApp> initilizeFirebase() async {
     return await AuthenticService.instance.initializeFirebase();
   }
@@ -30,7 +30,7 @@ class AuthenticController extends GetxController {
         Get.snackbar("Đăng nhập thành công", "Xin chao ${user.displayName}.");
       }
       currentUser =
-          new myUser(user.uid, user.email!, user.displayName!, user.photoURL!);
+          new MyUser(user.uid, user.email!, user.displayName!, user.photoURL!);
       currentUser!.typeAccount = 1;
       isSigningIn.value = false;
       isGuest.value = false;
@@ -69,7 +69,7 @@ class AuthenticController extends GetxController {
             "Chào mừng ${user.displayName} đến với CheemsNews.");
       }
       currentUser =
-          new myUser(user.uid, user.email!, user.displayName!, user.photoURL!);
+          new MyUser(user.uid, user.email!, user.displayName!, user.photoURL!);
       currentUser!.typeAccount = 2;
       isGuest.value = false;
       isSigningIn.value = false;

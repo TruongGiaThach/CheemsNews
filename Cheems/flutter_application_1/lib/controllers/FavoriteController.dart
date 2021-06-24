@@ -31,14 +31,14 @@ class FavoriteController extends GetxController {
     return tmp;
   }
 
-  Future addNewsToListFav(myUser? currentUser, News news) async {
+  Future addNewsToListFav(MyUser? currentUser, News news) async {
     if (listID.value.contains(news.id)) return;
     listID.add(news.id);
     await FirestoreService.instance
         .updateListFav(currentUser, listID.value as List<String>);
   }
 
-  Future deleteNewsFromListFav(myUser? currentUser, News news) async {
+  Future deleteNewsFromListFav(MyUser? currentUser, News news) async {
     if (!listID.value.contains(news.id)) return;
     listID.remove(news.id);
     await FirestoreService.instance
