@@ -1,11 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
 import 'package:flutter_application_1/controllers/FavoriteController.dart';
 import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:flutter_application_1/controllers/readingController.dart';
 import 'package:flutter_application_1/models/News.dart';
+import 'package:flutter_application_1/views/details/components/bottom_bar.dart';
+import 'package:flutter_application_1/views/details/components/hide_nav_bar.dart';
 import 'package:flutter_application_1/views/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
@@ -17,18 +21,29 @@ class DetailScreen extends StatelessWidget {
   final _readingController = Get.find<ReadingController>();
   final _favoriteController = Get.find<FavoriteController>();
 
+  final HideNavBar hiding = HideNavBar();
   @override
   Widget build(BuildContext context) {
     _readingController.news = this.news;
     _readingController.hasData.value = true;
+
     return Obx(() => (_readingController.hasData.isTrue)
         ? Scaffold(
             appBar: buildAppBar(context, news),
             body: RefreshIndicator(
                 onRefresh: () => _readingController.fletchNews(news.id),
                 child: newsView()),
-          )
+            bottomNavigationBar: ValueListenableBuilder(
+              valueListenable: hiding.visible,
+              builder: (context, bool value, child) => AnimatedContainer(
+                  duration: Duration(milliseconds: 500),
+                  height: value ? kBottomNavigationBarHeight : 0.0,
+                  child: buildBottomBar(_settingController.kBackgroundColor,
+                      _settingController.kPrimaryColor.value)),
+            ))
         : Scaffold(
+            backgroundColor:
+                _settingController.kPrimaryColor.value.withOpacity(.1),
             body: Center(
               child: Text("Can't load data from server. Please try again."),
             ),
@@ -36,7 +51,6 @@ class DetailScreen extends StatelessWidget {
   }
 
   AppBar buildAppBar(BuildContext context, News news) {
- 
     _favoriteController.check.value = _favoriteController.checkNew(news.id);
     return AppBar(
       backgroundColor: _settingController.kPrimaryColor.value,
@@ -55,14 +69,15 @@ class DetailScreen extends StatelessWidget {
                   fit: BoxFit.fitWidth,
                 ),
           SizedBox(width: 2),
-          IconButton(
-            icon: Icon(
-              (_favoriteController.check.value)
-                  ? Icons.favorite
-                  : Icons.favorite_border,
-              color: Colors.red,
+          GestureDetector(
+            child: Container(
+              height: 30,
+              width: 30,
+              child: (_favoriteController.check.value)
+                  ? SvgPicture.asset("assets/icons/favourite_selected.svg")
+                  : SvgPicture.asset("assets/icons/favourite.svg"),
             ),
-            onPressed: () async {
+            onTap: () async {
               if (_authenticController.currentUser != null) {
                 if (_favoriteController.check.value == false) {
                   await _favoriteController.addNewsToListFav(
@@ -88,7 +103,7 @@ class DetailScreen extends StatelessWidget {
                 ));
               }
             },
-          )
+          ),
         ],
       ),
     );
@@ -105,7 +120,8 @@ class DetailScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(3),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5), color: Colors.grey[300]),
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.grey[300]),
             child: Text(
               _readingController.news!.tag[0],
               style: minimzeTextStyle(),
@@ -121,8 +137,8 @@ class DetailScreen extends StatelessWidget {
 
   Widget newsView() {
     return ListView(
-        physics: BouncingScrollPhysics(
-          parent: AlwaysScrollableScrollPhysics()),
+        controller: hiding.controller,
+        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         shrinkWrap: true,
         children: [
           Text(_readingController.news!.title,
@@ -144,16 +160,18 @@ class DetailScreen extends StatelessWidget {
               ),
             ],
           ),
-          Container( 
+          Container(
             //decription
-             padding: EdgeInsets.all(8),
-             child: Text(_readingController.news!.decription,
-                  textAlign: TextAlign.left, style: TextStyle(
+            padding: EdgeInsets.all(8),
+            child: Text(
+              _readingController.news!.decription,
+              textAlign: TextAlign.left,
+              style: TextStyle(
                 fontSize: 12 + 8,
                 fontWeight: FontWeight.bold,
-              ),),
-           ),
-          
+              ),
+            ),
+          ),
           SizedBox(
             height: 10,
           ),
@@ -167,7 +185,6 @@ class DetailScreen extends StatelessWidget {
               shrinkWrap: true,
               itemCount: _readingController.news!.body.length,
               itemBuilder: (context, index) => Column(
-               
                 children: [
                   if (_readingController.news!.imageLink.length > index)
                     Container(
@@ -192,12 +209,16 @@ class DetailScreen extends StatelessWidget {
                     )
                   else
                     Container(),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     _readingController.news!.body[index],
                     style: newsBodyTextStyle(),
                   ),
-                  SizedBox(height: 10,)
+                  SizedBox(
+                    height: 10,
+                  )
                 ],
               ),
             ),
@@ -215,7 +236,6 @@ class DetailScreen extends StatelessWidget {
               ),
             ],
           ),
-          
         ]);
   }
 }

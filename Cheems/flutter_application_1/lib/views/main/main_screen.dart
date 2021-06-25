@@ -37,8 +37,12 @@ class MainScreen extends StatelessWidget {
                       ? FavoriteLink()
                       : (_mainController.currentIndex.value == 4)
                           ? PersonLink()
-                          : Center(
-                              child: Text("Underdevelopment"),
+                          : Container(
+                              color: _settingController.kPrimaryColor.value
+                                  .withOpacity(.1),
+                              child: Center(
+                                child: Text("Underdevelopment"),
+                              ),
                             )),
             ),
             bottomNavigationBar:

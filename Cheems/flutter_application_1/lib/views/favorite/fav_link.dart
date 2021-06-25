@@ -20,6 +20,8 @@ class FavoriteLink extends StatelessWidget {
     // ignore: unnecessary_null_comparison
     return Obx(() => (_settingController.kPrimaryColor.value != null)
         ? Scaffold(
+            backgroundColor:
+                _settingController.kPrimaryColor.value.withOpacity(.1),
             appBar: AppBar(
               backgroundColor: _settingController.kPrimaryColor.value,
             ),
@@ -30,6 +32,8 @@ class FavoriteLink extends StatelessWidget {
                     builder: (context, AsyncSnapshot<List<News>> snapshot) {
                       if (snapshot.hasError) {
                         return Container(
+                          color: _settingController.kPrimaryColor.value
+                              .withOpacity(.1),
                           child: Center(
                             child: Text(
                                 "There are some error when load your collection"),
@@ -56,6 +60,8 @@ class FavoriteLink extends StatelessWidget {
                     },
                   )
                 : Container(
+                    color:
+                        _settingController.kPrimaryColor.value.withOpacity(.1),
                     child: Center(
                         // ignore: deprecated_member_use
                         child: FlatButton(

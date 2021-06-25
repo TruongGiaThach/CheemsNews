@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class SettingController extends GetxController {
   // Colors that we use in our app
-  Rx<Color> kPrimaryColor = Color(0xFF0C9869).obs;
+  Rx<Color> kPrimaryColor = Color(0xFF00AA00).obs;
   Color kTextColor = Color(0xFF3C4046);
   Color kBackgroundColor = Color(0xFFF9F8FD);
 
@@ -16,9 +16,9 @@ class SettingController extends GetxController {
   Rx<int> idColor = 0.obs;
 
   RxList<int> kColor = [
-    0xFF0C9869,
+    0xFF00AA00,
     0xFF365C95,
-    0xFFF8C078,
+    0xFF9999FF,
     0xFFA29B9B,
   ].obs;
 }

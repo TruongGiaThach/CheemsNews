@@ -1,3 +1,4 @@
+import 'package:flutter_application_1/models/Comment.dart';
 import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/models/Title.dart';
 import 'package:flutter_application_1/models/User.dart';
@@ -138,5 +139,32 @@ class FirestoreService {
         .doc(_user!.uid)
         .update(<String, dynamic>{'favNews': newsID}).catchError(
             (error) => print('Update Faile : $error'));
+  }
+
+  Future<void> addCmt(String newsID, Comments cmt) async {
+    await database.collection("news").doc(newsID).collection("cmt").add(
+      {
+        'username': cmt.userName,
+        'userimage': cmt.userImage,
+        'body': cmt.body,
+        'time': cmt.time.toString()
+      },
+    );
+  }
+
+  Future<List<Comments>> getAllCmt(String newsID) async {
+    List<Comments> thumb = [];
+    await database
+        .collection('news')
+        .doc(newsID)
+        .collection("cmt")
+        .get()
+        .then((value) => {
+              print(value.docs[0].data()),
+              value.docs.forEach((element) {
+                thumb.add(Comments.fromJson(element.data()));
+              })
+            });
+    return thumb;
   }
 }
