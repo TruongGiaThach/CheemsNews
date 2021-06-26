@@ -159,10 +159,11 @@ class FirestoreService {
         .doc(newsID)
         .collection("cmt")
         .get()
-        .then((value) => {
-              print(value.docs[0].data()),
+        .then((value) =>  {
+              
               value.docs.forEach((element) {
-                thumb.add(Comments.fromJson(element.data()));
+                if (element.exists)
+                  thumb.add(Comments.fromJson(element.data()));
               })
             });
     return thumb;

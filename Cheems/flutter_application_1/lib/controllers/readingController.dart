@@ -9,6 +9,7 @@ class ReadingController extends GetxController {
   ReadingController() {
     news = null;
   }
+  var isNewCmt = false.obs;
   var hasData = false.obs;
   var bottomIndex = 0.obs;
 
@@ -29,6 +30,7 @@ class ReadingController extends GetxController {
     List<Comments> tmp = [];
     if (this.news != null)
       tmp = await FirestoreService.instance.getAllCmt(this.news!.id);
+    if (tmp != []) tmp.sort((cmt1,cmt2)=>cmt1.time.compareTo(cmt2.time) );
     return tmp;
   }
 }

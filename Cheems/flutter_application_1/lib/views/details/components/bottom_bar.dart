@@ -17,7 +17,7 @@ Widget buildBottomBar(Color backgroundColor, Color primaryColor) {
             onTap: (index) {
               controller.bottomIndex.value = index;
               if (index == 1){
-                Get.to(CommentPage());
+                Get.to(()=>CommentPage());
               }
             },
             items: [
