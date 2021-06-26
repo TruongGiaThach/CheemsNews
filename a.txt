@@ -1,0 +1,23 @@
+ID
+author
+body
+dateCreate
+decription
+image
+imageSource
+numOfLike
+source
+tag
+title
+
+chỉnh size chữ trong reading
+đổi vị trí lịch
+share bài viết
+show trị giá cổ phiếu hiện tại
+biểu đồ giá vàng hiện tại, giá trị tăng giảm
+kiểm tra kết nối mạng 
+đổi hình loading vào app
+đổi icon app
+thêm loading erro cheems ponk
+
+https://drive.google.com/uc?export=view&id=
