@@ -8,7 +8,6 @@ import 'package:flutter_application_1/controllers/readingController.dart';
 import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/views/details/components/bottom_bar.dart';
 import 'package:flutter_application_1/views/details/components/hide_nav_bar.dart';
-import 'package:flutter_application_1/views/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -61,7 +60,9 @@ class DetailScreen extends StatelessWidget {
           (_readingController.news!.imageSource == "")
               ? Text(
                   _readingController.news!.source,
-                  style: textFieldTextStyle(),
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: _settingController.textSize.value + 2),
                 )
               : Image.network(
                   _readingController.news!.imageSource,
@@ -124,7 +125,9 @@ class DetailScreen extends StatelessWidget {
                 color: Colors.grey[300]),
             child: Text(
               _readingController.news!.tag[0],
-              style: minimzeTextStyle(),
+              style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: _settingController.textSize.value),
             ),
           ),
           SizedBox(
@@ -142,7 +145,8 @@ class DetailScreen extends StatelessWidget {
         shrinkWrap: true,
         children: [
           Text(_readingController.news!.title,
-              textAlign: TextAlign.center, style: newsTiltleTextStyle()),
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black54, fontSize: 30)),
           SizedBox(
             height: 10,
           ),
@@ -151,10 +155,10 @@ class DetailScreen extends StatelessWidget {
             //date
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                _readingController.news!.dateCreate,
-                style: minimzeTextStyle(),
-              ),
+              Text(_readingController.news!.dateCreate,
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: _settingController.textSize.value)),
               SizedBox(
                 width: 10,
               ),
@@ -212,9 +216,14 @@ class DetailScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    _readingController.news!.body[index],
-                    style: newsBodyTextStyle(),
+                  Obx(
+                    () => Text(
+                      _readingController.news!.body[index],
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: _settingController.textSize.value + 4,
+                          height: 1.5),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
@@ -229,7 +238,9 @@ class DetailScreen extends StatelessWidget {
             children: [
               Text(
                 _readingController.news!.author,
-                style: textFieldTextStyle(),
+                style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: _settingController.textSize.value + 2),
               ),
               SizedBox(
                 width: 10,
