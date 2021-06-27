@@ -46,7 +46,7 @@ class CommentPage extends StatelessWidget {
                   Expanded(
                       child: TextField(
                     controller: textEditingController,
-                    style: newsBodyTextStyle(),
+                    style: TextStyle(color: Colors.black87, fontSize: 18,height: 1.5),
                   )),
                   IconButton(
                       onPressed: () async {

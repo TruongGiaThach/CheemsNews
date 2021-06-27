@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/views/details/detail_screen.dart';
 import 'package:get/get.dart';
@@ -53,7 +54,7 @@ InkWell FavItem(BuildContext context, News thumb) {
           Expanded(
             child: Text(
               '${thumb.title}\n\n',
-              style: titleTextFieldTextStyle(),
+              style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: SettingController().textSize.value  + 3),
               maxLines: 4,
             ),
           ),

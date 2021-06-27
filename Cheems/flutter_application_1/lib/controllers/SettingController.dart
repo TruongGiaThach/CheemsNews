@@ -21,4 +21,11 @@ class SettingController extends GetxController {
     0xFF9999FF,
     0xFFA29B9B,
   ].obs;
+
+  increaseFontSize() {
+    if (this.textSize.value < 18)
+      this.textSize.value += 1;
+    else
+      this.textSize.value = 14;
+  }
 }

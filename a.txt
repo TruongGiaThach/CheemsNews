@@ -10,7 +10,7 @@ source
 tag
 title
 
-chỉnh size chữ trong reading
+chỉnh size chữ trong reading(done)
 đổi vị trí lịch
 share bài viết
 show trị giá cổ phiếu hiện tại

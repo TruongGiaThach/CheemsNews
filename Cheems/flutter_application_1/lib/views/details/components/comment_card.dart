@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:flutter_application_1/models/Comment.dart';
 import 'package:flutter_application_1/views/widgets.dart';
 import 'package:intl/intl.dart';
@@ -32,13 +33,13 @@ class CommentCard extends StatelessWidget {
                 ),
                 Text(
                   cmt.userName,
-                  style: minimzeTextStyle(),
+                  style: TextStyle(color: Colors.blue, fontSize: SettingController().textSize.value),
                 ),
                 Spacer(),
                 Text(
                   DateFormat('yyyy-MM-dd – kk:mm').format(cmt.time),
                   textAlign: TextAlign.right,
-                  style: minimzeTextStyle(),
+                  style:TextStyle(color: Colors.blue, fontSize: SettingController().textSize.value),
                 ),
               ],
             ),
@@ -48,7 +49,7 @@ class CommentCard extends StatelessWidget {
               decoration: BoxDecoration(border: Border.all(color: Colors.black38)),
               child: Text(
                 cmt.body,
-                style: newsBodyTextStyle(),
+                style: TextStyle(color: Colors.black87, fontSize: 18,height: 1.5),
               ),
             )
           ],
