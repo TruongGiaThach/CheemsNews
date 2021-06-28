@@ -101,7 +101,7 @@ class CommentPage extends StatelessWidget {
             child: Text("Let's comment now"),
           ));
         return Center(
-          child: CircularProgressIndicator(),
+          child: loadingWiget(),
         );
       },
     );

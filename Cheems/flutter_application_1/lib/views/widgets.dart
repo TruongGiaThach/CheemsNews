@@ -16,3 +16,9 @@ InputDecoration textFieldInputDecoration(String hintText) {
         UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
   );
 }
+
+Widget loadingWiget()
+{
+  return Image.asset("assets/images/dancin_dog.gif");
+
+}

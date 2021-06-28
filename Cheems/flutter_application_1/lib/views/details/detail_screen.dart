@@ -11,6 +11,8 @@ import 'package:flutter_application_1/views/details/components/hide_nav_bar.dart
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../widgets.dart';
+
 // ignore: must_be_immutable
 class DetailScreen extends StatelessWidget {
   late News news;
@@ -205,9 +207,9 @@ class DetailScreen extends StatelessWidget {
                           ),
                         ),
                         placeholder: (context, url) => Container(
-                            height: 50,
-                            width: 50,
-                            child: CircularProgressIndicator()),
+                            height: 40,
+                            width: 40,
+                            child: loadingWiget()),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     )

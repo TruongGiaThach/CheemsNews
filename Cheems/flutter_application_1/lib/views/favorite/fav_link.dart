@@ -8,6 +8,8 @@ import 'package:flutter_application_1/views/favorite/fav_item_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 
+import '../widgets.dart';
+
 class FavoriteLink extends StatelessWidget {
   FavoriteLink({Key? key}) : super(key: key);
 
@@ -55,7 +57,7 @@ class FavoriteLink extends StatelessWidget {
                           child: Text("You don't have any news in collection"),
                         ));
                       return Center(
-                        child: CircularProgressIndicator(),
+                        child:loadingWiget(),
                       );
                     },
                   )

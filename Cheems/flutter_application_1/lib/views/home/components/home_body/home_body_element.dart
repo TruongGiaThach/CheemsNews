@@ -14,35 +14,26 @@ class HomeBodyElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: _settingController.kDefaultPadding / 2),
-          child: Row(
-            children: <Widget>[
-              TitleWithCustomUnderline(
-                text: controller.listType[index].name,
+    return GestureDetector(
+        onTap: () {
+          controller.typeIndex.value = index + 1;
+        },
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: _settingController.kDefaultPadding / 2),
+              child: Row(
+                children: <Widget>[
+                  TitleWithCustomUnderline(
+                    text: controller.listType[index].name,
+                  ),
+                ],
               ),
-              Spacer(),
-              // ignore: deprecated_member_use
-              Obx(() => FlatButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  color: _settingController.kPrimaryColor.value,
-                  onPressed: () {
-                    controller.typeIndex.value = index + 1;
-                  },
-                  child: Text(
-                    "Xem thêm",
-                    style: TextStyle(color: Colors.white),
-                  )))
-            ],
-          ),
-        ),
-        ListPlantCard(topic: controller.listType[index].name),
-      ],
-    );
+            ),
+            ListPlantCard(index: index),
+          ],
+        ));
   }
 }
 

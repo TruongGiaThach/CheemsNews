@@ -6,22 +6,25 @@ import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_application_1/views/details/detail_screen.dart';
 import 'package:get/get.dart';
 
+import '../../../widgets.dart';
+
 final _settingController = Get.find<SettingController>();
 
 class ListPlantCard extends StatelessWidget {
-  final String topic;
+  final int index;
 
-  ListPlantCard({Key? key, required this.topic}) : super(key: key);
+  ListPlantCard({Key? key, required this.index}) : super(key: key);
 
   final controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: controller.getListThumbWithTopic(topic, 4),
+        future: controller.getListThumbWithTopic(
+            controller.listType[index].name, 4),
         builder: (context, AsyncSnapshot<List<News>> snapshot) {
           // Check for errors
           if (snapshot.hasError) {
-            print("error when load " + topic);
+            print("error when load " + controller.listType[index].name);
           }
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done)
@@ -40,12 +43,11 @@ class ListPlantCard extends StatelessWidget {
                       ),
                     )));
           // Otherwise, show something whilst waiting for initialization to complete
-          return CircularProgressIndicator();
+          return Container(height: 50, width: 50, child: loadingWiget());
         });
   }
 
   InkWell buildCard(BuildContext context, News thumb) {
-
     return InkWell(
       onTap: () {
         Get.to(() => DetailScreen(
@@ -77,9 +79,12 @@ class ListPlantCard extends StatelessWidget {
                     ),
                   ),
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Center(
-                    child: CircularProgressIndicator(
-                        value: downloadProgress.progress),
+                      Container(
+                    height: 50,
+                    width: 50,
+                    child: Center(
+                      child: loadingWiget(),
+                    ),
                   ),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
@@ -117,9 +122,29 @@ class ListPlantCard extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: Image.network(
-                                thumb.imageSource,
-                                height: 20,
+                              child: CachedNetworkImage(
+                                imageUrl: thumb.imageSource,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.fitWidth,
+                                    ),
+                                  ),
+                                ),
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) =>
+                                        Container(
+                                  height: 20,
+                                  width: 20,
+                                  child: Center(
+                                    child: loadingWiget(),
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
                               ),
                             ),
                             Spacer(),

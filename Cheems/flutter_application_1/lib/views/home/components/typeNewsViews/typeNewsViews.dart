@@ -16,7 +16,7 @@ class TypeNewsViews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: controller.getListThumbWithTopic(this.typeNews, 10),
+        future: controller.getListThumbWithTopic(this.typeNews, 0),
         builder: (context, AsyncSnapshot<List<News>> snapshot) {
           if (snapshot.hasError) {
             return Center(
@@ -46,7 +46,7 @@ class TypeNewsViews extends StatelessWidget {
           }
 
           return Center(
-            child: CircularProgressIndicator(),
+            child: loadingWiget(),
           );
         });
   }
@@ -77,8 +77,7 @@ class TypeNewsViews extends StatelessWidget {
                   Container(
                       height: 20,
                       width: 20,
-                      child: CircularProgressIndicator(
-                          value: downloadProgress.progress)),
+                      child: loadingWiget()),
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           ),
@@ -151,8 +150,7 @@ class TypeNewsViews extends StatelessWidget {
                       Container(
                           height: 20,
                           width: 20,
-                          child: CircularProgressIndicator(
-                              value: downloadProgress.progress)),
+                          child: loadingWiget()),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
