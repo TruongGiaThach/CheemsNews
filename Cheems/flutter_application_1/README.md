@@ -1,6 +1,6 @@
-# flutter_application_1
+# CheemsNews
 
-A new Flutter project.
+Ứng dụng đọc báo
 
 ## Getting Started
 
