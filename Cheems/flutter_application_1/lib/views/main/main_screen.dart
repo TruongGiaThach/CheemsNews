@@ -84,8 +84,8 @@ class MainScreen extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(30.0),
-                          child: Lottie.asset(
-                              "assets/images/factoryAnimation.json"),
+                          child: Image.asset(
+                              "assets/images/ponl.gif"),
                         ),
                         CircularProgressIndicator(),
                         SizedBox(height: 20),
@@ -106,7 +106,7 @@ class MainScreen extends StatelessWidget {
     return CustomNavigationBar(
       iconSize: 30.0,
       selectedColor: _settingController.kPrimaryColor.value,
-      strokeColor: Color(0x30040307),
+      strokeColor: _settingController.kPrimaryColor.value,
       unSelectedColor: Color(0xffacacac),
       backgroundColor: Colors.white,
       items: [

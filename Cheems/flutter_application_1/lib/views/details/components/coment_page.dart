@@ -46,7 +46,8 @@ class CommentPage extends StatelessWidget {
                   Expanded(
                       child: TextField(
                     controller: textEditingController,
-                    style: TextStyle(color: Colors.black87, fontSize: 18,height: 1.5),
+                    style: TextStyle(
+                        color: Colors.black87, fontSize: 18, height: 1.5),
                   )),
                   IconButton(
                       onPressed: () async {
@@ -58,7 +59,8 @@ class CommentPage extends StatelessWidget {
                               DateTime.now());
                           await _readingController.addComment(cmt);
                           textEditingController.clear();
-                          _readingController.isNewCmt.value = !_readingController.isNewCmt.value;
+                          _readingController.isNewCmt.value =
+                              !_readingController.isNewCmt.value;
                         }
                       },
                       icon: Icon(Icons.add_comment_outlined))
@@ -126,16 +128,19 @@ class CommentPage extends StatelessWidget {
                         ),
                         backgroundColor: Colors.blue[300]!,
                         text: "Continute with Google",
-                        onPressed: () {
-                          _authenticateController.signInWithGoogle();
+                        onPressed: () => {
+                          _authenticateController.signInWithGoogle(),
+                          Navigator.pop(context),
                         },
                       ),
                     ),
                     Center(
                       child: SignInButton(Buttons.FacebookNew,
                           text: "Continute with Facebook",
-                          onPressed: () =>
-                              {_authenticateController.signInWithFacebook()}),
+                          onPressed: () => {
+                                _authenticateController.signInWithFacebook(),
+                                Navigator.pop(context)
+                              }),
                     )
                   ],
                 )

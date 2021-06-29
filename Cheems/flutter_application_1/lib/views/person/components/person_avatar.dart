@@ -108,16 +108,19 @@ class PersonAvatar extends StatelessWidget {
                         ),
                         backgroundColor: Colors.blue[300]!,
                         text: "Continute with Google",
-                        onPressed: () {
-                          _authenticController.signInWithGoogle();
+                        onPressed: () => {
+                          _authenticController.signInWithGoogle(),
+                          Navigator.pop(context),
                         },
                       ),
                     ),
                     Center(
                       child: SignInButton(Buttons.FacebookNew,
                           text: "Continute with Facebook",
-                          onPressed: () =>
-                              {_authenticController.signInWithFacebook()}),
+                          onPressed: () => {
+                                _authenticController.signInWithFacebook(),
+                                Navigator.pop(context)
+                              }),
                     )
                   ],
                 )

@@ -29,9 +29,6 @@ Widget buildBottomBar(Color backgroundColor, Color primaryColor) {
               CustomNavigationBarItem(
                 icon: Icon(Icons.comment_bank_outlined),
               ),
-              CustomNavigationBarItem(
-                icon: Icon(Icons.ios_share_outlined)
-              ),
             ],
           ),
         ],

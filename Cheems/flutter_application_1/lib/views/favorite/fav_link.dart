@@ -25,6 +25,13 @@ class FavoriteLink extends StatelessWidget {
             backgroundColor:
                 _settingController.kPrimaryColor.value.withOpacity(.1),
             appBar: AppBar(
+              title: Align(
+                alignment: Alignment.bottomCenter,
+                child: Text(
+                  "Yêu thích",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
               backgroundColor: _settingController.kPrimaryColor.value,
             ),
             body: Obx(() => (!authController.isGuest.value)
@@ -57,7 +64,7 @@ class FavoriteLink extends StatelessWidget {
                           child: Text("You don't have any news in collection"),
                         ));
                       return Center(
-                        child:loadingWiget(),
+                        child: loadingWiget(),
                       );
                     },
                   )
@@ -102,16 +109,19 @@ class FavoriteLink extends StatelessWidget {
                         ),
                         backgroundColor: Colors.blue[300]!,
                         text: "Continute with Google",
-                        onPressed: () {
-                          authController.signInWithGoogle();
+                        onPressed: () => {
+                          authController.signInWithGoogle(),
+                          Navigator.pop(context),
                         },
                       ),
                     ),
                     Center(
                       child: SignInButton(Buttons.FacebookNew,
                           text: "Continute with Facebook",
-                          onPressed: () =>
-                              {authController.signInWithFacebook()}),
+                          onPressed: () => {
+                                authController.signInWithFacebook(),
+                                Navigator.pop(context)
+                              }),
                     )
                   ],
                 )
