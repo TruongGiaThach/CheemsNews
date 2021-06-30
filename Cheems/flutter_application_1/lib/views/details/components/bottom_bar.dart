@@ -20,7 +20,9 @@ Widget buildBottomBar(Color backgroundColor, Color primaryColor) {
               controller.bottomIndex.value = index;
               if (index == 1) {
                 Get.to(() => CommentPage());
-              } else if (index == 0) _settingController.increaseFontSize();
+              } else if (index == 0)
+                _settingController.increaseFontSize();
+              else if (index == 2) Get.to(() => CommentPage());
             },
             items: [
               CustomNavigationBarItem(
@@ -28,6 +30,9 @@ Widget buildBottomBar(Color backgroundColor, Color primaryColor) {
               ),
               CustomNavigationBarItem(
                 icon: Icon(Icons.comment_bank_outlined),
+              ),
+              CustomNavigationBarItem(
+                icon: Icon(Icons.error),
               ),
             ],
           ),

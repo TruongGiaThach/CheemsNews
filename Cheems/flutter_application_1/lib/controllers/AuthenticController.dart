@@ -36,7 +36,7 @@ class AuthenticController extends GetxController {
       isSigningIn.value = false;
       isGuest.value = false;
 
-      //Get.offAll(() => MainScreen());
+      Get.offAll(() => MainScreen());
 
       return true;
     }
@@ -74,7 +74,7 @@ class AuthenticController extends GetxController {
       currentUser!.typeAccount = 2;
       isGuest.value = false;
       isSigningIn.value = false;
-      //Get.offAll(() => MainScreen());
+      Get.offAll(() => MainScreen());
 
       return true;
     } else

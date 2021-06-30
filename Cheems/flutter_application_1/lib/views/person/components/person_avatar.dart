@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
+import 'package:flutter_application_1/controllers/MainController.dart';
 import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 
 final _settingController = Get.find<SettingController>();
 var _authenticController = Get.find<AuthenticController>();
+final _mainController = Get.find<MainController>();
 
 class PersonAvatar extends StatelessWidget {
   const PersonAvatar({
@@ -119,7 +121,7 @@ class PersonAvatar extends StatelessWidget {
                           text: "Continute with Facebook",
                           onPressed: () => {
                                 _authenticController.signInWithFacebook(),
-                                Navigator.pop(context)
+                                Navigator.pop(context),
                               }),
                     )
                   ],

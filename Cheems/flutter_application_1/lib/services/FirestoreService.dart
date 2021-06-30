@@ -154,6 +154,16 @@ class FirestoreService {
     );
   }
 
+  Future<void> addReport(String email, String newsID, String report) async {
+    await database.collection("reports").add(
+      {
+        'email': email,
+        'newId': newsID,
+        'report': report,
+      },
+    );
+  }
+
   Future<List<Comments>> getAllCmt(String newsID) async {
     List<Comments> thumb = [];
     await database
@@ -161,8 +171,7 @@ class FirestoreService {
         .doc(newsID)
         .collection("cmt")
         .get()
-        .then((value) =>  {
-              
+        .then((value) => {
               value.docs.forEach((element) {
                 if (element.exists)
                   thumb.add(Comments.fromJson(element.data()));
