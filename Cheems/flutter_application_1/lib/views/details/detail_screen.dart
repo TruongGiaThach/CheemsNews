@@ -40,7 +40,7 @@ class DetailScreen extends StatelessWidget {
                   duration: Duration(milliseconds: 500),
                   height: value ? kBottomNavigationBarHeight : 0.0,
                   child: buildBottomBar(_settingController.kBackgroundColor,
-                      _settingController.kPrimaryColor.value)),
+                      _settingController.kPrimaryColor.value, news)),
             ))
         : Scaffold(
             backgroundColor:
@@ -207,9 +207,7 @@ class DetailScreen extends StatelessWidget {
                           ),
                         ),
                         placeholder: (context, url) => Container(
-                            height: 40,
-                            width: 40,
-                            child: loadingWiget()),
+                            height: 40, width: 40, child: loadingWiget()),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     )

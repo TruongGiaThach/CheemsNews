@@ -1,111 +1,92 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
+import 'package:flutter_application_1/controllers/ReportController.dart';
 import 'package:flutter_application_1/controllers/SettingController.dart';
-import 'package:flutter_application_1/controllers/readingController.dart';
-import 'package:flutter_application_1/models/Comment.dart';
-import 'package:flutter_application_1/views/details/components/comment_card.dart';
-import 'package:flutter_application_1/views/widgets.dart';
+import 'package:flutter_application_1/models/News.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:get/get.dart';
 
 class ReportPage extends StatelessWidget {
-  ReportPage({Key? key}) : super(key: key);
+  late News news;
+  ReportPage({Key? key, required this.news}) : super(key: key);
   final _authenticateController = Get.find<AuthenticController>();
   final _settingController = Get.find<SettingController>();
-  final _readingController = Get.find<ReadingController>();
-  late var textEditingController = new TextEditingController();
+  final _reportController = Get.put(ReportController());
+
+  var reportController = TextEditingController();
+  final FocusNode reportFocus = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: _settingController.kPrimaryColor.value,
+        title: Text('Report'),
+        centerTitle: true,
       ),
       body: buildBody(context),
     );
   }
 
   Widget buildBody(BuildContext context) {
-    return ListView(physics: ScrollPhysics(), shrinkWrap: true, children: [
-      Obx(() => (_authenticateController.isGuest.value)
-          // ignore: deprecated_member_use
-          ? FlatButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              color: _settingController.kPrimaryColor.value,
-              onPressed: () {
-                _showGuestSheet(context);
-              },
-              child: Text(
-                "Log in to comment",
-                style: TextStyle(color: Colors.white),
-              ))
-          : Container(
-              padding: EdgeInsets.all(8),
-              child: Row(
-                children: [
-                  Expanded(
-                      child: TextField(
-                    controller: textEditingController,
-                    style: TextStyle(
-                        color: Colors.black87, fontSize: 18, height: 1.5),
-                  )),
-                  IconButton(
-                      onPressed: () async {
-                        if (textEditingController.text != "") {
-                          var cmt = new Comments(
-                              _authenticateController.currentUser!.displayName,
-                              _authenticateController.currentUser!.photoUrl,
-                              textEditingController.text,
-                              DateTime.now());
-                          await _readingController.addComment(cmt);
-                          textEditingController.clear();
-                          _readingController.isNewCmt.value =
-                              !_readingController.isNewCmt.value;
-                        }
+    return KeyboardDismisser(
+      gestures: [GestureType.onTap],
+      child: GestureDetector(
+        //onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+        child: ListView(physics: ScrollPhysics(), shrinkWrap: true, children: [
+          Obx(() => (_authenticateController.isGuest.value)
+              // ignore: deprecated_member_use
+              ? FlatButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  color: _settingController.kPrimaryColor.value,
+                  onPressed: () {
+                    _showGuestSheet(context);
+                  },
+                  child: Text(
+                    "Log in to comment",
+                    style: TextStyle(color: Colors.white),
+                  ))
+              : Column(
+                  children: [
+                    Container(
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          'writing your report here',
+                          style: TextStyle(fontSize: 18),
+                        )),
+                    TextField(
+                      controller: reportController,
+                      focusNode: reportFocus,
+                      onChanged: (report) {
+                        _reportController.reportLine = report;
                       },
-                      icon: Icon(Icons.add_comment_outlined))
-                ],
-              ),
-            )),
-      Container(
-          child: Obx(
-        () => (_readingController.isNewCmt.value)
-            ? buildListCmt()
-            : buildListCmt(),
-      ))
-    ]);
-  }
-
-  Widget buildListCmt() {
-    return FutureBuilder(
-      future: _readingController.getListCmt(),
-      builder: (context, AsyncSnapshot<List<Comments>> snapshot) {
-        if (snapshot.hasError) {
-          return Container(
-            color: _settingController.kPrimaryColor.value.withOpacity(.1),
-            child: Center(
-              child: Text("There are some error when load comments"),
-            ),
-          );
-        }
-        if (snapshot.connectionState == ConnectionState.done) if (snapshot
-            .hasData) if (snapshot.data!.length != 0) {
-          return ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                return CommentCard(cmt: snapshot.data![index]);
-              }); // show list news
-        } else
-          return Container(
-              child: Center(
-            child: Text("Let's comment now"),
-          ));
-        return Center(
-          child: loadingWiget(),
-        );
-      },
+                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      maxLines: 5,
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      child: TextButton(
+                          onPressed: () {
+                            if (_reportController.reportLine.isNotEmpty) {
+                              _reportController.sendReport(
+                                  _authenticateController.currentUser != null
+                                      ? _authenticateController
+                                          .currentUser!.email
+                                      : "Guest",
+                                  news.id);
+                            }
+                          },
+                          child: Text('Send')),
+                    )
+                  ],
+                )),
+        ]),
+      ),
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:flutter_application_1/controllers/FavoriteController.dart';
 import 'package:flutter_application_1/controllers/ForecastController.dart';
 import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
+import 'package:flutter_application_1/controllers/ReportController.dart';
 import 'package:flutter_application_1/controllers/readingController.dart';
 import 'package:flutter_application_1/services/DataService.dart';
 import 'package:flutter_application_1/services/ForecastService.dart';

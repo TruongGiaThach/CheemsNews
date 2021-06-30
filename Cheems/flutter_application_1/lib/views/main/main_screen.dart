@@ -68,24 +68,15 @@ class MainScreen extends StatelessWidget {
                       children: [
                         Center(
                           child: SizedBox(
-                              height: 40,
-                              width: 40,
-                              child: Image.asset("assets/images/tmpIcon.png")),
+                              height: 70,
+                              width: 70,
+                              child:
+                                  Image.asset("assets/images/CheemsIcons.png")),
                         ),
                         SizedBox(height: 20),
-                        Center(
-                          child: Text(
-                            "CheemsNews",
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
                         Padding(
                           padding: const EdgeInsets.all(30.0),
-                          child: Image.asset(
-                              "assets/images/ponl.gif"),
+                          child: Image.asset("assets/images/CheemsNews.png"),
                         ),
                         CircularProgressIndicator(),
                         SizedBox(height: 20),
@@ -120,7 +111,7 @@ class MainScreen extends StatelessWidget {
           icon: Icon(Icons.cloud),
         ),
         CustomNavigationBarItem(
-           icon: Icon(Icons.shopping_cart),
+          icon: Icon(Icons.shopping_cart),
         ),
         CustomNavigationBarItem(
           icon: Icon(Icons.account_circle),
