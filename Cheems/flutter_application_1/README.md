@@ -1,16 +1,26 @@
-# CheemsNews
+# CheemsNews - Ứng dụng đọc báo
+Ứng dụng xem tin tức theo chủ đề, quản lí các bài viết yêu thích, xem thông tin thời tiết, tài chính.
 
-Ứng dụng đọc báo
+## Nội dung
+1. [Chức năng](#chức-năng)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+1. [Yêu cầu thiết bị](#yêu-cầu-thiết-bị)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+1. [Thư viện và công nghệ](#thư-viện-và-công-nghệ)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. [Tác giả](#tác-giả)
+
+1. [Giấy phép](#giấy-phép)
+
+## Chức năng
+
+## Yêu cầu thiết bị
+
+## Thư viện và công nghệ
+
+## Tác giả
+
+## Giấy phép
+
