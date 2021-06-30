@@ -89,29 +89,6 @@ class Chart extends StatelessWidget {
                               child: Text('MSFT'))),
                     ],
                   ),
-                  Text(
-                    'Chart type',
-                    style: TextStyle(fontSize: 24, color: Colors.white54),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      TextButton(
-                          onPressed: () {
-                            _analyticController.chartType.value = "candle";
-                          },
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text('Candle'))),
-                      TextButton(
-                          onPressed: () {
-                            _analyticController.chartType.value = "bars";
-                          },
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text('Bars'))),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -156,14 +133,18 @@ class Chart extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.all(5),
-            child: Center(
-              child: Obx(() => Text(
-                    _analyticController.name.value,
-                    style: TextStyle(fontSize: 18, color: Colors.white60),
-                  )),
-            ),
+          Column(
+            children: [
+              Container(
+                margin: EdgeInsets.all(5),
+                child: Center(
+                  child: Obx(() => Text(
+                        _analyticController.name.value,
+                        style: TextStyle(fontSize: 18, color: Colors.white60),
+                      )),
+                ),
+              ),
+            ],
           ),
           Obx(() => FutureBuilder(
               future: httpService.getStats(_analyticController.name.value,
@@ -173,37 +154,109 @@ class Chart extends StatelessWidget {
                 if (snapshot.hasData) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     stockData = snapshot.data;
-                    return Obx(() => SizedBox(
-                          child: _analyticController.chartType.value == 'candle'
-                              ? LayoutBuilder(
-                                  builder: (_, constraints) => Container(
-                                    width:
-                                        constraints.widthConstraints().maxWidth,
-                                    height: 245,
-                                    color: Colors.black45,
-                                    child: CustomPaint(
-                                      painter: StockCandlesPainter(
-                                          stockData: stockData),
-                                    ),
-                                  ),
-                                )
-                              : LayoutBuilder(
-                                  builder: (_, constraints) => Container(
-                                    width:
-                                        constraints.widthConstraints().maxWidth,
-                                    height: 245,
-                                    color: Colors.black45,
-                                    child: CustomPaint(
-                                      painter: StockVolumePainter(
-                                          stockData: stockData),
-                                    ),
-                                  ),
-                                ),
-                        ));
+                    _analyticController.stockPrice.value =
+                        stockData != null ? stockData!.c.last : 0;
+                    _analyticController.stockPriceChangePer.value =
+                        stockData != null
+                            ? ((stockData!.c.last - stockData!.o.last) /
+                                    stockData!.o.last *
+                                    100)
+                                .toPrecision(2)
+                            : 0;
+                    return Column(
+                      children: [
+                        RichText(
+                            text: _analyticController.stockPrice.value != 0
+                                ? TextSpan(children: [
+                                    TextSpan(
+                                        text: "price: ",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.white60)),
+                                    TextSpan(
+                                        text:
+                                            "${_analyticController.stockPrice.value.toString()} ",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.white60)),
+                                    TextSpan(
+                                        text:
+                                            "${_analyticController.stockPriceChangePer.value.toString()}%",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: _analyticController
+                                                        .stockPriceChangePer
+                                                        .value >=
+                                                    0
+                                                ? Colors.greenAccent
+                                                : Colors.redAccent)),
+                                  ])
+                                : TextSpan(text: "0")),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text("stock price chart",
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.white60)),
+                        ),
+                        SizedBox(
+                            child: LayoutBuilder(
+                          builder: (_, constraints) => Container(
+                            width: constraints.widthConstraints().maxWidth,
+                            height: 245,
+                            color: Colors.black45,
+                            child: CustomPaint(
+                              painter:
+                                  StockCandlesPainter(stockData: stockData),
+                            ),
+                          ),
+                        )),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text("trading volume chart",
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.white60)),
+                        ),
+                        SizedBox(
+                          child: LayoutBuilder(
+                            builder: (_, constraints) => Container(
+                              width: constraints.widthConstraints().maxWidth,
+                              height: 245,
+                              color: Colors.black45,
+                              child: CustomPaint(
+                                painter:
+                                    StockVolumePainter(stockData: stockData),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    );
                   } else if (snapshot.connectionState ==
                       ConnectionState.active) {
-                    return Center(
-                      child: CircularProgressIndicator(),
+                    return Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text("stock price chart",
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.white60)),
+                        ),
+                        Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text("trading volume chart",
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.white60)),
+                        ),
+                        Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ],
                     );
                   }
                 }
@@ -215,13 +268,29 @@ class Chart extends StatelessWidget {
                     ),
                   );
                 }
-                return Center(
-                  child: CircularProgressIndicator(),
+                return Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text("stock price chart",
+                          style:
+                              TextStyle(fontSize: 18, color: Colors.white60)),
+                    ),
+                    Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text("trading volume chart",
+                          style:
+                              TextStyle(fontSize: 18, color: Colors.white60)),
+                    ),
+                    Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ],
                 );
               })),
-          SizedBox(
-            height: 5,
-          ),
         ]));
   }
 }
