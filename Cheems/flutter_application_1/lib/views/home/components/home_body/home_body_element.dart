@@ -14,26 +14,29 @@ class HomeBodyElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          controller.typeIndex.value = index + 1;
-        },
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: _settingController.kDefaultPadding / 2),
-              child: Row(
-                children: <Widget>[
-                  TitleWithCustomUnderline(
-                    text: controller.listType[index].name,
-                  ),
-                ],
-              ),
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: _settingController.kDefaultPadding / 2),
+          child: GestureDetector(
+            onTap: () {
+              controller.typeIndex.value = index + 1;
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                TitleWithCustomUnderline(
+                  text: controller.listType[index].name,
+                ),
+                Icon(Icons.more_rounded,color: _settingController.kPrimaryColor.value.withOpacity(0.4),)
+              ],
             ),
-            ListPlantCard(index: index),
-          ],
-        ));
+          ),
+        ),
+        ListPlantCard(index: index),
+      ],
+    );
   }
 }
 

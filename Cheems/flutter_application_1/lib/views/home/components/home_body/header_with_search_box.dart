@@ -54,6 +54,17 @@ class HeaderWithSearchBox extends StatelessWidget {
                                   ),
                         ),
                         Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            Get.toNamed('/calender');
+                          },
+                          icon: Icon(
+                            Icons.calendar_today_outlined,
+                            color: Colors.white,
+                            size: 28,
+                          ),
+                        ),
+                        Spacer(),
                         Container(
                           height: size.height * 0.1,
                           width: size.height * 0.1,
@@ -244,16 +255,19 @@ class HeaderWithSearchBox extends StatelessWidget {
                         ),
                         backgroundColor: Colors.blue[300]!,
                         text: "Continute with Google",
-                        onPressed: () {
-                          authController.signInWithGoogle();
+                        onPressed: () => {
+                          authController.signInWithGoogle(),
+                          Navigator.pop(context),
                         },
                       ),
                     ),
                     Center(
                       child: SignInButton(Buttons.FacebookNew,
                           text: "Continute with Facebook",
-                          onPressed: () =>
-                              {authController.signInWithFacebook()}),
+                          onPressed: () => {
+                                authController.signInWithFacebook(),
+                                Navigator.pop(context)
+                              }),
                     )
                   ],
                 )

@@ -67,8 +67,9 @@ class FirestoreService {
   Future<List<News>> getLimitNewsWithTag(String tag, int limit) async {
     List<News> thumb = [];
     await database
-        .collection('news')
+        .collection("news")
         .where('tag', arrayContainsAny: [tag])
+        .orderBy("dateCreate")
         .limit(limit)
         .get()
         .then((value) => {
@@ -84,6 +85,7 @@ class FirestoreService {
     await database
         .collection('news')
         .where('tag', arrayContainsAny: [tag])
+        .orderBy("dateCreate")
         .get()
         .then((value) => {
               value.docs.forEach((element) {
