@@ -6,10 +6,10 @@ import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:flutter_application_1/views/StockChart/chartBuilder.dart';
 import 'package:flutter_application_1/views/favorite/fav_link.dart';
 import 'package:flutter_application_1/views/home/home_link.dart';
+import 'package:flutter_application_1/views/main/loading_screen.dart';
 import 'package:flutter_application_1/views/person/person_link.dart';
 import 'package:flutter_application_1/views/weather/weather_view.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
 final _settingController = Get.find<SettingController>();
 
@@ -19,6 +19,7 @@ class MainScreen extends StatelessWidget {
   final _mainController = Get.find<MainController>();
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return FutureBuilder(
       future: Future.wait([
         _authenticController.initilizeFirebase(),
@@ -55,40 +56,9 @@ class MainScreen extends StatelessWidget {
             bottomNavigationBar:
                 Obx(() => myBar(_mainController.currentIndex.value)),
           );
-        } else
-          return Scaffold(
-            body: SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: SizedBox(
-                              height: 70,
-                              width: 70,
-                              child:
-                                  Image.asset("assets/images/CheemsIcons.png")),
-                        ),
-                        SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.all(30.0),
-                          child: Image.asset("assets/images/CheemsNews.png"),
-                        ),
-                        CircularProgressIndicator(),
-                        SizedBox(height: 20),
-                        Text("Initilizing..."),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 40)
-                ],
-              ),
-            ),
-          );
+        } else {
+          return LoadingScreen();
+        }
       },
     );
   }
