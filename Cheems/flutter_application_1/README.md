@@ -51,14 +51,16 @@
    
 ### 6. Tìm kiếm bài viết
 
-### 7. Xem thông tin thời tiết
+### 7.Xem lịch
+
+### 8. Xem thông tin thời tiết
   * Tìm kiếm theo thành phố
   
  <p align="center">
    <img src="screenshot/weather.jpg" height = "480" width="240"> 
    </p>
    
-### 8. Xem thông tin cổ phiếu
+### 9. Xem thông tin cổ phiếu
   * Xem giá trị hàng ngày
   
   * Biểu đồ giá theo ngày, tháng , năm
