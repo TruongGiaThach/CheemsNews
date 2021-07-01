@@ -53,6 +53,10 @@
 
 ### 7.Xem lịch
 
+<p align="center">
+   <img src="screenshot/calendar.jpg" height = "480" width="240"> 
+   </p>
+
 ### 8. Xem thông tin thời tiết
   * Tìm kiếm theo thành phố
   
