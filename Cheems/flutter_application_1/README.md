@@ -14,6 +14,58 @@
 
 
 ## Chức năng
+### 1. Đăng nhập  
+
+  <p align="center">
+   <img src="screenshot/homepageLogin.jpg" height = "480" width="240"> <img src="screenshot/trangchu.jpg" height = "480" width="240">
+   </p>
+   
+### 2. Xem bài viết
+
+ <p align="center">
+  <img src="screenshot/news list of a tag.jpg" height = "480" width="240"> 
+   <img src="screenshot/detail_screen.jpg" height = "480" width="240"> 
+ </p>
+ 
+### 3. Comment
+
+ <p align="center">
+   <img src="screenshot/comment.jpg" height = "480" width="240"> 
+ </p>
+ 
+### 4. Đánh dấu bài viết
+
+  * Thêm bài viết vào mục yêu thích
+  
+  * Xem danh sách các bài viết đã thích
+  
+ <p align="center">
+   <img src="screenshot/favorite.jpg" height = "480" width="240"> 
+   </p>
+   
+### 5. Báo cáo vi phạm (Report)
+
+ <p align="center">
+   <img src="screenshot/report.jpg" height = "480" width="240"> 
+   </p>
+   
+### 6. Tìm kiếm bài viết
+
+### 7. Xem thông tin thời tiết
+  * Tìm kiếm theo thành phố
+  
+ <p align="center">
+   <img src="screenshot/weather.jpg" height = "480" width="240"> 
+   </p>
+   
+### 8. Xem thông tin cổ phiếu
+  * Xem giá trị hàng ngày
+  
+  * Biểu đồ giá theo ngày, tháng , năm
+  
+ <p align="center">
+   <img src="screenshot/analytics2.jpg" height = "480" width="240"> 
+   </p>
 
 ## Yêu cầu thiết bị
 - Android:
@@ -28,7 +80,7 @@
 - Language: Dart 2.13.1
 - FrameWork: Flutter 2.2.1
 - Database: Firebase
-- flutter : https://github.com/flutter/flutter
+- Flutter : https://github.com/flutter/flutter
 -  cupertino_icons: ^1.0.2
 -  get: ^4.1.4
 -  flutter_signin_button: ^2.0.0
@@ -59,7 +111,7 @@
 
 ## Giấy phép
 
-    Copyright 2014
+    Copyright 2021
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
