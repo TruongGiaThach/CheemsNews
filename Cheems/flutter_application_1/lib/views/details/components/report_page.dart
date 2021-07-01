@@ -70,51 +70,101 @@ class ReportPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18),
                       ),
                       child: TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             FocusScope.of(context).requestFocus(FocusNode());
                             if (_reportController.reportLine.isNotEmpty) {
-                              _reportController.sendReport(
-                                  _authenticateController.currentUser != null
-                                      ? _authenticateController
-                                          .currentUser!.email
-                                      : "Guest",
-                                  news.id);
-                              showDialog<String>(
-                                  context: context,
-                                  builder: (BuildContext context) => Container(
-                                        height: 300,
-                                        child: AlertDialog(
-                                          title: Text('Report sended'),
-                                          content: FittedBox(
-                                            fit: BoxFit.fitHeight,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  'We have recive your report',
-                                                  style:
-                                                      TextStyle(fontSize: 14),
-                                                ),
-                                                Text(
-                                                  'thank you for annouce us about this information',
-                                                  style:
-                                                      TextStyle(fontSize: 14),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  reportController.text = "";
-                                                  Navigator.pop(context, 'Yes');
-                                                },
-                                                child: Text('Yes')),
-                                          ],
-                                          elevation: 24,
-                                        ),
-                                      ));
+                              await _reportController
+                                  .sendReport(
+                                      _authenticateController.currentUser !=
+                                              null
+                                          ? _authenticateController
+                                              .currentUser!.email
+                                          : "Guest",
+                                      news.id)
+                                  .then((value) => {
+                                        showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                Container(
+                                                  height: 300,
+                                                  child: AlertDialog(
+                                                    title:
+                                                        Text('Report sended'),
+                                                    content: FittedBox(
+                                                      fit: BoxFit.fitHeight,
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            'We have recive your report',
+                                                            style: TextStyle(
+                                                                fontSize: 14),
+                                                          ),
+                                                          Text(
+                                                            'thank you for annouce us about this information',
+                                                            style: TextStyle(
+                                                                fontSize: 14),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    actions: [
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            reportController
+                                                                .text = "";
+                                                            Navigator.pop(
+                                                                context, 'Yes');
+                                                          },
+                                                          child: Text('Yes')),
+                                                    ],
+                                                    elevation: 24,
+                                                  ),
+                                                ))
+                                      })
+                                  .catchError((error) => {
+                                        showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                Container(
+                                                  height: 300,
+                                                  child: AlertDialog(
+                                                    title: Text(
+                                                        'Report not sended'),
+                                                    content: FittedBox(
+                                                      fit: BoxFit.fitHeight,
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            'something went wrong when send',
+                                                            style: TextStyle(
+                                                                fontSize: 14),
+                                                          ),
+                                                          Text(
+                                                            'please check your network connection and retry after a while',
+                                                            style: TextStyle(
+                                                                fontSize: 14),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    actions: [
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context, 'Yes');
+                                                          },
+                                                          child: Text('Yes')),
+                                                    ],
+                                                    elevation: 24,
+                                                  ),
+                                                ))
+                                      });
                             }
                           },
                           child: Text('Send')),
