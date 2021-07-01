@@ -36,12 +36,24 @@ class HomeController extends GetxController {
     return tmp;
   }
 
+  bool checkContainBegin(String str, String str1) {
+    str = str.toLowerCase();
+    str1 = str1.toLowerCase();
+    if (str == "") return false;
+    if (str.length > str1.length) return false;
+    for (int i = 0; i < str.length; i++) if (str[i] != str1[i]) return false;
+    return true;
+  }
+
   Future<List<News>> getListThumbWithName(String name) async {
     List<News> tmp = [];
     if (name.isNotEmpty) {
       tmp = await FirestoreService.instance.getAllNewsWithName(name);
-      for (int i = 0; i < tmp.length; i++) {
-        if (!tmp[i].title.toLowerCase().contains(name)) tmp.removeAt(i);
+      int i  = 0;
+
+      while (i < tmp.length ) {
+        if (!checkContainBegin(name, tmp[i].title)) tmp.removeAt(i);
+        else i ++;
       }
     }
     return tmp;
