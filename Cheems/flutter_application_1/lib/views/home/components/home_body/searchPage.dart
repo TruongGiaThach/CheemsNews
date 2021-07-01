@@ -6,9 +6,14 @@ import 'package:get/get.dart';
 
 import '../../../widgets.dart';
 
-class SearchPage extends StatelessWidget {
-  SearchPage({Key? key}) : super(key: key);
+class SearchPage extends StatefulWidget {
+  const SearchPage({Key? key}) : super(key: key);
 
+  @override
+  _SearchPageState createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
   final _searchController = Get.put(SearchController());
 
   ScrollController _controller = ScrollController();
@@ -50,16 +55,13 @@ class SearchPage extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: Obx(() => TextField(
                                     controller: _textController,
-                                    onChanged: (text) {
+                                    onChanged: (text) async {
                                       _searchController.searchLine.value = text;
-                                    },
-                                    onTap: () async {
                                       _searchController.searchResult.value =
                                           await homecontroller
-                                              .getListThumbWithName(
-                                                  _searchController
-                                                      .searchLine.value);
+                                              .getListThumbWithName(text);
                                     },
+                                    onTap: () {},
                                     decoration: InputDecoration(
                                         hintText: "Tìm kiếm",
                                         hintStyle: TextStyle(
@@ -131,6 +133,7 @@ class SearchPage extends StatelessWidget {
                                 height: size.height - 78,
                                 width: size.width,
                                 child: ListView.builder(
+                                  controller: _controller,
                                   itemCount:
                                       _searchController.searchResult.length,
                                   itemBuilder: (context, index) {
