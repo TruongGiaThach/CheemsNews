@@ -1,10 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/AuthenticController.dart';
+import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:flutter_application_1/controllers/MainController.dart';
 import 'package:flutter_application_1/controllers/SettingController.dart';
-import 'package:flutter_application_1/views/calender/Calendar.dart';
+import 'package:flutter_application_1/models/News.dart';
+import 'package:flutter_application_1/views/details/detail_screen.dart';
+import 'package:flutter_application_1/views/widgets.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 
 class HeaderWithSearchBox extends StatelessWidget {
@@ -16,6 +21,7 @@ class HeaderWithSearchBox extends StatelessWidget {
 
   final authController = Get.find<AuthenticController>();
   final mainController = Get.find<MainController>();
+  final homecontroller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +215,10 @@ class HeaderWithSearchBox extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          child: TextField(
+                            child: TypeAheadField<News?>(
+                          debounceDuration: Duration(milliseconds: 500),
+                          suggestionsBoxDecoration: SuggestionsBoxDecoration(),
+                          textFieldConfiguration: TextFieldConfiguration(
                             decoration: InputDecoration(
                               hintText: "Tìm kiếm",
                               hintStyle: TextStyle(
@@ -221,7 +230,67 @@ class HeaderWithSearchBox extends StatelessWidget {
                             style: TextStyle(
                                 color: _settingController.kPrimaryColor.value),
                           ),
-                        ),
+                          suggestionsCallback:
+                              homecontroller.getListThumbWithName,
+                          itemBuilder: (context, News? suggetion) {
+                            final news = suggetion;
+                            return ListTile(
+                              /*leading: suggetion != null
+                                  ? CachedNetworkImage(
+                                      fit: BoxFit.cover,
+                                      imageUrl: suggetion.imageLink.first,
+                                      imageBuilder: (context, imageProvider) =>
+                                          Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.fitWidth,
+                                          ),
+                                        ),
+                                      ),
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              Center(
+                                        child: loadingWiget(),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(Icons.error),
+                                    )
+                                  : loadingWiget(),*/
+                              leading: suggetion != null
+                                  ? Image.network(
+                                      suggetion.imageLink.first,
+                                      fit: BoxFit.cover,
+                                      height: 60,
+                                      width: 60,
+                                    )
+                                  : Container(
+                                      height: 60,
+                                      width: 60,
+                                      child: loadingWiget()),
+                              title: Text(news!.title),
+                            );
+                          },
+                          onSuggestionSelected: (News? suggetion) {
+                            Get.to(() => DetailScreen(
+                                  news: suggetion!,
+                                ));
+                          },
+                        )
+                            /*TextField(
+                            onTap: () {},
+                            decoration: InputDecoration(
+                              hintText: "Tìm kiếm",
+                              hintStyle: TextStyle(
+                                  color: _settingController.kPrimaryColor.value
+                                      .withOpacity(0.5)),
+                              enabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                            ),
+                            style: TextStyle(
+                                color: _settingController.kPrimaryColor.value),
+                          ),*/
+                            ),
                         InkWell(
                           onTap: () {},
                           child: SvgPicture.asset("assets/icons/search.svg"),

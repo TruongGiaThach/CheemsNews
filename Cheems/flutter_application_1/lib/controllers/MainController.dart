@@ -1,16 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get/state_manager.dart';
 
-class MainController extends GetxController{
+class MainController extends GetxController {
   var currentIndex = 0.obs;
-  
-  MainController();
-  gotoHome(){
+  late Future<FirebaseApp> firestoreConnect;
+  gotoHome() {
     currentIndex.value = 0;
   }
-   gotoCollection(){
+
+  gotoCollection() {
     currentIndex.value = 1;
   }
-   gotoSetting(){
+
+  gotoSetting() {
     currentIndex.value = 4;
   }
 }

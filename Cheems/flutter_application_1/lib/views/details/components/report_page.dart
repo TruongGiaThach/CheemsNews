@@ -45,7 +45,7 @@ class ReportPage extends StatelessWidget {
                     _showGuestSheet(context);
                   },
                   child: Text(
-                    "Log in to comment",
+                    "Log in to report",
                     style: TextStyle(color: Colors.white),
                   ))
               : Column(
@@ -72,6 +72,7 @@ class ReportPage extends StatelessWidget {
                       ),
                       child: TextButton(
                           onPressed: () {
+                            FocusScope.of(context).requestFocus(FocusNode());
                             if (_reportController.reportLine.isNotEmpty) {
                               _reportController.sendReport(
                                   _authenticateController.currentUser != null
@@ -79,6 +80,41 @@ class ReportPage extends StatelessWidget {
                                           .currentUser!.email
                                       : "Guest",
                                   news.id);
+                              showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) => Container(
+                                        height: 300,
+                                        child: AlertDialog(
+                                          title: Text('Report sended'),
+                                          content: FittedBox(
+                                            fit: BoxFit.fitHeight,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'We have recive your report',
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                ),
+                                                Text(
+                                                  'thank you for annouce us about this information',
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context, 'Yes');
+                                                },
+                                                child: Text('Yes')),
+                                          ],
+                                          elevation: 24,
+                                        ),
+                                      ));
                             }
                           },
                           child: Text('Send')),

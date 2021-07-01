@@ -28,11 +28,22 @@ class HomeController extends GetxController {
     if (num == 0)
       tmp = await FirestoreService.instance.getAllNewsWithTag(topic);
     else
-    tmp = await FirestoreService.instance.getLimitNewsWithTag(topic, num);
+      tmp = await FirestoreService.instance.getLimitNewsWithTag(topic, num);
     if (tmp.length != 0)
       while (tmp.length < num) {
         tmp.add(tmp[0]);
       }
+    return tmp;
+  }
+
+  Future<List<News>> getListThumbWithName(String name) async {
+    List<News> tmp = [];
+    if (name.isNotEmpty) {
+      tmp = await FirestoreService.instance.getAllNewsWithName(name);
+      for (int i = 0; i < tmp.length; i++) {
+        if (!tmp[i].title.toLowerCase().contains(name)) tmp.removeAt(i);
+      }
+    }
     return tmp;
   }
 }

@@ -31,6 +31,7 @@ class HomeLink extends StatelessWidget {
       ]),
       builder: (context, snapshot) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             elevation: 2,
             // ignore: deprecated_member_use

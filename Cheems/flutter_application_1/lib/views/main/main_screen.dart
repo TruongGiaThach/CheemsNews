@@ -13,17 +13,29 @@ import 'package:get/get.dart';
 
 final _settingController = Get.find<SettingController>();
 
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
+
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
 // ignore: must_be_immutable
-class MainScreen extends StatelessWidget {
+class _MainScreenState extends State<MainScreen> {
   var _authenticController = Get.find<AuthenticController>();
   final _mainController = Get.find<MainController>();
+
+  @override
+  void initState() {
+    _mainController.firestoreConnect = _authenticController.initilizeFirebase();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return FutureBuilder(
-      future: Future.wait([
-        _authenticController.initilizeFirebase(),
-      ]),
+      future: _mainController.firestoreConnect,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Scaffold(body: Center(child: Text("Error!")));
@@ -32,6 +44,7 @@ class MainScreen extends StatelessWidget {
         // Once complete, show your application
         else if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             extendBody: true,
             body: SafeArea(
               child: Obx(() => (_mainController.currentIndex.value == 0)

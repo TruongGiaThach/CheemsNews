@@ -95,6 +95,20 @@ class FirestoreService {
     return thumb;
   }
 
+  Future<List<News>> getAllNewsWithName(String name) async {
+    List<News> thumb = [];
+    await database
+        .collection('news')
+        .orderBy("dateCreate")
+        .get()
+        .then((value) => {
+              value.docs.forEach((element) {
+                thumb.add(News.fromJson(element.data()));
+              })
+            });
+    return thumb;
+  }
+
   Future<News?> getNewsById(String id) async {
     late News? tmp;
 
