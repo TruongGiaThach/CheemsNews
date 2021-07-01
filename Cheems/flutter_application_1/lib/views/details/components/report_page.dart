@@ -12,7 +12,7 @@ class ReportPage extends StatelessWidget {
   ReportPage({Key? key, required this.news}) : super(key: key);
   final _authenticateController = Get.find<AuthenticController>();
   final _settingController = Get.find<SettingController>();
-  final _reportController = Get.put(ReportController()); 
+  final _reportController = Get.put(ReportController());
   var reportController = TextEditingController();
   final FocusNode reportFocus = FocusNode();
 
@@ -107,6 +107,7 @@ class ReportPage extends StatelessWidget {
                                           actions: [
                                             TextButton(
                                                 onPressed: () {
+                                                  reportController.text = "";
                                                   Navigator.pop(context, 'Yes');
                                                 },
                                                 child: Text('Yes')),
