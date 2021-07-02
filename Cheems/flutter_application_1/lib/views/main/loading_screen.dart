@@ -10,11 +10,11 @@ class LoadingScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 30),
               child: Align(
-                alignment: Alignment.topCenter,
+                alignment: Alignment.bottomCenter,
                 child: Container(
-                    //color: Colors.yellowAccent,
+                    
                     child: Image.asset(
                   "assets/images/CheemsNews.png",
                   fit: BoxFit.fitWidth,
@@ -26,7 +26,8 @@ class LoadingScreen extends StatelessWidget {
               "assets/images/ponl.gif",
             ),
             FittedBox(fit: BoxFit.contain, child: CircularProgressIndicator()),
-            FittedBox(fit: BoxFit.contain, child: Text("Initilizing...")),
+            SizedBox(height: 20,),
+            FittedBox(fit: BoxFit.contain, child: Text("Initilizing...",style: TextStyle(fontSize: 18),)),
           ],
         ),
       ),

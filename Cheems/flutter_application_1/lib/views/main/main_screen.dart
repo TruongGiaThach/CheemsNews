@@ -34,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return FutureBuilder(
+    return  FutureBuilder(
       future: _mainController.firestoreConnect,
       builder: (context, snapshot) {
         if (snapshot.hasError) {

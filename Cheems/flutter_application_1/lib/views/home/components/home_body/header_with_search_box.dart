@@ -199,11 +199,11 @@ class HeaderWithSearchBox extends StatelessWidget {
             right: 0,
             child: Obx(() => Container(
                   margin: EdgeInsets.symmetric(
-                      horizontal: _settingController.kDefaultPadding),
+                      horizontal: _settingController.kDefaultPadding + 5),
                   height: 54,
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
                             offset: Offset(0, 10),
