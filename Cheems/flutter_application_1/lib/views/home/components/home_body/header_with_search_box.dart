@@ -216,89 +216,22 @@ class HeaderWithSearchBox extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          child:
-                              /*TypeAheadField<News?>(
-                      debounceDuration: Duration(milliseconds: 500),
-                      suggestionsBoxDecoration: SuggestionsBoxDecoration(),
-                      textFieldConfiguration: TextFieldConfiguration(
-                        decoration: InputDecoration(
-                          hintText: "Tìm kiếm",
-                          hintStyle: TextStyle(
-                              color: _settingController.kPrimaryColor.value
-                                  .withOpacity(0.5)),
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                        ),
-                        style: TextStyle(
-                            color: _settingController.kPrimaryColor.value),
-                      ),
-                      suggestionsCallback:
-                          homecontroller.getListThumbWithName,
-                      itemBuilder: (context, News? suggetion) {
-                        final news = suggetion;
-                        return ListTile(
-                          /*leading: suggetion != null
-                              ? CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: suggetion.imageLink.first,
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.fitWidth,
-                                      ),
-                                    ),
-                                  ),
-                                  progressIndicatorBuilder:
-                                      (context, url, downloadProgress) =>
-                                          Center(
-                                    child: loadingWiget(),
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
-                                )
-                              : loadingWiget(),*/
-                          leading: suggetion != null
-                              ? Image.network(
-                                  suggetion.imageLink.first,
-                                  fit: BoxFit.cover,
-                                  height: 60,
-                                  width: 60,
-                                )
-                              : Container(
-                                  height: 60,
-                                  width: 60,
-                                  child: loadingWiget()),
-                          title: Text(news!.title),
-                        );
-                      },
-                      onSuggestionSelected: (News? suggetion) {
-                        Get.to(() => DetailScreen(
-                              news: suggetion!,
-                            ));
-                      },
-                    )*/
-                              InkWell(
+                          child: InkWell(
                             onTap: () {
                               Get.to(() => SearchPage());
                             },
-                            child: TextField(
-                              enabled: false,
-                              readOnly: true,
-                              decoration: InputDecoration(
-                                hintText: "Tìm kiếm",
-                                hintStyle: TextStyle(
-                                    color: _settingController
-                                        .kPrimaryColor.value
-                                        .withOpacity(0.5)),
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                              ),
-                              style: TextStyle(
-                                  color:
-                                      _settingController.kPrimaryColor.value),
-                            ),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Tìm kiếm",
+                                    style: TextStyle(
+                                        color: _settingController
+                                            .kPrimaryColor.value),
+                                  ),
+                                  Icon(Icons.search)
+                                ]),
                           ),
                         ),
                       ],

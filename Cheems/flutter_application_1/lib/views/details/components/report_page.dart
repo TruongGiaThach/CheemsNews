@@ -49,20 +49,20 @@ class ReportPage extends StatelessWidget {
                   ))
               : Column(
                   children: [
-                    Container(
-                        padding: EdgeInsets.all(8),
-                        child: Text(
-                          'writing your report here',
-                          style: TextStyle(fontSize: 18),
-                        )),
-                    TextField(
-                      controller: reportController,
-                      focusNode: reportFocus,
-                      onChanged: (report) {
-                        _reportController.reportLine = report;
-                      },
-                      decoration: InputDecoration(border: OutlineInputBorder()),
-                      maxLines: 5,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: reportController,
+                        focusNode: reportFocus,
+                        onChanged: (report) {
+                          _reportController.reportLine = report;
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'writing your report here',
+                        ),
+                        maxLines: 5,
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.all(10),
@@ -100,12 +100,12 @@ class ReportPage extends StatelessWidget {
                                                           Text(
                                                             'We have recive your report',
                                                             style: TextStyle(
-                                                                fontSize: 14),
+                                                                fontSize: 18),
                                                           ),
                                                           Text(
                                                             'thank you for annouce us about this information',
                                                             style: TextStyle(
-                                                                fontSize: 14),
+                                                                fontSize: 18),
                                                           )
                                                         ],
                                                       ),
@@ -143,12 +143,12 @@ class ReportPage extends StatelessWidget {
                                                           Text(
                                                             'something went wrong when send',
                                                             style: TextStyle(
-                                                                fontSize: 14),
+                                                                fontSize: 18),
                                                           ),
                                                           Text(
                                                             'please check your network connection and retry after a while',
                                                             style: TextStyle(
-                                                                fontSize: 14),
+                                                                fontSize: 18),
                                                           )
                                                         ],
                                                       ),

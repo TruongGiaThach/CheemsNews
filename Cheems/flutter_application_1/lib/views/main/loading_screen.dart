@@ -9,19 +9,21 @@ class LoadingScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                  //color: Colors.yellowAccent,
-                  child: Image.asset(
-                "assets/images/CheemsNews.png",
-                fit: BoxFit.fitWidth,
-                height: 200,
-              )),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                    //color: Colors.yellowAccent,
+                    child: Image.asset(
+                  "assets/images/CheemsNews.png",
+                  fit: BoxFit.fitWidth,
+                  height: 200,
+                )),
+              ),
             ),
             Image.asset(
               "assets/images/ponl.gif",
-              height: 200,
             ),
             FittedBox(fit: BoxFit.contain, child: CircularProgressIndicator()),
             FittedBox(fit: BoxFit.contain, child: Text("Initilizing...")),

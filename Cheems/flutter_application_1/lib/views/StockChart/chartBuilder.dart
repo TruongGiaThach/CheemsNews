@@ -22,6 +22,7 @@ class Chart extends StatelessWidget {
           ),
           centerTitle: true,
           actions: [],
+          backgroundColor: _settingController.kPrimaryColor.value,
         ),
         drawer: SizedBox(
           width: 200,

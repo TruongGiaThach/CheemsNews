@@ -1,8 +1,11 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:flutter_application_1/controllers/SearchController.dart';
 import 'package:flutter_application_1/controllers/SettingController.dart';
 import 'package:get/get.dart';
+
 
 import '../../../widgets.dart';
 
@@ -42,7 +45,7 @@ class _SearchPageState extends State<SearchPage> {
                             height: 54,
                             decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(30),
                                 boxShadow: [
                                   BoxShadow(
                                       offset: Offset(0, 10),
@@ -52,7 +55,7 @@ class _SearchPageState extends State<SearchPage> {
                                           .withOpacity(.23)),
                                 ]),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8),
                               child: Obx(() => TextField(
                                     controller: _textController,
                                     onChanged: (text) async {
@@ -65,12 +68,17 @@ class _SearchPageState extends State<SearchPage> {
                                     decoration: InputDecoration(
                                         hintText: "Tìm kiếm",
                                         hintStyle: TextStyle(
+                                          fontSize: 22,
                                           color: _settingController
                                               .kPrimaryColor.value
-                                              .withOpacity(0.5),
+                                              .withOpacity(0.3),
                                         ),
-                                        enabledBorder: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.white)),
+                                        enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.white)),
                                         suffixIcon: _searchController
                                                 .searchLine.value.isNotEmpty
                                             ? IconButton(
@@ -83,8 +91,10 @@ class _SearchPageState extends State<SearchPage> {
                                               )
                                             : Icon(Icons.search)),
                                     style: TextStyle(
+                                        fontSize: 22,
                                         color: _settingController
                                             .kPrimaryColor.value),
+                                    textAlignVertical: TextAlignVertical.bottom,
                                   )),
                             ),
                           ),
@@ -129,6 +139,8 @@ class _SearchPageState extends State<SearchPage> {
                             ),
                             Expanded(
                               child: Container(
+                                color: _settingController.kPrimaryColor.value
+                                    .withOpacity(0.1),
                                 padding: EdgeInsets.all(10),
                                 height: size.height - 78,
                                 width: size.width,
