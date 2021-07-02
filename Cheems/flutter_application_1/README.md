@@ -50,7 +50,11 @@
    </p>
    
 ### 6. Tìm kiếm bài viết
-
+  
+ <p align="center">
+   <img src="screenshot/search.jpg" height = "480" width="240">  <img src="screenshot/searched.jpg" height = "480" width="240"> 
+   </p>
+   
 ### 7.Xem lịch
 
 <p align="center">
