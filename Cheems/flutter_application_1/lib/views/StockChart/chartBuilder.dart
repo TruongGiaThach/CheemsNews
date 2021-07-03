@@ -6,6 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/httpServices.dart';
 import 'package:flutter/src/rendering/custom_paint.dart';
 import 'package:get/get.dart';
+import 'dart:math';
+import 'package:syncfusion_flutter_charts/charts.dart';
+
+class ChartData {
+  ChartData(this.time, this.value);
+  final String time;
+  final double value;
+}
+class BarData {
+  BarData(this.time, this.value);
+  final String time;
+  final int value;
+}
 
 class Chart extends StatelessWidget {
   final _analyticController = Get.find<AnalyticController>();
@@ -194,27 +207,117 @@ class Chart extends StatelessWidget {
                                   ])
                                 : TextSpan(text: "0")),
                         Container(
+                          color: Colors.black45,
                           alignment: Alignment.centerLeft,
                           child: Text("stock price chart",
                               style: TextStyle(
                                   fontSize: 18, color: Colors.white60)),
                         ),
                         SizedBox(
-                            child: LayoutBuilder(
-                          builder: (_, constraints) => Container(
-                            width: constraints.widthConstraints().maxWidth,
-                            height: 245,
-                            color: Colors.black45,
-                            child: CustomPaint(
-                              painter:
-                                  StockCandlesPainter(stockData: stockData),
+                          child: LayoutBuilder(
+                            builder: (_,constraints) => Container(
+                              width: constraints.widthConstraints().maxWidth,
+                              height: 275,
+                              color:Colors.black45,
+                              child: CustomPaint(
+                                child: SfCartesianChart(
+                                  primaryXAxis: CategoryAxis(),
+                                  series: <ChartSeries>[
+                                    // Initialize line series
+                                    if (_analyticController.timeWindow == "1Day")
+                                      LineSeries<ChartData, String>(
+                                          dataSource: [
+                                            ChartData('0',stockData!.c.reduce(min)),
+                                            ChartData('1',stockData!.c[0]),
+                                            ChartData('2',stockData!.c[0] ),
+                                            ChartData('3',stockData!.c[0] ),
+                                            ChartData('4',stockData!.c[0]),
+                                            ChartData('5',stockData!.c[0] ),
+                                            ChartData('6',stockData!.c[0] ),
+                                            ChartData('7',stockData!.c[0]),
+                                            ChartData('8',stockData!.c[0]),
+                                            ChartData('9',stockData!.c[0]),
+                                            ChartData('10', stockData!.c[0]),
+                                            ChartData('11', stockData!.c[0]),
+                                            ChartData('12', stockData!.c[0]),
+                                            ChartData('13', stockData!.c[0]),
+                                            ChartData('14', stockData!.c[0]),
+                                            ChartData('15', stockData!.c[0]),
+                                            ChartData('16', stockData!.c[0]),
+                                            ChartData('17', stockData!.c[0]),
+                                            ChartData('18', stockData!.c[0]),
+                                            ChartData('19', stockData!.c[0]),
+                                            ChartData('20', stockData!.c[0]),
+                                            ChartData('21', stockData!.c[0]),
+                                            ChartData('22', stockData!.c[0]),
+                                            ChartData('23',stockData!.c.reduce(max)),
+                                          ],
+                                          xValueMapper: (ChartData sales, _) => sales.time,
+                                          yValueMapper: (ChartData sales, _) => sales.value,
+                                          color: Colors.transparent
+                                      )
+                                    else if(_analyticController.timeWindow == "1Week")
+                                      LineSeries<ChartData, String>(
+                                          dataSource: [
+                                            ChartData('Mon',stockData!.c.reduce(min)),
+                                            ChartData('Tue',stockData!.c[0]),
+                                            ChartData('Wed',stockData!.c[0] ),
+                                            ChartData('Thu',stockData!.c[0] ),
+                                            ChartData('Fri',stockData!.c[0]),
+                                            ChartData('Sat',stockData!.c[0] ),
+                                            ChartData('Sun',stockData!.c.reduce(max)),
+                                          ],
+                                          xValueMapper: (ChartData sales, _) => sales.time,
+                                          yValueMapper: (ChartData sales, _) => sales.value,
+                                          color: Colors.transparent
+                                      )
+                                    else if(_analyticController.timeWindow == "1Month")
+                                        LineSeries<ChartData, String>(
+                                            dataSource: [
+                                              ChartData('1st',stockData!.c.reduce(min)),
+                                              ChartData('4th',stockData!.c[0]),
+                                              ChartData('7th',stockData!.c[0] ),
+                                              ChartData('10th',stockData!.c[0] ),
+                                              ChartData('13th',stockData!.c[0]),
+                                              ChartData('16h',stockData!.c[0] ),
+                                              ChartData('19th',stockData!.c[0] ),
+                                              ChartData('22th',stockData!.c[0]),
+                                              ChartData('25th',stockData!.c[0]),
+                                              ChartData('28th',stockData!.c.reduce(max)),
+                                            ],
+                                            xValueMapper: (ChartData sales, _) => sales.time,
+                                            yValueMapper: (ChartData sales, _) => sales.value,
+                                            color: Colors.transparent
+                                        )
+                                      else
+                                        LineSeries<ChartData, String>(
+                                            dataSource: [
+                                              ChartData('Jan',stockData!.c.reduce(min)),
+                                              ChartData('Feb',stockData!.c[0]),
+                                              ChartData('Mar',stockData!.c[0] ),
+                                              ChartData('Apr',stockData!.c[0] ),
+                                              ChartData('May',stockData!.c[0]),
+                                              ChartData('Jun',stockData!.c[0] ),
+                                              ChartData('Jul',stockData!.c[0] ),
+                                              ChartData('Aug',stockData!.c[0]),
+                                              ChartData('Sep',stockData!.c[0]),
+                                              ChartData('Oct',stockData!.c[0] ),
+                                              ChartData('Nov', stockData!.c[0]),
+                                              ChartData('Dec',stockData!.c.reduce(max)),
+                                            ],
+                                            xValueMapper: (ChartData sales, _) => sales.time,
+                                            yValueMapper: (ChartData sales, _) => sales.value,
+                                            color: Colors.transparent
+                                        )
+                                  ],
+                                ),
+                                painter: StockCandlesPainter(stockData: stockData),
+                              ),
                             ),
                           ),
-                        )),
-                        SizedBox(
-                          height: 5,
                         ),
                         Container(
+                          color: Colors.black45,
                           alignment: Alignment.centerLeft,
                           child: Text("trading volume chart",
                               style: TextStyle(
@@ -224,11 +327,101 @@ class Chart extends StatelessWidget {
                           child: LayoutBuilder(
                             builder: (_, constraints) => Container(
                               width: constraints.widthConstraints().maxWidth,
-                              height: 245,
+                              height: 180,
                               color: Colors.black45,
                               child: CustomPaint(
-                                painter:
-                                    StockVolumePainter(stockData: stockData),
+                                child: SfCartesianChart(
+                                  primaryXAxis: CategoryAxis(),
+                                  series: <ChartSeries>[
+                                    // Initialize line series
+                                    if (_analyticController.timeWindow == "1Day")
+                                      LineSeries<BarData, String>(
+                                          dataSource: [
+                                            BarData('0',stockData!.v.reduce(min)),
+                                            BarData('1',stockData!.v[0]),
+                                            BarData('2',stockData!.v[0] ),
+                                            BarData('3',stockData!.v[0] ),
+                                            BarData('4',stockData!.v[0]),
+                                            BarData('5',stockData!.v[0] ),
+                                            BarData('6',stockData!.v[0] ),
+                                            BarData('7',stockData!.v[0]),
+                                            BarData('8',stockData!.v[0]),
+                                            BarData('9',stockData!.v[0]),
+                                            BarData('10', stockData!.v[0]),
+                                            BarData('11', stockData!.v[0]),
+                                            BarData('12', stockData!.v[0]),
+                                            BarData('13', stockData!.v[0]),
+                                            BarData('14', stockData!.v[0]),
+                                            BarData('15', stockData!.v[0]),
+                                            BarData('16', stockData!.v[0]),
+                                            BarData('17', stockData!.v[0]),
+                                            BarData('18', stockData!.v[0]),
+                                            BarData('19', stockData!.v[0]),
+                                            BarData('20', stockData!.v[0]),
+                                            BarData('21', stockData!.v[0]),
+                                            BarData('22', stockData!.v[0]),
+                                            BarData('23',stockData!.v.reduce(max)),
+                                          ],
+                                          xValueMapper: (BarData sales, _) => sales.time,
+                                          yValueMapper: (BarData sales, _) => sales.value,
+                                          color: Colors.transparent
+                                      )
+                                    else if(_analyticController.timeWindow == "1Week")
+                                      LineSeries<BarData, String>(
+                                          dataSource: [
+                                            BarData('Mon',stockData!.v.reduce(min)),
+                                            BarData('Tue',stockData!.v[0]),
+                                            BarData('Wed',stockData!.v[0] ),
+                                            BarData('Thu',stockData!.v[0] ),
+                                            BarData('Fri',stockData!.v[0]),
+                                            BarData('Sat',stockData!.v[0] ),
+                                            BarData('Sun',stockData!.v.reduce(max)),
+                                          ],
+                                          xValueMapper: (BarData sales, _) => sales.time,
+                                          yValueMapper: (BarData sales, _) => sales.value,
+                                          color: Colors.transparent
+                                      )
+                                    else if(_analyticController.timeWindow == "1Month")
+                                        LineSeries<BarData, String>(
+                                            dataSource: [
+                                              BarData('1st',stockData!.v.reduce(min)),
+                                              BarData('4th',stockData!.v[0]),
+                                              BarData('7th',stockData!.v[0] ),
+                                              BarData('10th',stockData!.v[0] ),
+                                              BarData('13th',stockData!.v[0]),
+                                              BarData('16h',stockData!.v[0] ),
+                                              BarData('19th',stockData!.v[0] ),
+                                              BarData('22nd',stockData!.v[0]),
+                                              BarData('25th',stockData!.v[0]),
+                                              BarData('28th',stockData!.v.reduce(max)),
+                                            ],
+                                            xValueMapper: (BarData sales, _) => sales.time,
+                                            yValueMapper: (BarData sales, _) => sales.value,
+                                            color: Colors.transparent
+                                        )
+                                      else
+                                        LineSeries<BarData, String>(
+                                            dataSource: [
+                                              BarData('Jan',stockData!.v.reduce(min)),
+                                              BarData('Feb',stockData!.v[0]),
+                                              BarData('Mar',stockData!.v[0] ),
+                                              BarData('Apr',stockData!.v[0] ),
+                                              BarData('May',stockData!.v[0]),
+                                              BarData('Jun',stockData!.v[0] ),
+                                              BarData('Jul',stockData!.v[0] ),
+                                              BarData('Aug',stockData!.v[0]),
+                                              BarData('Sep',stockData!.v[0]),
+                                              BarData('Oct',stockData!.v[0] ),
+                                              BarData('Nov', stockData!.v[0]),
+                                              BarData('Dec',stockData!.v.reduce(max)),
+                                            ],
+                                            xValueMapper: (BarData sales, _) => sales.time,
+                                            yValueMapper: (BarData sales, _) => sales.value,
+                                            color: Colors.transparent
+                                        )
+                                  ],
+                                ),
+                                painter: StockVolumePainter(stockData: stockData),
                               ),
                             ),
                           ),
@@ -317,28 +510,29 @@ class StockVolumePainter extends CustomPainter {
     //paint bar
     for (Bar bar in bars) {
       canvas.drawRect(
-        Rect.fromLTWH(bar.centerX - (bar.width / 2), size.height - bar.height,
+        Rect.fromLTWH(
+            bar.centerX - (bar.width / 2),
+            size.height - bar.height - 34,
             bar.width, bar.height),
-        bar.paint,
+            bar.paint,
       );
     }
   }
 
-  List<Bar> _generateBars(Size availableSpace) {
-    final int maxVolume =
-        stockData!.v.reduce((curr, next) => curr > next ? curr : next);
-    final pixelPerWindow = availableSpace.width / (stockData!.t.length + 1);
+  List<Bar> _generateBars(Size availableSpace){
+    final int maxVolume = stockData!.v.reduce(max);
+    final pixelPerWindow = (availableSpace.width - 80) / (stockData!.t.length + 1);
 
-    final pixelPerStockOrder = availableSpace.height / maxVolume;
+    final pixelPerStockOrder = (availableSpace.height - 50) / maxVolume;
     List<Bar> bars = [];
 
-    for (int i = 0; i < stockData!.t.length; i++) {
+    for(int i = 0; i < stockData!.t.length; i++){
       bars.add(
         Bar(
           width: 3.0,
-          height: stockData!.v[i] * pixelPerStockOrder,
-          centerX: (i + 1) * pixelPerWindow,
-          paint: stockData!.o[i] < stockData!.c[i] ? _gainPaint : _lossPaint,
+          height: stockData!.v[i] * pixelPerStockOrder + 2,
+          centerX: (i + 1) * pixelPerWindow + 80,
+          paint: stockData!.o[i] < stockData!.c[i] ?  _gainPaint : _lossPaint,
         ),
       );
     }
@@ -397,25 +591,24 @@ class StockCandlesPainter extends CustomPainter {
     }
   }
 
-  List<Candlestick> _generateCandles(Size availableSpace) {
-    final highest =
-        stockData!.h.reduce((curr, next) => curr > next ? curr : next);
-    final lowest =
-        stockData!.l.reduce((curr, next) => curr < next ? curr : next);
-    final pixelPerWindow = availableSpace.width / (stockData!.t.length + 1);
+  List<Candlestick> _generateCandles(Size availableSpace){
+    final highest = stockData!.h.reduce(max);
+    final lowest = stockData!.l.reduce(min);
+    final pixelPerWindow = (availableSpace.width - 50) / (stockData!.t.length + 1);
 
-    final pixelPerDollar = availableSpace.height / (highest - lowest);
+    final pixelPerDollar = (availableSpace.height - 50)  / (highest - lowest);
     final List<Candlestick> candlestick = [];
-    for (int i = 0; i < stockData!.t.length; ++i) {
-      candlestick.add(Candlestick(
-        centerX: (i + 1) * pixelPerWindow,
-        wickHighY: (stockData!.h[i] - lowest) * pixelPerDollar,
-        wickLowY: (stockData!.l[i] - lowest) * pixelPerDollar,
-        candleHighY: (stockData!.o[i] - lowest) * pixelPerDollar,
-        candleLowY: (stockData!.c[i] - lowest) * pixelPerDollar,
-        candlePaint:
-            stockData!.o[i] < stockData!.c[i] ? _gainPaint : _lossPaint,
-      ));
+    for(int i = 0 ; i < stockData!.t.length; ++i){
+      candlestick.add(
+          Candlestick(
+            centerX: (i + 1) * pixelPerWindow  + 50,
+            wickHighY: (stockData!.h[i] - lowest) * pixelPerDollar + 37,
+            wickLowY: (stockData!.l[i] - lowest) * pixelPerDollar + 37,
+            candleHighY: (stockData!.o[i] - lowest) * pixelPerDollar + 37,
+            candleLowY: (stockData!.c[i] - lowest) * pixelPerDollar + 37,
+            candlePaint: stockData!.o[i] < stockData!.c[i] ?  _gainPaint : _lossPaint,
+          )
+      );
     }
     return candlestick;
   }
