@@ -1,11 +1,9 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controllers/HomeController.dart';
 import 'package:flutter_application_1/controllers/SearchController.dart';
 import 'package:flutter_application_1/controllers/SettingController.dart';
+import 'package:flutter_application_1/views/details/detail_screen.dart';
 import 'package:get/get.dart';
-
 
 import '../../../widgets.dart';
 
@@ -166,6 +164,12 @@ class _SearchPageState extends State<SearchPage> {
                                               child: loadingWiget()),
                                       title: Text(_searchController
                                           .searchResult.value[index].title),
+                                      onTap: () {
+                                        Get.to(() => DetailScreen(
+                                              news: _searchController
+                                          .searchResult.value[index],
+                                            ));
+                                      },
                                     );
                                   },
                                 ),
