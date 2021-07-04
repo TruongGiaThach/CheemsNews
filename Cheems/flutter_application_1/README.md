@@ -74,7 +74,7 @@
   * Biểu đồ giá theo ngày, tháng , năm
   
  <p align="center">
-   <img src="screenshot/analytics2.jpg" height = "480" width="240"> 
+   <img src="screenshot/stockGraph.jpg" height = "480" width="240"> <img src="screenshot/stockType.jpg" height = "480" width="240"> 
    </p>
 
 ## Yêu cầu thiết bị
