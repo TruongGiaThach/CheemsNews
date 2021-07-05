@@ -209,7 +209,7 @@ class Chart extends StatelessWidget {
                         Container(
                           color: Colors.black45,
                           alignment: Alignment.centerLeft,
-                          child: Text("stock price chart",
+                          child: Text("Stock price:",
                               style: TextStyle(
                                   fontSize: 18, color: Colors.white60)),
                         ),
@@ -319,7 +319,7 @@ class Chart extends StatelessWidget {
                         Container(
                           color: Colors.black45,
                           alignment: Alignment.centerLeft,
-                          child: Text("trading volume chart",
+                          child: Text("Trading volume:",
                               style: TextStyle(
                                   fontSize: 18, color: Colors.white60)),
                         ),
@@ -327,7 +327,7 @@ class Chart extends StatelessWidget {
                           child: LayoutBuilder(
                             builder: (_, constraints) => Container(
                               width: constraints.widthConstraints().maxWidth,
-                              height: 180,
+                              height: 185,
                               color: Colors.black45,
                               child: CustomPaint(
                                 child: SfCartesianChart(
@@ -432,23 +432,32 @@ class Chart extends StatelessWidget {
                       ConnectionState.active) {
                     return Column(
                       children: [
+                        Center(
+                        child:Text(
+                          'price: ',
+                          style: TextStyle(fontSize: 18, color: Colors.white60),
+                        ),),
                         Container(
+                          color: Colors.black45,
                           alignment: Alignment.centerLeft,
-                          child: Text("stock price chart",
+                          child: Text("Stock price:",
                               style: TextStyle(
                                   fontSize: 18, color: Colors.white60)),
                         ),
-                        Center(
-                          child: CircularProgressIndicator(),
+                        SizedBox(
+                          height: 275,
+                          child: SfCartesianChart(backgroundColor: Colors.black45),
                         ),
                         Container(
+                          color: Colors.black45,
                           alignment: Alignment.centerLeft,
-                          child: Text("trading volume chart",
+                          child: Text("Trading volume:",
                               style: TextStyle(
                                   fontSize: 18, color: Colors.white60)),
                         ),
-                        Center(
-                          child: CircularProgressIndicator(),
+                        SizedBox(
+                          height: 185,
+                          child: SfCartesianChart(backgroundColor: Colors.black45),
                         ),
                       ],
                     );
@@ -464,23 +473,32 @@ class Chart extends StatelessWidget {
                 }
                 return Column(
                   children: [
+                    Center(
+                      child:Text(
+                        'price: ',
+                        style: TextStyle(fontSize: 18, color: Colors.white60),
+                      ),),
                     Container(
+                      color: Colors.black45,
                       alignment: Alignment.centerLeft,
-                      child: Text("stock price chart",
+                      child: Text("Stock price:",
                           style:
                               TextStyle(fontSize: 18, color: Colors.white60)),
                     ),
-                    Center(
-                      child: CircularProgressIndicator(),
+                    SizedBox(
+                      height: 275,
+                      child: SfCartesianChart(backgroundColor: Colors.black45),
                     ),
                     Container(
+                      color: Colors.black45,
                       alignment: Alignment.centerLeft,
-                      child: Text("trading volume chart",
+                      child: Text("Trading volume:",
                           style:
                               TextStyle(fontSize: 18, color: Colors.white60)),
                     ),
-                    Center(
-                      child: CircularProgressIndicator(),
+                    SizedBox(
+                      height: 185,
+                      child: SfCartesianChart(backgroundColor: Colors.black45),
                     ),
                   ],
                 );
