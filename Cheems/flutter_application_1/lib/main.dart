@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     WidgetsFlutterBinding.ensureInitialized();
     var _settingController = Get.put(SettingController(), permanent: true);
     return GetMaterialApp(
-      title: 'Demo Login',
+      title: 'Cheems News',
       initialBinding: mainSrceenBinding(),
       theme: ThemeData(
         scaffoldBackgroundColor: _settingController.kBackgroundColor,

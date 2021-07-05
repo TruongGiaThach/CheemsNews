@@ -8,26 +8,36 @@ class LoadingScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                    
-                    child: Image.asset(
-                  "assets/images/CheemsNews.png",
-                  fit: BoxFit.fitWidth,
-                  height: 200,
-                )),
+            Expanded(
+              flex: 3,
+              child: Container(
+                  child: Image.asset(
+                "assets/images/CheemsNews.png",
+                fit: BoxFit.fitWidth,
+              )),
+            ),
+            Expanded(
+              flex: 4,
+              child: Image.asset(
+                "assets/images/ponl.gif",
               ),
             ),
-            Image.asset(
-              "assets/images/ponl.gif",
+            Expanded(
+              flex: 1,
+              child: FittedBox(
+                  fit: BoxFit.contain, child: CircularProgressIndicator()),
             ),
-            FittedBox(fit: BoxFit.contain, child: CircularProgressIndicator()),
-            SizedBox(height: 20,),
-            FittedBox(fit: BoxFit.contain, child: Text("Initilizing...",style: TextStyle(fontSize: 18),)),
+            Expanded(
+              flex: 2,
+              child: Center(
+                child: Text(
+                  "Initilizing...",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+            ),
           ],
         ),
       ),
