@@ -64,13 +64,13 @@
 
 ![Product Name Screen Shot][product-screenshot]
 
+<!-- write something here -->
 
+To see demo, please reading the [doc](https://github.com/TruongGiaThach/CheemsNews/Cheems/flutter_application_1/README.md)
 
 ### Built With
 
 * [Flutter](https://github.com/flutter/flutter)
-
-
 
 
 <!-- GETTING STARTED -->
