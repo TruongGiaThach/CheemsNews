@@ -123,7 +123,11 @@ Distributed under the Apache License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-NohopeTeam - [@face-book](https://facebook.com/your_username) - 19522183@gm.uit.edu.com
+NohopeTeam 
+  1. Trương Gia Thạch - 19522183@gm.uit.edu.com
+  2. Đặng Hải Thịnh
+  3. Nguyễn Văn Dũng
+  4. Nguyễn Tấn Tiến  
 
 Project Link: [https://github.com/TruongGiaThach/CheemsNews](https://github.com/TruongGiaThach/CheemsNews)
 
