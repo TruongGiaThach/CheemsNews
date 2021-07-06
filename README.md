@@ -66,7 +66,7 @@
 
 <!-- write something here -->
 
-_To see demo, please reading the [doc](https://github.com/TruongGiaThach/CheemsNews/Cheems/flutter_application_1/README.md)_
+_To see demo, please reading the [doc](/Cheems/flutter_application_1/README.md)_
 
 ### Built With
 
