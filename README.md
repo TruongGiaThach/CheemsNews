@@ -64,6 +64,7 @@
 
 ![Product Name Screen Shot][product-screenshot]
 
+_For more examples, please refer to the [Documentation](https://1drv.ms/w/s!AsSwGcMxjRDBhmfnHX9k_clhd7Yc?e=NX9oC2m)_
 
 
 ### Built With
@@ -91,8 +92,6 @@ Install flutter version 2.2.1 or < 3.0.0 following https://flutter.dev/docs/get-
 ## Usage
 
 Download release-apk in project and run on your device.
-_For more examples, please refer to the [Documentation](https://1drv.ms/w/s!AsSwGcMxjRDBhmfnHX9k_clhd7Yc?e=NX9oC2m)_
-
 
 
 <!-- ROADMAP -->
