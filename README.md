@@ -148,4 +148,4 @@ Project Link: [https://github.com/TruongGiaThach/CheemsNews](https://github.com/
 [license-url]: https://github.com/TruongGiaThach/CheemsNews/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: /Cheems/flutter_application_1/assets/images/CheemsNews.png
+[product-screenshot]: /Cheems/flutter_application_1/screenshot/CheemsNews.png
