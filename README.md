@@ -19,7 +19,7 @@
   <p align="center">
     An awesome reading news app!
     <br />
-    <a href=""><strong>Explore the docs »</strong></a>      <!--Link toi bao cao -->
+    <a href="https://1drv.ms/w/s!AsSwGcMxjRDBhmfnHX9k_clhd7Yc?e=NX9oC2m"><strong>Explore the docs »</strong></a>   <!--Link toi bao cao -->
     <br />
     <br />
     <a href="">View Demo</a>
@@ -64,7 +64,6 @@
 
 ![Product Name Screen Shot][product-screenshot]
 
-_For more examples, please refer to the [Documentation](https://1drv.ms/w/s!AsSwGcMxjRDBhmfnHX9k_clhd7Yc?e=NX9oC2m)_
 
 
 ### Built With
@@ -91,7 +90,7 @@ Install flutter version 2.2.1 or < 3.0.0 following https://flutter.dev/docs/get-
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Download release-apk in project and run on your device.
+Download release-apk in this [link](https://drive.google.com/file/d/1ICJtjlmxsTxrPSLM318h2xmLcs2evlQE/view?usp=sharing) and run on your device.
 
 
 <!-- ROADMAP -->
