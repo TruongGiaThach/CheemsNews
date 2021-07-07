@@ -64,6 +64,7 @@
 ![Product Name Screen Shot][product-screenshot]
 
 <!-- write something here -->
+CheemsNews allows users to read news easily and manage favorite reading list conveniently.
 
 _To see demo, please reading the [doc](/Cheems/flutter_application_1/README.md)_
 
