@@ -11,7 +11,7 @@ class LoadingScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              flex: 3,
+              flex: 5,
               child: Container(
                   child: Image.asset(
                 "assets/images/CheemsNews.png",
@@ -19,7 +19,7 @@ class LoadingScreen extends StatelessWidget {
               )),
             ),
             Expanded(
-              flex: 4,
+              flex: 10,
               child: Image.asset(
                 "assets/images/ponl.gif",
               ),
@@ -30,7 +30,7 @@ class LoadingScreen extends StatelessWidget {
                   fit: BoxFit.contain, child: CircularProgressIndicator()),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Center(
                 child: Text(
                   "Initilizing...",

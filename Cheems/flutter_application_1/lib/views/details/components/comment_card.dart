@@ -11,7 +11,7 @@ class CommentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.only(left: 8,right: 8),
+        padding: const EdgeInsets.only(left: 8, right: 8),
         child: Column(
           children: [
             Row(
@@ -33,23 +33,30 @@ class CommentCard extends StatelessWidget {
                 ),
                 Text(
                   cmt.userName,
-                  style: TextStyle(color: Colors.blue, fontSize: SettingController().textSize.value),
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: SettingController().textSize.value),
                 ),
                 Spacer(),
                 Text(
                   DateFormat('yyyy-MM-dd – kk:mm').format(cmt.time),
                   textAlign: TextAlign.right,
-                  style:TextStyle(color: Colors.blue, fontSize: SettingController().textSize.value),
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: SettingController().textSize.value),
                 ),
               ],
             ),
             Container(
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(4),
-              decoration: BoxDecoration(border: Border.all(color: Colors.black38)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: Colors.black38)),
               child: Text(
                 cmt.body,
-                style: TextStyle(color: Colors.black87, fontSize: 18,height: 1.5),
+                style:
+                    TextStyle(color: Colors.black87, fontSize: 18, height: 1.5),
               ),
             )
           ],
